@@ -1,0 +1,77 @@
+<script lang="ts">
+	import { cn } from '$lib/utils/cn';
+	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
+
+	interface Props extends HTMLAttributes<HTMLDivElement> {
+		variant?: 'default' | 'bordered' | 'elevated' | 'flat';
+		padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'; // Alias for size
+		size?: 'sm' | 'md' | 'lg' | 'xl';
+		hoverable?: boolean;
+		href?: string; // If provided, renders as a link
+		children?: Snippet;
+		class?: string;
+	}
+
+	let {
+		variant = 'default',
+		size = 'md',
+		padding,
+		hoverable = false,
+		href,
+		children,
+		class: className,
+		...restProps
+	}: Props = $props();
+
+	// Support both size and padding props (padding is an alias for size)
+	const computedPadding = $derived(padding ?? size);
+
+	const baseStyles = 'rounded-xl bg-white dark:bg-gray-800 transition-all duration-200';
+
+	const variants = {
+		default:
+			'border border-gray-200/80 shadow-[0_1px_2px_0_rgb(0_0_0/0.04),0_0_0_1px_rgb(0_0_0/0.02)] dark:border-gray-700/80',
+		bordered: 'border-2 border-gray-300 dark:border-gray-600',
+		elevated:
+			'border border-gray-200/60 shadow-[0_2px_4px_0_rgb(0_0_0/0.06),0_8px_16px_-4px_rgb(0_0_0/0.08)] bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-850',
+		flat: 'border border-gray-100 dark:border-gray-800',
+		glass:
+			'bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl backdrop-saturate-150 border border-white/80 dark:border-gray-700/80 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.08),0_10px_24px_-6px_rgb(0_0_0/0.1),inset_0_1px_0_0_rgba(255_255_255/0.9)]'
+	};
+
+	const paddings = {
+		none: '',
+		sm: 'p-4',
+		md: 'p-6',
+		lg: 'p-8',
+		xl: 'p-10'
+	};
+
+	const computedClass = $derived(
+		cn(
+			baseStyles,
+			variants[variant],
+			paddings[computedPadding],
+			(hoverable || href) &&
+				'hover:-translate-y-0.5 hover:shadow-[0_4px_8px_0_rgb(0_0_0/0.08),0_12px_24px_-4px_rgb(0_0_0/0.12)] hover:border-gray-300 dark:hover:border-gray-600 cursor-pointer active:translate-y-0 active:shadow-[0_1px_2px_0_rgb(0_0_0/0.06),0_4px_8px_-2px_rgb(0_0_0/0.08)]',
+			href && 'block no-underline',
+			className
+		)
+	);
+</script>
+
+{#if href}
+	<!-- Spreading div props onto anchor tag - using type assertion for compatibility -->
+	<a {href} class={computedClass} {...restProps as any}>
+		{#if children}
+			{@render children()}
+		{/if}
+	</a>
+{:else}
+	<div class={computedClass} {...restProps}>
+		{#if children}
+			{@render children()}
+		{/if}
+	</div>
+{/if}

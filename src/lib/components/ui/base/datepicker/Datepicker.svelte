@@ -1,0 +1,161 @@
+<script lang="ts">
+	import { DatePicker } from 'bits-ui';
+	import { CalendarDate, type DateValue } from '@internationalized/date';
+	import { cn } from '$lib/utils/cn';
+	import { Calendar } from '@lucide/svelte';
+	import { dateToCalendarDate, calendarDateToDate } from '$lib/utils/bits-ui-utils';
+
+	/**
+	 * DatePicker component props
+	 * @interface Props
+	 */
+	interface Props {
+		/** Current selected date */
+		value?: Date;
+		/** Minimum selectable date */
+		minValue?: Date;
+		/** Maximum selectable date */
+		maxValue?: Date;
+		/** Additional CSS classes */
+		class?: string;
+		/** Callback when date changes */
+		onChange?: () => void;
+	}
+
+	let { value = $bindable(), minValue, maxValue, class: classValue, onChange }: Props = $props();
+
+	// Compute internal bits-ui value from prop value
+	let internalValue = $derived(dateToCalendarDate(value));
+
+	// Compute min/max values for bits-ui
+	let bitsMinValue = $derived(dateToCalendarDate(minValue));
+	let bitsMaxValue = $derived(dateToCalendarDate(maxValue));
+
+	/**
+	 * Handles value change from bits-ui date picker
+	 * Converts CalendarDate back to JavaScript Date and triggers onChange callback
+	 * @param newDateValue - New date value from bits-ui
+	 */
+	let handleValueChange: any = (newDateValue: DateValue | undefined) => {
+		const newDate = calendarDateToDate(newDateValue);
+		value = newDate ?? undefined;
+		onChange?.();
+	};
+</script>
+
+<DatePicker.Root
+	value={internalValue}
+	minValue={bitsMinValue}
+	maxValue={bitsMaxValue}
+	granularity="day"
+	onValueChange={handleValueChange}>
+	<DatePicker.Input
+		class={cn(
+			'flex items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm',
+			'focus-within:border-primary-500 focus-within:ring-2 focus-within:outline-none hover:bg-gray-50',
+			'dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700',
+			classValue
+		)}>
+		{#snippet children({ segments })}
+			{#each segments as { part, value }, i (part + i)}
+				<div class="inline-block select-none">
+					{#if part === 'literal'}
+						<DatePicker.Segment {part} class="p-1 text-gray-500 dark:text-gray-400">
+							{value}
+						</DatePicker.Segment>
+					{:else}
+						<DatePicker.Segment
+							{part}
+							class="focus:ring-primary-500 rounded px-1 py-1 hover:bg-gray-100 focus:ring-2 dark:hover:bg-gray-700">
+							{value}
+						</DatePicker.Segment>
+					{/if}
+				</div>
+			{/each}
+			<DatePicker.Trigger
+				class="ml-auto inline-flex size-8 items-center justify-center rounded-lg text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200">
+				<Calendar class="h-4 w-4" />
+			</DatePicker.Trigger>
+		{/snippet}
+	</DatePicker.Input>
+
+	<DatePicker.Content
+		class="z-50 rounded-lg border border-gray-200 bg-white p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800"
+		sideOffset={8}>
+		<DatePicker.Calendar
+			class="border-dark-10 bg-background-alt shadow-popover rounded-[15px] border p-[22px]">
+			{#snippet children({ months, weekdays })}
+				{#each months as month}
+					<div class="space-y-4">
+						<DatePicker.Header class="flex items-center justify-between">
+							<DatePicker.PrevButton
+								class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-10 items-center justify-center transition-all active:scale-[0.98]">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round">
+									<polyline points="15 18 9 12 15 6" />
+								</svg>
+							</DatePicker.PrevButton>
+							<DatePicker.Heading class="text-[15px] font-medium text-gray-900 dark:text-white" />
+							<DatePicker.NextButton
+								class="rounded-9px bg-background-alt hover:bg-muted inline-flex size-10 items-center justify-center transition-all active:scale-[0.98]">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="20"
+									height="20"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round">
+									<polyline points="9 18 15 12 9 6" />
+								</svg>
+							</DatePicker.NextButton>
+						</DatePicker.Header>
+
+						<DatePicker.Grid class="w-full border-collapse space-y-1 select-none">
+							<DatePicker.GridHead>
+								<DatePicker.GridRow class="mb-1 flex w-full justify-between">
+									{#each weekdays as day}
+										<DatePicker.HeadCell
+											class="text-muted-foreground w-10 rounded-md text-xs font-normal!">
+											<div>{day.slice(0, 2)}</div>
+										</DatePicker.HeadCell>
+									{/each}
+								</DatePicker.GridRow>
+							</DatePicker.GridHead>
+							<DatePicker.GridBody>
+								{#each month.weeks as weekDates}
+									<DatePicker.GridRow class="flex w-full">
+										{#each weekDates as date}
+											<DatePicker.Cell
+												{date}
+												month={month.value}
+												class="relative size-10 p-0! text-center">
+												<DatePicker.Day
+													class="rounded-9px text-foreground hover:border-foreground data-selected:bg-foreground data-disabled:text-foreground/30 data-selected:text-background data-unavailable:text-muted-foreground group relative inline-flex size-10 items-center justify-center border border-transparent bg-transparent p-0 text-sm font-normal whitespace-nowrap transition-all data-disabled:pointer-events-none data-outside-month:pointer-events-none data-selected:font-medium data-unavailable:line-through">
+													<div
+														class="bg-foreground group-data-selected:bg-background absolute top-[5px] hidden size-1 rounded-full transition-all group-data-today:block">
+													</div>
+													{date.day}
+												</DatePicker.Day>
+											</DatePicker.Cell>
+										{/each}
+									</DatePicker.GridRow>
+								{/each}
+							</DatePicker.GridBody>
+						</DatePicker.Grid>
+					</div>
+				{/each}
+			{/snippet}
+		</DatePicker.Calendar>
+	</DatePicker.Content>
+</DatePicker.Root>

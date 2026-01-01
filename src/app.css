@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* Prevent theme flash by hiding until theme is loaded */
+html:not([data-theme-loaded]) {
+  visibility: hidden;
+}
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"]:disabled {
+    cursor: default;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-track-gray-100 {
+    scrollbar-color: rgb(156 163 175) rgb(243 244 246);
+  }
+
+  .scrollbar-thumb-gray-300 {
+    scrollbar-color: rgb(209 213 219) rgb(243 244 246);
+  }
+
+  .dark .scrollbar-track-gray-800 {
+    scrollbar-color: rgb(75 85 99) rgb(31 41 55);
+  }
+
+  .dark .scrollbar-thumb-gray-600 {
+    scrollbar-color: rgb(75 85 99) rgb(31 41 55);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .scrollbar-track-gray-100::-webkit-scrollbar-track {
+    background: rgb(243 244 246);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+    background: rgb(209 213 219);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb:hover {
+    background: rgb(156 163 175);
+  }
+
+  .dark .scrollbar-track-gray-800::-webkit-scrollbar-track {
+    background: rgb(31 41 55);
+  }
+
+  .dark .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background: rgb(75 85 99);
+  }
+
+  .dark .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb:hover {
+    background: rgb(107 114 128);
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  font-family:
+    "Readex Pro Variable",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+#svelte-announcer {
+  display: none;
+}
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold tracking-tight text-gray-900 lg:text-4xl dark:text-gray-50;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold tracking-tight text-gray-900 lg:text-3xl dark:text-gray-50;
+  }
+
+  h3 {
+    @apply text-xl font-semibold tracking-tight text-gray-900 lg:text-2xl dark:text-gray-50;
+  }
+
+  h4 {
+    @apply text-lg font-semibold text-gray-900 dark:text-gray-50;
+  }
+
+  h5 {
+    @apply text-base font-semibold text-gray-900 dark:text-gray-50;
+  }
+
+  h6 {
+    @apply text-sm font-semibold text-gray-900 dark:text-gray-50;
+  }
+
+  p {
+    @apply text-base leading-relaxed text-gray-700 dark:text-gray-300;
+  }
+
+  small {
+    @apply text-sm text-gray-600 dark:text-gray-400;
+  }
+
+  .text-muted {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .text-subtle {
+    @apply text-gray-500 dark:text-gray-500;
+  }
+
+  .text-display {
+    @apply text-4xl font-bold tracking-tight lg:text-5xl;
+  }
+}
