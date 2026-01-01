@@ -1,0 +1,30 @@
+# Exclude development files
+.svelte-kit/
+build/
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Exclude test files
+**/*.test.ts
+**/*.spec.ts
+**/*.test.svelte
+
+# Exclude config files
+tsconfig.json
+vite.config.ts
+vite.lib.config.ts
+svelte.config.js
+tailwind.config.js
+.prettierrc
+.gitignore
+
+# Exclude other meta files
+AGENTS.md
+SETUP.md
+
+# Only include dist for published package
+!dist/
