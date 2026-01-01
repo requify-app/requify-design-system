@@ -1,5 +1,5 @@
 {
-  "name": "requify-design-system",
+  "name": "@requify/requify-design-system",
   "version": "0.5.0",
   "description": "A professional, customizable design system for Requify built with Svelte 5, Tailwind CSS, and bits-ui",
   "keywords": [
@@ -11,25 +11,39 @@
     "bits-ui"
   ],
   "license": "MIT",
+  "author": "paul@requify.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/requify/requify-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/requify/requify-design-system/issues"
+  },
+  "homepage": "https://github.com/requify/requify-design-system#readme",
   "type": "module",
-  "svelte": "src/index.js",
+  "svelte": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "svelte": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./components": {
-      "types": "./src/lib/components/ui/base/index.ts",
-      "svelte": "./src/lib/components/ui/base/index.ts"
-    }
+      "types": "./dist/components/index.d.ts",
+      "svelte": "./dist/components/index.js",
+      "default": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "src",
-    "static"
+    "dist"
   ],
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build:site": "vite build",
     "preview": "vite preview",
     "svelte-sync": "svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --threshold error --tsconfig ./tsconfig.json",
@@ -47,6 +61,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "svelte": "^5.46.1",
     "svelte-check": "^4.3.5",
+    "svelte-package": "^2.6.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vite": "^7.3.0"
@@ -60,5 +75,9 @@
     "clsx": "^2.1.1",
     "tailwind-merge": "^3.4.0",
     "@lucide/svelte": "^0.562.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

@@ -10,6 +10,20 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true
-  }
+    "noUncheckedIndexedAccess": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "composite": true,
+    "outDir": "./dist"
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".svelte-kit",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.test.svelte"
+  ]
 }
