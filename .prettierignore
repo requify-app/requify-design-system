@@ -1,0 +1,8 @@
+# Ignore files for Bun, PNPM, NPM and YARN
+bun.lock
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Let drizzle do its thing
+drizzle

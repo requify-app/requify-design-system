@@ -46,9 +46,7 @@ import { ButtonVariant, ComponentSize } from 'requify-design-system'
 	<p>This is a sample card component.</p>
 	<Label for="input">Enter text:</Label>
 	<Input id="input" bind:value={inputValue} placeholder="Type something..." />
-	<Button variant={ButtonVariant.PRIMARY} size={ComponentSize.MD}>
-		Submit
-	</Button>
+	<Button variant={ButtonVariant.PRIMARY} size={ComponentSize.MD}>Submit</Button>
 </Card>
 ```
 

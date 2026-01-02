@@ -333,8 +333,8 @@
 
 				<Modal bind:open={modalMdOpen} title="Medium Modal" size={ModalSize.MD}>
 					<p class="text-gray-700 dark:text-gray-200">
-						This is a MD (Medium) modal with max-width of 448px. This is the default modal size
-						and works well for most use cases.
+						This is a MD (Medium) modal with max-width of 448px. This is the default modal size and
+						works well for most use cases.
 					</p>
 					{#snippet footer()}
 						<Button variant="outline" onclick={() => (modalMdOpen = false)}>Cancel</Button>
@@ -344,8 +344,8 @@
 
 				<Modal bind:open={modalLgOpen} title="Large Modal" size={ModalSize.LG}>
 					<p class="text-gray-700 dark:text-gray-200">
-						This is a LG (Large) modal with max-width of 512px. Good for forms with multiple
-						fields or content that needs more breathing room.
+						This is a LG (Large) modal with max-width of 512px. Good for forms with multiple fields
+						or content that needs more breathing room.
 					</p>
 					{#snippet footer()}
 						<Button variant="outline" onclick={() => (modalLgOpen = false)}>Cancel</Button>

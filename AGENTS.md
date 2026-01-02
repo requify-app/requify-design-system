@@ -116,32 +116,32 @@ Example:
 
 ```svelte
 <script lang="ts">
-  import { Dialog } from 'bits-ui'
-  import { cn } from '$lib/utils/cn'
+	import { Dialog } from 'bits-ui';
+	import { cn } from '$lib/utils/cn';
 
-  interface Props {
-    open: boolean
-    title?: string
-    children?: Snippet
-    footer?: Snippet
-    class?: string
-  }
+	interface Props {
+		open: boolean;
+		title?: string;
+		children?: Snippet;
+		footer?: Snippet;
+		class?: string;
+	}
 
-  let { open, title, children, footer, class: className }: Props = $props()
+	let { open, title, children, footer, class: className }: Props = $props();
 </script>
 
 <Dialog.Root bind:open>
-  <Dialog.Content class={cn('max-w-md rounded-lg', className)}>
-    {#if title}
-      <Dialog.Title>{title}</Dialog.Title>
-    {/if}
-    {#if children}
-      {@render children()}
-    {/if}
-    {#if footer}
-      {@render footer()}
-    {/if}
-  </Dialog.Content>
+	<Dialog.Content class={cn('max-w-md rounded-lg', className)}>
+		{#if title}
+			<Dialog.Title>{title}</Dialog.Title>
+		{/if}
+		{#if children}
+			{@render children()}
+		{/if}
+		{#if footer}
+			{@render footer()}
+		{/if}
+	</Dialog.Content>
 </Dialog.Root>
 ```
 
@@ -151,28 +151,28 @@ Use Svelte 5 snippets for flexible content composition:
 
 ```svelte
 <script lang="ts">
-  import type { Snippet } from 'svelte'
+	import type { Snippet } from 'svelte';
 
-  interface Props {
-    icon?: Snippet
-    children?: Snippet
-    variant?: 'primary' | 'secondary'
-  }
+	interface Props {
+		icon?: Snippet;
+		children?: Snippet;
+		variant?: 'primary' | 'secondary';
+	}
 
-  let { icon, children, variant = 'primary' }: Props = $props()
+	let { icon, children, variant = 'primary' }: Props = $props();
 </script>
 
 <div class="flex items-center gap-2">
-  {#if icon}
-    <span class="icon-slot">
-      {@render icon()}
-    </span>
-  {/if}
-  {#if children}
-    <span class="content-slot">
-      {@render children()}
-    </span>
-  {/if}
+	{#if icon}
+		<span class="icon-slot">
+			{@render icon()}
+		</span>
+	{/if}
+	{#if children}
+		<span class="content-slot">
+			{@render children()}
+		</span>
+	{/if}
 </div>
 ```
 
@@ -183,8 +183,8 @@ All colors should use CSS custom properties from `tailwind.config.js`:
 ```css
 /* In component styles */
 .primary-btn {
-  background-color: var(--color-primary-500);
-  border-color: var(--color-primary-600);
+	background-color: var(--color-primary-500);
+	border-color: var(--color-primary-600);
 }
 ```
 
@@ -194,18 +194,18 @@ The design system uses CSS custom properties defined in `src/app.css` and `tailw
 
 ```css
 :root {
-  /* Override primary brand color */
-  --color-primary-500: #your-brand-color;
-  --color-primary-600: #your-darker-brand-color;
+	/* Override primary brand color */
+	--color-primary-500: #your-brand-color;
+	--color-primary-600: #your-darker-brand-color;
 
-  /* Override secondary/accent colors */
-  --color-secondary-500: #your-accent-color;
+	/* Override secondary/accent colors */
+	--color-secondary-500: #your-accent-color;
 
-  /* Override semantic colors */
-  --color-success-500: #your-green;
-  --color-error-500: #your-red;
-  --color-warning-500: #your-yellow;
-  --color-info-500: #your-blue;
+	/* Override semantic colors */
+	--color-success-500: #your-green;
+	--color-error-500: #your-red;
+	--color-warning-500: #your-yellow;
+	--color-info-500: #your-blue;
 }
 ```
 
@@ -267,57 +267,57 @@ Follow these rules for all code you write:
 
 ```svelte
 <script lang="ts">
-  import { cn } from '$lib/utils/cn'
-  import { ButtonVariant } from '$lib/components/ui/base/enums'
-  import type { Snippet } from 'svelte'
+	import { cn } from '$lib/utils/cn';
+	import { ButtonVariant } from '$lib/components/ui/base/enums';
+	import type { Snippet } from 'svelte';
 
-  interface Props {
-    variant?: ButtonVariant
-    size?: 'sm' | 'md' | 'lg'
-    loading?: boolean
-    disabled?: boolean
-    icon?: Snippet
-    children?: Snippet
-    class?: string
-    onclick?: (e: MouseEvent) => void
-  }
+	interface Props {
+		variant?: ButtonVariant;
+		size?: 'sm' | 'md' | 'lg';
+		loading?: boolean;
+		disabled?: boolean;
+		icon?: Snippet;
+		children?: Snippet;
+		class?: string;
+		onclick?: (e: MouseEvent) => void;
+	}
 
-  let {
-    variant = ButtonVariant.PRIMARY,
-    size = 'md',
-    loading = false,
-    disabled = false,
-    icon,
-    children,
-    class: className,
-    onclick
-  }: Props = $props()
+	let {
+		variant = ButtonVariant.PRIMARY,
+		size = 'md',
+		loading = false,
+		disabled = false,
+		icon,
+		children,
+		class: className,
+		onclick
+	}: Props = $props();
 
-  const baseStyles =
-    'inline-flex items-center justify-center rounded-md font-medium transition-colors'
-  const variants = {
-    [ButtonVariant.PRIMARY]: 'bg-primary-600 text-white hover:bg-primary-700',
-    [ButtonVariant.SECONDARY]: 'bg-secondary-600 text-white hover:bg-secondary-700',
-    [ButtonVariant.OUTLINE]: 'border border-gray-300 hover:bg-gray-50'
-  }
-  const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg'
-  }
+	const baseStyles =
+		'inline-flex items-center justify-center rounded-md font-medium transition-colors';
+	const variants = {
+		[ButtonVariant.PRIMARY]: 'bg-primary-600 text-white hover:bg-primary-700',
+		[ButtonVariant.SECONDARY]: 'bg-secondary-600 text-white hover:bg-secondary-700',
+		[ButtonVariant.OUTLINE]: 'border border-gray-300 hover:bg-gray-50'
+	};
+	const sizes = {
+		sm: 'px-3 py-1.5 text-sm',
+		md: 'px-4 py-2 text-base',
+		lg: 'px-6 py-3 text-lg'
+	};
 
-  const computedClass = $derived(cn(baseStyles, variants[variant], sizes[size], className))
+	const computedClass = $derived(cn(baseStyles, variants[variant], sizes[size], className));
 </script>
 
 <button class={computedClass} disabled={disabled || loading} {onclick} aria-busy={loading}>
-  {#if loading}
-    <Spinner />
-  {:else if icon}
-    <span>{@render icon()}</span>
-  {/if}
-  {#if children}
-    <span>{@render children()}</span>
-  {/if}
+	{#if loading}
+		<Spinner />
+	{:else if icon}
+		<span>{@render icon()}</span>
+	{/if}
+	{#if children}
+		<span>{@render children()}</span>
+	{/if}
 </button>
 ```
 
@@ -343,30 +343,30 @@ export function cn(...inputs: ClassValue[]) {
 
 ```svelte
 <script lang="ts">
-  import { DropdownMenu } from 'bits-ui'
-  import { cn } from '$lib/utils/cn'
-  import type { Snippet } from 'svelte'
+	import { DropdownMenu } from 'bits-ui';
+	import { cn } from '$lib/utils/cn';
+	import type { Snippet } from 'svelte';
 
-  interface Props {
-    open: boolean
-    trigger: Snippet
-    children?: Snippet
-    align?: 'start' | 'center' | 'end'
-    class?: string
-  }
+	interface Props {
+		open: boolean;
+		trigger: Snippet;
+		children?: Snippet;
+		align?: 'start' | 'center' | 'end';
+		class?: string;
+	}
 
-  let { open, trigger, children, align = 'start', class: className }: Props = $props()
+	let { open, trigger, children, align = 'start', class: className }: Props = $props();
 </script>
 
 <DropdownMenu.Root bind:open>
-  <DropdownMenu.Trigger asChild>
-    {@render trigger()}
-  </DropdownMenu.Trigger>
-  <DropdownMenu.Content {align} class={cn('min-w-[200px]', className)}>
-    {#if children}
-      {@render children()}
-    {/if}
-  </DropdownMenu.Content>
+	<DropdownMenu.Trigger asChild>
+		{@render trigger()}
+	</DropdownMenu.Trigger>
+	<DropdownMenu.Content {align} class={cn('min-w-[200px]', className)}>
+		{#if children}
+			{@render children()}
+		{/if}
+	</DropdownMenu.Content>
 </DropdownMenu.Root>
 ```
 
@@ -385,7 +385,7 @@ Example ARIA pattern:
 
 ```svelte
 <button aria-label="Close dialog" aria-pressed={isOpen} onclick={toggleDialog}>
-  <X class="h-5 w-5" />
+	<X class="h-5 w-5" />
 </button>
 ```
 
