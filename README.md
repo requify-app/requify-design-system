@@ -13,22 +13,62 @@ A professional, customizable design system built with Svelte 5, Tailwind CSS, an
 
 ## Installation
 
+### Prerequisites
+
+Before installing this package, ensure you have set up:
+
+- **Tailwind CSS 4+** with `@tailwindcss/typography` plugin
+- CSS custom properties in your global CSS file
+
 ```bash
-npm install requify-design-system
+npm install @requify/requify-design-system
 # or
-yarn add requify-design-system
+yarn add @requify/requify-design-system
 # or
-bun add requify-design-system
+bun add @requify/requify-design-system
 ```
+
+### Tailwind CSS Setup
+
+1. Install Tailwind CSS and the typography plugin:
+
+   ```bash
+   npm install -D tailwindcss @tailwindcss/typography
+   ```
+
+2. Add CSS variables to your global CSS (e.g., `app.css`):
+
+   ```css
+   @import 'tailwindcss';
+
+   @layer base {
+   	:root {
+   		/* Override primary brand color */
+   		--color-primary-500: #your-brand-color;
+   		--color-primary-600: #your-darker-brand-color;
+
+   		/* Override secondary/accent colors */
+   		--color-secondary-500: #your-accent-color;
+
+   		/* Override semantic colors */
+   		--color-success-500: #your-green;
+   		--color-error-500: #your-red;
+   		--color-warning-500: #your-yellow;
+   		--color-info-500: #your-blue;
+   	}
+   }
+   ```
+
+3. Configure Tailwind with your project needs (see Tailwind CSS docs for setup)
 
 ## Usage
 
-### Basic Setup
+### Import Components
 
 ```typescript
 // In your Svelte component
-import { Button, Card, Input, Label } from 'requify-design-system'
-import { ButtonVariant, ComponentSize } from 'requify-design-system'
+import { Button, Card, Input, Label } from '@requify/requify-design-system';
+import { ButtonVariant } from '@requify/requify-design-system';
 ```
 
 ### Example Components
@@ -121,6 +161,7 @@ bun run format
 ## License
 
 MIT
+
 
 ## Contributing
 

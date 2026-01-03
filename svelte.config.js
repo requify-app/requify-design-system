@@ -5,15 +5,18 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
 	preprocess: [vitePreprocess({})],
 	compilerOptions: { runes: true },
+	kit: {
+		adapter: adapter(),
+		alias: {
+			$lib: './src/lib'
+		}
+	},
 	vitePlugin: {
 		dynamicCompileOptions({ filename }) {
 			if (filename.includes('node_modules')) {
 				return { runes: undefined };
 			}
 		}
-	},
-	kit: {
-		adapter: adapter()
 	}
 };
 

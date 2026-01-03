@@ -10,21 +10,40 @@ node_modules/
 
 # Exclude test files
 **/*.test.ts
-**/*.spec.ts
 **/*.test.svelte
+**/*.spec.ts
 
-# Exclude config files
+# Exclude demo site and app-specific files
+src/routes/
+src/app.css
+src/app.html
+src/app.js
+src/app.d.ts
+src/index.ts
+src/index.js
+
+# Exclude config files (not needed in package)
 tsconfig.json
 vite.config.ts
 vite.lib.config.ts
 svelte.config.js
+svelte.lib.config.js
 tailwind.config.js
 .prettierrc
+.prettierignore
 .gitignore
 
-# Exclude other meta files
+# Exclude documentation files
 AGENTS.md
 SETUP.md
+PUBLISHING.md
+DRY-RUN-PUBLISH.md
+CHANGELOG.md
 
-# Only include dist for published package
+# Exclude other meta files
+.github/
+.git/
+
+# Include dist and src/lib for published package
 !dist/
+!src/lib/
