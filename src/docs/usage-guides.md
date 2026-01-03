@@ -735,10 +735,10 @@ When upgrading, check for breaking changes in CHANGELOG.md.
 
 ```svelte
 <script lang="ts">
-  import { Listgroup, ListgroupItem } from '@requify/requify-design-system';
+	import { Listgroup, ListgroupItem } from '@requify/requify-design-system';
 
-  // Use $derived for computed values
-  let items = $state([...]); // Large dataset
+	// Use $derived for computed values
+	let items = $state([dataset]); // Large dataset
 </script>
 
 <Listgroup>

@@ -7,39 +7,28 @@
 	import { ComponentSize } from '$lib/components/ui/base/enums';
 	import type { ComponentSizeType } from '$lib/components/ui/base/enums';
 
-	// @ts-expect-error - Extending Omit<HTMLInputAttributes, 'size'> to override size prop
 	/**
 	 * Text input with error states, icon slots, and clearable functionality.
 	 * Extends HTML input attributes for full compatibility.
 	 *
 	 * @example Basic usage
-	 * ```svelte
 	 * <Input placeholder="Enter text..." bind:value={text} />
-	 * ```
 	 *
 	 * @example With left icon
-	 * ```svelte
 	 * <Input placeholder="Search...">
 	 *   {#snippet left()}
 	 *     <Search class="h-4 w-4" />
 	 *   {/snippet}
 	 * </Input>
-	 * ```
 	 *
 	 * @example With error state
-	 * ```svelte
 	 * <Input error="This field is required" bind:value={email} />
-	 * ```
 	 *
 	 * @example Clearable input
-	 * ```svelte
 	 * <Input clearable placeholder="Type something..." bind:value={search} />
-	 * ```
 	 *
 	 * @example Small size
-	 * ```svelte
 	 * <Input size={ComponentSize.SM} placeholder="Small input" />
-	 * ```
 	 *
 	 * @param {ComponentSize | ComponentSizeType} size - Input size affecting height and padding. Default: ComponentSize.MD
 	 *   Options: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -47,11 +36,14 @@
 	 * @param {boolean} clearable - If true, shows X button to clear value when not empty. Default: false
 	 * @param {Snippet} left - Left icon slot (displayed before input text)
 	 * @param {Snippet} right - Right icon slot (displayed after input text)
-	 * @param {Snippet<[HTMLInputAttributes]>} children - Custom input rendering snippet
 	 * @param {string} class - Additional CSS classes to apply
 	 * @param {string} value - Input value (bindable)
 	 * @param {boolean} disabled - Disables input. Default: false
 	 * @param {string} id - HTML id for label association
+	 * @param {string} placeholder - Placeholder text
+	 * @param {string} name - HTML name attribute
+	 * @param {string} type - HTML input type. Default: 'text'
+	 * @param {string} autocomplete - HTML autocomplete attribute
 	 *
 	 * @see {@link Label} - Use with Label for proper form structure
 	 * @see {@link Helper} - Add helper text below input
@@ -69,8 +61,14 @@
 		clearable?: boolean;
 		left?: Snippet;
 		right?: Snippet;
-		children?: Snippet<[HTMLInputAttributes]>;
 		class?: string;
+		value?: string;
+		disabled?: boolean;
+		id?: string;
+		placeholder?: string;
+		name?: string;
+		type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+		autocomplete?: HTMLInputAttributes['autocomplete'];
 	}
 
 	let {
@@ -81,8 +79,12 @@
 		value = $bindable(),
 		left,
 		right,
-		children,
 		class: className,
+		type = 'text',
+		id,
+		placeholder,
+		name,
+		autocomplete,
 		...restProps
 	}: Props = $props();
 
@@ -128,13 +130,22 @@
 		</div>
 	{/if}
 
-	{#if children}
-		{@render children({ class: computedClass, value, disabled, ...restProps })}
-	{:else}
-		<input class={computedClass} bind:value {disabled} {...restProps} />
-	{/if}
+	<input
+		class={computedClass}
+		bind:value
+		{disabled}
+		{type}
+		{id}
+		{placeholder}
+		{name}
+		{autocomplete}
+		{...restProps} />
 
-	{#if clearable && value}
+	{#if right}
+		<div class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400">
+			{@render right()}
+		</div>
+	{:else if clearable && value}
 		<button
 			type="button"
 			class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
@@ -142,10 +153,6 @@
 			tabindex="-1">
 			<X class="h-4 w-4" />
 		</button>
-	{:else if right}
-		<div class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400">
-			{@render right()}
-		</div>
 	{/if}
 </div>
 

@@ -68,7 +68,7 @@ You are a senior UI component developer with expertise in building reusable, acc
 ### Tech Stack
 
 - **Frontend**: Svelte 5 (runes-based reactivity, snippets API)
-- **Styling**: Tailwind CSS 4 with custom theme and CSS custom properties
+- **Styling**: Tailwind CSS v4 with custom theme and CSS custom properties
 - **Primitives**: bits-ui v2 for accessibility-first headless components
 - **Icons**: @lucide/svelte for consistent iconography
 - **Type Checking**: TypeScript strict mode with svelte-check
@@ -97,7 +97,7 @@ You are a senior UI component developer with expertise in building reusable, acc
 - `src/app.html` - HTML template (READ)
 - `src/app.d.ts` - TypeScript type definitions (READ)
 - `package.json` - NPM package configuration (READ/WRITE)
-- `tailwind.config.js` - Tailwind CSS theme configuration (READ/WRITE)
+- `tailwind.config.js` - Tailwind v4 CSS theme configuration (READ/WRITE)
 
 ### Component Architecture Patterns
 

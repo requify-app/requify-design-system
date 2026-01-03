@@ -43,18 +43,19 @@
 	 * - Wraps bits-ui.Label for ARIA support
 	 */
 	interface Props {
+		for?: string;
 		required?: boolean;
 		children?: Snippet;
 		class?: string;
 	}
 
-	let { required = false, children, class: className }: Props = $props();
+	let { for: htmlFor, required = false, children, class: className }: Props = $props();
 
 	const baseStyles = 'block text-sm font-medium text-gray-900 dark:text-gray-50';
 	const computedClass = $derived(cn(baseStyles, className));
 </script>
 
-<Label.Root class={computedClass}>
+<Label.Root class={computedClass} for={htmlFor}>
 	{#if children}
 		{@render children()}
 	{/if}

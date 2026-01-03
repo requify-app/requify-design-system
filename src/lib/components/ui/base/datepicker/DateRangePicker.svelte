@@ -10,27 +10,13 @@
 	 * Wraps bits-ui.DateRangePicker with internationalized date handling.
 	 *
 	 * @example Basic date range
-	 * ```svelte
 	 * <DateRangePicker bind:value={dateRange} />
-	 * ```
 	 *
 	 * @example With initial range
-	 * ```svelte
-	 * <script lang="ts">
-	 *   let range = {
-	 *     start: new Date('2024-01-01'),
-	 *     end: new Date('2024-01-07')
-	 *   };
-	 * </script>
 	 * <DateRangePicker bind:value={range} />
-	 * ```
 	 *
 	 * @example With onChange handler
-	 * ```svelte
-	 * <DateRangePicker
-	 *   bind:value={stayDates}
-	 *   onChange={() => checkAvailability()} />
-	 * ```
+	 * <DateRangePicker bind:value={stayDates} onChange={handleCheck} />
 	 *
 	 * @interface DateRange
 	 * @property {Date} [start] - Start date of the range (optional)

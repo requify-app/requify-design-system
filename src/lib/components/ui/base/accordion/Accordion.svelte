@@ -9,38 +9,13 @@
 	 * Wraps bits-ui.Accordion.Root.
 	 *
 	 * @example Single open panel
-	 * ```svelte
 	 * <Accordion type="single" value="item1">
-	 *   <AccordionItem value="item1" title="Item 1">
-	 *     <p>Content for item 1</p>
-	 *   </AccordionItem>
-	 *   <AccordionItem value="item2" title="Item 2">
-	 *     <p>Content for item 2</p>
-	 *   </AccordionItem>
-	 * </Accordion>
-	 * ```
 	 *
 	 * @example Multiple open panels
-	 * ```svelte
 	 * <Accordion type="multiple" value={["item1", "item3"]}>
-	 *   <AccordionItem value="item1" title="Item 1">
-	 *     <p>Content</p>
-	 *   </AccordionItem>
-	 *   <!-- More items -->
-	 * </Accordion>
-	 * ```
 	 *
 	 * @example Controlled value
-	 * ```svelte
-	 * <script>
-	 *   let openItems = $state([]);
-	 * </script>
 	 * <Accordion bind:value={openItems} multiple>
-	 *   <AccordionItem value="section1" title="Section 1">
-	 *     <p>Content</p>
-	 *   </AccordionItem>
-	 * </Accordion>
-	 * ```
 	 *
 	 * @param {string | string[]} value - Open panel identifier(s). Bindable. For type="single": string; for type="multiple": string[]
 	 * @param {boolean} multiple - If true, allows multiple panels open. If false, single panel. Default: false

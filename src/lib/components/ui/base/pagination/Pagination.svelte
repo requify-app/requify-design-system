@@ -7,39 +7,13 @@
 	 * Pagination controls for data sets with previous/next and page numbers.
 	 *
 	 * @example Basic usage
-	 * ```svelte
-	 * <script lang="ts">
-	 *   let pages = [
-	 *     { name: '1', href: '/page/1', active: true },
-	 *     { name: '2', href: '/page/2', active: false },
-	 *     { name: '3', href: '/page/3', active: false }
-	 *   ];
-	 * </script>
-	 * <Pagination
-	 *   pages={pages}
-	 *   previous={goToPrevious}
-	 *   next={goToNext} />
-	 * ```
+	 * <Pagination pages={pageArray} previous={prevFn} next={nextFn} />
 	 *
 	 * @example Small size
-	 * ```svelte
-	 * <Pagination size="sm" pages={pages} previous={prev} next={next} />
-	 * ```
+	 * <Pagination size="sm" pages={pageArray} previous={prevFn} next={nextFn} />
 	 *
 	 * @example Large size
-	 * ```svelte
-	 * <Pagination size="lg" pages={pages} previous={prev} next={next} />
-	 * ```
-	 *
-	 * @example Custom prev/next content
-	 * ```svelte
-	 * <Pagination
-	 *   pages={pages}
-	 *   previous={goBack}
-	 *   next={goForward}
-	 *   prevContent={() => <span>Previous</span>}
-	 *   nextContent={() => <span>Next</span>} />
-	 * ```
+	 * <Pagination size="lg" pages={pageArray} previous={prevFn} next={nextFn} />
 	 *
 	 * @interface PageItem
 	 * @property {string} name - Page number/text to display
