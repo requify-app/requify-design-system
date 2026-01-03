@@ -3,6 +3,58 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
+	/**
+	 * Container component with multiple visual variants for content grouping.
+	 * Can render as link when href provided.
+	 *
+	 * @example Basic card
+	 * ```svelte
+	 * <Card variant="default">
+	 *   <h3>Card Title</h3>
+	 *   <p>Card content goes here</p>
+	 * </Card>
+	 * ```
+	 *
+	 * @example Clickable card with hover effect
+	 * ```svelte
+	 * <Card variant="elevated" hoverable href="/details">
+	 *   <h3>Clickable Card</h3>
+	 *   <p>Click to view details</p>
+	 * </Card>
+	 * ```
+	 *
+	 * @example Glass morphism card
+	 * ```svelte
+	 * <Card variant="glass" padding="lg">
+	 *   <h3>Glass Card</h3>
+	 *   <p>Modern glass effect</p>
+	 * </Card>
+	 * ```
+	 *
+	 * @example Bordered card
+	 * ```svelte
+	 * <Card variant="bordered" padding="sm">
+	 *   <h3>Bordered Card</h3>
+	 *   <p>Subtle border styling</p>
+	 * </Card>
+	 * ```
+	 *
+	 * @param {'default' | 'bordered' | 'elevated' | 'flat' | 'glass'} variant - Visual style variant. Default: 'default'
+	 * @param {'none' | 'sm' | 'md' | 'lg' | 'xl'} size - Padding size (alias for padding). Default: 'md'
+	 * @param {'none' | 'sm' | 'md' | 'lg' | 'xl'} padding - Padding size. Default: 'md'
+	 * @param {boolean} hoverable - If true or href provided, adds hover lift effect. Default: false
+	 * @param {string} href - If provided, renders as anchor tag with href and link behavior
+	 * @param {Snippet} children - Card content
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Button} - Often used inside cards
+	 * @see {@link Input} - Often used inside cards for forms
+	 *
+	 * @accessibility
+	 * - When href is provided, renders as semantic link with proper ARIA
+	 * - Keyboard focusable with hover effect
+	 * - Visible focus indicator
+	 */
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		variant?: 'default' | 'bordered' | 'elevated' | 'flat';
 		padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'; // Alias for size

@@ -10,6 +10,57 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
+	/**
+	 * Small status indicator with semantic colors and dismissible option.
+	 * Can render as link when href provided.
+	 *
+	 * @example Basic badge
+	 * ```svelte
+	 * <Badge variant={BadgeVariant.PRIMARY}>New</Badge>
+	 * ```
+	 *
+	 * @example With semantic color
+	 * ```svelte
+	 * <Badge variant={BadgeVariant.SUCCESS}>Completed</Badge>
+	 * ```
+	 *
+	 * @example Dismissible badge
+	 * ```svelte
+	 * <Badge dismissable onclose={handleClose} variant={BadgeVariant.INFO}>
+	 *   New notification
+	 * </Badge>
+	 * ```
+	 *
+	 * @example As link
+	 * ```svelte
+	 * <Badge href="/notifications" variant={BadgeVariant.ERROR}>
+	 *   3 unread messages
+	 * </Badge>
+	 * ```
+	 *
+	 * @example Small size
+	 * ```svelte
+	 * <Badge size={ComponentSize.SM} variant={BadgeVariant.WARNING}>
+	 *   Beta
+	 * </Badge>
+	 * ```
+	 *
+	 * @param {BadgeVariant | BadgeVariantType} variant - Color variant for semantic meaning. Default: BadgeVariant.DEFAULT
+	 *   Options: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'orange'
+	 * @param {ComponentSize | ComponentSizeType} size - Badge size affecting padding and text. Default: ComponentSize.MD
+	 *   Options: 'xs' | 'sm' | 'md' | 'lg'
+	 * @param {boolean} dismissable - If true, shows X button to dismiss. Requires onclose. Default: false
+	 * @param {() => void} onclose - Callback when dismiss button is clicked
+	 * @param {Snippet} children - Badge text and content
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {string} href - If provided, renders as anchor tag with hover effect
+	 *
+	 * @accessibility
+	 * - Semantic colors convey meaning to all users
+	 * - Dismiss button has aria-label="Remove"
+	 * - When href provided, renders as semantic link
+	 * - Proper contrast ratios for all variants
+	 */
 	interface Props extends HTMLAttributes<HTMLSpanElement> {
 		variant?: BadgeVariant | BadgeVariantType;
 		size?: ComponentSize | ComponentSizeType;

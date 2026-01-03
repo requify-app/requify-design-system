@@ -2,6 +2,58 @@
 	import { cn } from '$lib/utils/cn';
 	import { ComponentSize, ProgressbarVariant } from '../enums';
 
+	/**
+	 * Progress bar component for displaying completion percentage.
+	 * Supports multiple colors, sizes, and label positions.
+	 *
+	 * @example Basic progress
+	 * ```svelte
+	 * <Progressbar progress={50} />
+	 * ```
+	 *
+	 * @example With success color
+	 * ```svelte
+	 * <Progressbar progress={75} color={ProgressbarVariant.SUCCESS} />
+	 * ```
+	 *
+	 * @example Small size with label outside
+	 * ```svelte
+	 * <Progressbar progress={30} size={ComponentSize.SM} labelOutside />
+	 * ```
+	 *
+	 * @example Large size with label inside
+	 * ```svelte
+	 * <Progressbar progress={60} size={ComponentSize.LG} labelInside />
+	 * ```
+	 *
+	 * @example Error progress
+	 * ```svelte
+	 * <Progressbar progress={90} color={ProgressbarVariant.ERROR} labelOutside />
+	 * ```
+	 *
+	 * @example Custom size
+	 * ```svelte
+	 * <Progressbar progress={45} size="h-1" />
+	 * ```
+	 *
+	 * @param {number} progress - Percentage value (0-100). Default: 0
+	 * @param {ComponentSize | string} size - Progress bar height. Default: ComponentSize.MD
+	 *   Named: 'xs' (4px), 'sm' (6px), 'md' (10px), 'lg' (16px), 'xl' (24px)
+	 *   Custom: pass Tailwind height class (e.g., 'h-1')
+	 * @param {ProgressbarVariant} color - Color variant. Default: ProgressbarVariant.PRIMARY
+	 *   Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
+	 * @param {boolean} labelInside - If true, shows percentage inside bar. Default: false
+	 * @param {boolean} labelOutside - If true, shows percentage above bar. Default: false
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Spinner} - For loading indicators without progress
+	 *
+	 * @accessibility
+	 * - ARIA: Should be wrapped with aria-label and aria-valuenow
+	 * - Screen reader: Use labelInside or labelOutside for visibility
+	 * - Smooth transition for visual updates
+	 * - High contrast colors for all variants
+	 */
 	interface Props {
 		progress?: number;
 		size?: ComponentSize | string;

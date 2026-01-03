@@ -2,6 +2,48 @@
 	import { RadioGroup as BitsRadioGroup } from 'bits-ui';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Individual radio button item for use within RadioGroup.
+	 * Wraps bits-ui.RadioGroup.Item.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <RadioItem value="option1">Option 1</RadioItem>
+	 * ```
+	 *
+	 * @example With id for label
+	 * ```svelte
+	 * <RadioItem id="option-a" value="a">Option A</RadioItem>
+	 * <Label for="option-a">Select Option A</Label>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <RadioItem value="disabled" disabled>This option is disabled</RadioItem>
+	 * ```
+	 *
+	 * @example In RadioGroup
+	 * ```svelte
+	 * <RadioGroup bind:value={selected}>
+	 *   <RadioItem value="morning">Morning</RadioItem>
+	 *   <RadioItem value="afternoon">Afternoon</RadioItem>
+	 *   <RadioItem value="evening">Evening</RadioItem>
+	 * </RadioGroup>
+	 * ```
+	 *
+	 * @param {string} value - Unique value for this radio option (required)
+	 * @param {boolean} disabled - If true, this option cannot be selected. Default: false
+	 * @param {string} id - HTML id for label association
+	 * @param {Snippet} children - Radio label text
+	 *
+	 * @see {@link RadioGroup} - Use RadioGroup to group multiple RadioItems
+	 *
+	 * @accessibility
+	 * - Proper label association when used with id
+	 * - Keyboard navigable as part of RadioGroup
+	 * - ARIA checked state
+	 * - Visible focus indicator when selected
+	 */
 	interface Props {
 		value: string;
 		disabled?: boolean;

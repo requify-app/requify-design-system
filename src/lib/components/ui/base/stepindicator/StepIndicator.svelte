@@ -3,6 +3,70 @@
 	import { Check } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Step indicator for multi-step workflows and wizards.
+	 * Visual progress tracker with numbered steps and connecting lines.
+	 *
+	 * @example Basic 3-step indicator
+	 * ```svelte
+	 * <StepIndicator currentStep={1} steps={['Step 1', 'Step 2', 'Step 3']} />
+	 * ```
+	 *
+	 * @example With custom steps
+	 * ```svelte
+	 * <StepIndicator
+	 *   currentStep={2}
+	 *   steps={['Personal Info', 'Address', 'Confirmation']}
+	 * />
+	 * ```
+	 *
+	 * @example With glow effect
+	 * ```svelte
+	 * <StepIndicator currentStep={2} steps={['A', 'B', 'C']} glow />
+	 * ```
+	 *
+	 * @example 5-step wizard
+	 * ```svelte
+	 * <StepIndicator
+	 *   currentStep={3}
+	 *   steps={['Upload', 'Process', 'Review', 'Approve', 'Complete']}
+	 * />
+	 * ```
+	 *
+	 * @example With custom step content
+	 * ```svelte
+	 * <StepIndicator currentStep={1} steps={['Step 1', 'Step 2']}>
+	 *   {#snippet children({ step, label })}
+	 *     <Icon class="h-4 w-4" />
+	 *   {/snippet}
+	 * </StepIndicator>
+	 * ```
+	 *
+	 * @example With custom styling
+	 * ```svelte
+	 * <StepIndicator
+	 *   currentStep={2}
+	 *   steps={['Start', 'Middle', 'End']}
+	 *   class="py-8"
+	 * />
+	 * ```
+	 *
+	 * @param {number} currentStep - Current active step (1-indexed). Default: 1
+	 * @param {string[]} steps - Array of step labels. Default: ['Step 1', 'Step 2', 'Step 3']
+	 * @param {boolean} glow - If true, adds glow effect to current step. Default: false
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {Snippet<[{step: number, label: string}]>} children - Custom step content snippet
+	 *
+	 * @see {@link Progressbar} - For linear progress without steps
+	 * @see {@link Spinner} - For loading indicators
+	 *
+	 * @accessibility
+	 * - Semantic ordered list (ol)
+	 * - Visual distinction between completed, current, and pending steps
+	 * - Checkmark icon for completed steps
+	 * - High contrast colors
+	 * - Screen reader announces current step position
+	 */
 	interface Props {
 		currentStep?: number;
 		steps?: string[];

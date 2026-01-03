@@ -5,6 +5,64 @@
 	import { slide } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Individual accordion panel with header and content.
+	 * Content collapses/expands with smooth slide animation.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <AccordionItem value="item1" title="First Item">
+	 *   <p>This is the content for the first accordion item.</p>
+	 * </AccordionItem>
+	 * ```
+	 *
+	 * @example Custom header
+	 * ```svelte
+	 * <AccordionItem value="item2">
+	 *   {#snippet header()}
+	 *     <div class="flex items-center gap-2">
+	 *       <Icon class="h-4 w-4" />
+	 *       <span>Custom Header</span>
+	 *     </div>
+	 *   {/snippet}
+	 *   <p>Content here</p>
+	 * </AccordionItem>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <AccordionItem value="item3" title="Disabled" disabled>
+	 *   <p>This item cannot be expanded</p>
+	 * </AccordionItem>
+	 * ```
+	 *
+	 * @example Rich content
+	 * ```svelte
+	 * <AccordionItem value="faq1" title="What is this?">
+	 *   <p>Detailed explanation goes here with multiple paragraphs, lists, and other content.</p>
+	 *   <ul>
+	 *     <li>Point one</li>
+	 *     <li>Point two</li>
+	 *   </ul>
+	 * </AccordionItem>
+	 * ```
+	 *
+	 * @param {string} value - Unique identifier for this panel (required)
+	 * @param {boolean} disabled - Disables panel expansion. Default: false
+	 * @param {string} title - Header text displayed in clickable area
+	 * @param {Snippet} header - Custom header snippet (alternative to title)
+	 * @param {Snippet} children - Collapsible content to display
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Accordion} - Parent accordion container
+	 *
+	 * @accessibility
+	 * - Keyboard toggle (Space, Enter)
+	 * - ARIA expanded attribute
+	 * - Chevron icon rotates on expand
+	 * - Smooth slide animation
+	 * - Screen reader announces state changes
+	 */
 	interface Props {
 		value: string; // REQUIRED - explicit values needed for controlled state
 		disabled?: boolean;

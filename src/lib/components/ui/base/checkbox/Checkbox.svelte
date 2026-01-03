@@ -5,8 +5,53 @@
 	import type { Snippet } from 'svelte';
 
 	/**
-	 * Checkbox component props
-	 * @interface Props
+	 * Boolean input with checked/unchecked/indeterminate states.
+	 * Wraps bits-ui.Checkbox.Root for accessibility and tri-state support.
+	 *
+	 * @example Basic checkbox
+	 * ```svelte
+	 * <Checkbox bind:checked={agreeToTerms} />
+	 * <Label for="terms">I agree to the terms</Label>
+	 * ```
+	 *
+	 * @example Required field
+	 * ```svelte
+	 * <Checkbox bind:checked={requiredField} required />
+	 * <Label for="required">Required option</Label>
+	 * ```
+	 *
+	 * @example Indeterminate (tri-state)
+	 * ```svelte
+	 * <Checkbox bind:checked={allSelected} bind:indeterminate={someSelected} />
+	 * <Label for="all">Select all</Label>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <Checkbox bind:checked={disabledCheck} disabled />
+	 * <Label for="disabled">Disabled option</Label>
+	 * ```
+	 *
+	 * @param {boolean} checked - Current checked state (bindable)
+	 * @param {boolean} indeterminate - Indeterminate state for tri-state checkboxes (partially selected). Bindable. Default: false
+	 * @param {boolean} disabled - Disables checkbox interaction. Default: false
+	 * @param {boolean} required - Shows asterisk, form validation hint. Default: false
+	 * @param {string} name - HTML name attribute for form submission
+	 * @param {string} value - HTML value attribute
+	 * @param {string} id - HTML id for label association
+	 * @param {Snippet} children - Label content displayed next to checkbox
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {(checked: boolean | 'indeterminate') => void} onCheckedChange - Callback when checked state changes
+	 *
+	 * @see {@link RadioGroup} - Use for single-select radio buttons
+	 * @see {@link Switch} - Use for toggle switches instead
+	 *
+	 * @accessibility
+	 * - Native checkbox keyboard support (Space to toggle)
+	 * - Proper label association via for/id attributes
+	 * - Indeterminate state properly announced to screen readers
+	 * - Visual focus ring for keyboard navigation
+	 * - Required indicator (asterisk) for form validation
 	 */
 	interface Props {
 		/** Current checked state */

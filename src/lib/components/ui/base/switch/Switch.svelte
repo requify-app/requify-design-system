@@ -5,8 +5,60 @@
 	import { SwitchVariant } from '../enums';
 
 	/**
-	 * Switch component props
-	 * @interface Props
+	 * Toggle switch with variants (primary, secondary, success, error, warning) and sizes.
+	 * Wraps bits-ui.Switch.Root for accessibility.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Switch bind:checked={notificationsEnabled} />
+	 * <Label for="switch">Enable notifications</Label>
+	 * ```
+	 *
+	 * @example With variant
+	 * ```svelte
+	 * <Switch bind:checked={darkMode} variant={SwitchVariant.SECONDARY} />
+	 * <Label for="theme">Dark mode</Label>
+	 * ```
+	 *
+	 * @example Success variant
+	 * ```svelte
+	 * <Switch bind:checked={autoSave} variant={SwitchVariant.SUCCESS} />
+	 * <Label for="autosave">Auto-save</Label>
+	 * ```
+	 *
+	 * @example Error variant
+	 * ```svelte
+	 * <Switch bind:checked={strictMode} variant={SwitchVariant.ERROR} />
+	 * <Label for="strict">Strict mode</Label>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <Switch bind:checked={disabledSwitch} disabled />
+	 * <Label for="disabled">Disabled switch</Label>
+	 * ```
+	 *
+	 * @param {boolean} checked - Current checked state (bindable)
+	 * @param {SwitchVariant} variant - Color variant for semantic meaning. Default: SwitchVariant.PRIMARY
+	 *   Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning'
+	 * @param {boolean} disabled - Disables switch interaction. Default: false
+	 * @param {boolean} required - Shows asterisk, form validation hint. Default: false
+	 * @param {string} name - HTML name attribute for form submission
+	 * @param {string} value - HTML value attribute
+	 * @param {string} id - HTML id for label association
+	 * @param {Snippet} children - Label content displayed next to switch
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {(checked: boolean) => void} onCheckedChange - Callback when checked state changes
+	 *
+	 * @see {@link Checkbox} - Use Checkbox for boolean selections
+	 * @see {@link RadioGroup} - Use RadioGroup for single-select options
+	 *
+	 * @accessibility
+	 * - Keyboard toggle with Space and Enter
+	 * - Visible focus ring for keyboard navigation
+	 * - Proper label association via for/id attributes
+	 * - Smooth animation with proper reduced motion support
+	 * - ARIA switch role for screen readers
 	 */
 	interface Props {
 		/** Current checked state */

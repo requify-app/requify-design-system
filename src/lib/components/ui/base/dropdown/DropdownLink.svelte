@@ -3,6 +3,53 @@
 	import { cn } from '$lib/utils/cn';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Dropdown item that renders as link.
+	 * Alternative to DropdownItem for navigation links.
+	 *
+	 * @example Basic link
+	 * ```svelte
+	 * <DropdownLink href="/profile">Profile</DropdownLink>
+	 * <DropdownLink href="/settings">Settings</DropdownLink>
+	 * <DropdownLink href="/logout">Logout</DropdownLink>
+	 * ```
+	 *
+	 * @example With onclick
+	 * ```svelte
+	 * <DropdownLink href="/dashboard" onclick={trackNavigation}>
+	 *   Dashboard
+	 * </DropdownLink>
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <DropdownLink href="/documents">
+	 *   <Document class="h-4 w-4 mr-2" />
+	 *   Documents
+	 * </DropdownLink>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <DropdownLink href="/pro" disabled>
+	 *   Upgrade to Pro
+	 * </DropdownLink>
+	 * ```
+	 *
+	 * @param {string} href - Link URL for navigation (required)
+	 * @param {Snippet} children - Link text and/or icons
+	 * @param {(e: MouseEvent) => void} onclick - Click handler
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Dropdown} - Parent dropdown component
+	 * @see {@link DropdownItem} - Button variant for actions
+	 *
+	 * @accessibility
+	 * - Renders as semantic <a> tag
+	 * - Keyboard navigable
+	 * - Hover state visual feedback
+	 * - Disabled state properly indicated
+	 */
 	interface Props {
 		href: string;
 		onclick?: (e: MouseEvent) => void;

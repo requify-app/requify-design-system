@@ -1,6 +1,47 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
 
+	/**
+	 * Circular loading spinner for indicating async operations.
+	 * Animated SVG with configurable size.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Spinner />
+	 * ```
+	 *
+	 * @example Large spinner
+	 * ```svelte
+	 * <Spinner size="xl" />
+	 * ```
+	 *
+	 * @example Small spinner
+	 * ```svelte
+	 * <Spinner size="xs" />
+	 * ```
+	 *
+	 * @example Custom size
+	 * ```svelte
+	 * <Spinner size="8" />
+	 * ```
+	 *
+	 * @example With custom class
+	 * ```svelte
+	 * <Spinner class="text-primary-500" />
+	 * ```
+	 *
+	 * @param {'xs' | 'sm' | 'md' | 'lg' | 'xl' | '4' | '6' | '8' | '10' | '12' | '16' | string} size - Spinner size.
+	 *   Named sizes: 'xs' (12px), 'sm' (16px), 'md' (24px), 'lg' (32px), 'xl' (48px)
+	 *   Numeric sizes correspond to Tailwind spacing (e.g., '8' = 32px). Default: 'md'
+	 * @param {string} class - Additional CSS classes to apply (useful for custom colors)
+	 *
+	 * @see {@link Button} - Use Button with loading prop for integrated spinner
+	 *
+	 * @accessibility
+	 * - aria-label="Loading" for screen readers
+	 * - Not focusable (decorative loading indicator)
+	 * - Smooth animation, respectful of prefers-reduced-motion
+	 */
 	interface Props {
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '4' | '6' | '8' | '10' | '12' | '16' | string;
 		class?: string;

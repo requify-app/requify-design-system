@@ -2,6 +2,64 @@
 	import { cn } from '$lib/utils/cn';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Semantic heading component with predefined sizes and tracking.
+	 * Renders appropriate HTML heading element based on tag prop.
+	 *
+	 * @example H1 - Page title
+	 * ```svelte
+	 * <Heading tag="h1">Welcome to Our App</Heading>
+	 * ```
+	 *
+	 * @example H2 - Section heading
+	 * ```svelte
+	 * <Heading tag="h2">Getting Started</Heading>
+	 * ```
+	 *
+	 * @example H3 - Subsection
+	 * ```svelte
+	 * <Heading tag="h3">Installation Guide</Heading>
+	 * ```
+	 *
+	 * @example With custom size
+	 * ```svelte
+	 * <Heading tag="h2" customSize="text-xl">Small Section Header</Heading>
+	 * ```
+	 *
+	 * @example H4 - Minor heading
+	 * ```svelte
+	 * <Heading tag="h4">Quick Tips</Heading>
+	 * ```
+	 *
+	 * @example H5 - Small heading
+	 * ```svelte
+	 * <Heading tag="h5">Note</Heading>
+	 * ```
+	 *
+	 * @example H6 - Smallest heading
+	 * ```svelte
+	 * <Heading tag="h6">Caption</Heading>
+	 * ```
+	 *
+	 * @example With custom styling
+	 * ```svelte
+	 * <Heading tag="h1" class="text-center mt-8">Centered Title</Heading>
+	 * ```
+	 *
+	 * @param {'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'} tag - HTML heading element to render. Default: 'h1'
+	 * @param {Snippet} children - Heading content
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {string} customSize - Custom Tailwind size class (overrides default tag size)
+	 *
+	 * @see {@link P} - For paragraph text
+	 * @see {@link Blockquote} - For quoted text
+	 *
+	 * @accessibility
+	 * - Semantic heading elements (h1-h6)
+	 * - Proper heading hierarchy for screen readers
+	 * - High contrast text colors
+	 * - Appropriate font weights and tracking
+	 */
 	interface Props {
 		tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 		children?: Snippet;

@@ -5,6 +5,68 @@
 	import type { Snippet } from 'svelte';
 	import { ToastVariant } from '$lib/components/ui/base/enums';
 
+	/**
+	 * Toast notification component with multiple variants and dismissible option.
+	 * Supports auto-dismiss, custom content, and fly-in animation.
+	 *
+	 * @example Basic success toast
+	 * ```svelte
+	 * <Toast variant={ToastVariant.SUCCESS} message="Changes saved successfully!" />
+	 * ```
+	 *
+	 * @example Dismissible error toast
+	 * ```svelte
+	 * <Toast
+	 *   variant={ToastVariant.ERROR}
+	 *   message="Failed to save changes"
+	 *   dismissable
+	 *   onDismiss={() => console.log('dismissed')}
+	 * />
+	 * ```
+	 *
+	 * @example With custom content
+	 * ```svelte
+	 * <Toast dismissable onclose={() => console.log('closed')}>
+	 *   {#snippet children()}
+	 *     <div>
+	 *       <p class="font-bold">Custom Notification</p>
+	 *       <p class="text-sm">With custom content</p>
+	 *     </div>
+	 *   {/snippet}
+	 * </Toast>
+	 * ```
+	 *
+	 * @example Using toast data object
+	 * ```svelte
+	 * <Toast
+	 *   toast={myToastData}
+	 *   onDismiss={(id) => removeToast(id)}
+	 * />
+	 * ```
+	 *
+	 * @example Warning variant
+	 * ```svelte
+	 * <Toast variant={ToastVariant.WARNING} message="This is a warning" />
+	 * ```
+	 *
+	 * @param {ToastData} toast - Toast data object containing id, variant, and message
+	 * @param {(id: string) => void} onDismiss - Callback when toast is dismissed via close button
+	 * @param {boolean} dismissable - If true, shows dismiss button. Auto-detected from toast/onDismiss. Default: false
+	 * @param {() => void} onclose - Callback when toast is closed or dismissed
+	 * @param {ToastVariant} color - Color variant (alternative to toast.variant). Default: ToastVariant.INFO
+	 * @param {Snippet} children - Custom toast content (overrides toast.message)
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link ToastProvider} - Provider component for toast state management
+	 * @see {@link Modal} - For modal dialogs
+	 *
+	 * @accessibility
+	 * - ARIA: role="alert" and aria-live="polite" for screen readers
+	 * - Keyboard: Dismiss button is keyboard accessible
+	 * - Dismiss button has proper aria-label
+	 * - Fly-in animation respects prefers-reduced-motion
+	 * - High contrast colors for all variants
+	 */
 	interface ToastData {
 		id: string;
 		variant?: ToastVariant;

@@ -4,6 +4,46 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
+	/**
+	 * Individual breadcrumb item with separator and link support.
+	 * First item has no separator, last item renders as text.
+	 *
+	 * @example Link item
+	 * ```svelte
+	 * <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+	 * ```
+	 *
+	 * @example Current page (no link)
+	 * ```svelte
+	 * <BreadcrumbItem>Product Details</BreadcrumbItem>
+	 * ```
+	 *
+	 * @example Home page
+	 * ```svelte
+	 * <BreadcrumbItem home href="/">Home</BreadcrumbItem>
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <BreadcrumbItem href="/">
+	 *   <Home class="h-4 w-4" />
+	 *   Home
+	 * </BreadcrumbItem>
+	 * ```
+	 *
+	 * @param {Snippet} children - Breadcrumb text and/or icons
+	 * @param {string} href - If provided, renders as anchor link; if not, renders as text
+	 * @param {boolean} home - If true, no separator is shown before this item. Default: false
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Breadcrumb} - Parent breadcrumb container
+	 *
+	 * @accessibility
+	 * - Renders as semantic <a> if href provided
+	 * - Renders as <span> if no href (current page)
+	 * - Separator icon (chevron) for visual hierarchy
+	 * - Keyboard navigable links
+	 */
 	interface Props {
 		children?: Snippet;
 		href?: string;

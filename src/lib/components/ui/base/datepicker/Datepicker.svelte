@@ -6,8 +6,43 @@
 	import { dateToCalendarDate, calendarDateToDate } from '$lib/utils/bits-ui-utils';
 
 	/**
-	 * DatePicker component props
-	 * @interface Props
+	 * Single date selection component with custom styling and keyboard support.
+	 * Wraps bits-ui.DatePicker with internationalized date handling.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Datepicker bind:value={selectedDate} />
+	 * ```
+	 *
+	 * @example With date range limits
+	 * ```svelte
+	 * <Datepicker
+	 *   bind:value={selectedDate}
+	 *   minValue={new Date('2024-01-01')}
+	 *   maxValue={new Date('2024-12-31')} />
+	 * ```
+	 *
+	 * @example With onChange handler
+	 * ```svelte
+	 * <Datepicker
+	 *   bind:value={appointmentDate}
+	 *   onChange={() => validateDate()} />
+	 * ```
+	 *
+	 * @param {Date} value - Currently selected date (bindable, undefined if none selected)
+	 * @param {Date} minValue - Minimum selectable date (user cannot select earlier dates)
+	 * @param {Date} maxValue - Maximum selectable date (user cannot select later dates)
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {() => void} onChange - Callback when date selection changes
+	 *
+	 * @see {@link DateRangePicker} - Use for date range selection
+	 *
+	 * @accessibility
+	 * - Full keyboard date navigation (arrow keys, Page Up/Down)
+	 * - ARIA datepicker role with proper labels
+	 * - Today indicator (dot) for visual reference
+	 * - Focus management on open/close
+	 * - Screen reader announces selected date
 	 */
 	interface Props {
 		/** Current selected date */

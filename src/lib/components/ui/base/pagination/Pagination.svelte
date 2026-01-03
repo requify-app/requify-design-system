@@ -3,6 +3,64 @@
 	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Pagination controls for data sets with previous/next and page numbers.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <script lang="ts">
+	 *   let pages = [
+	 *     { name: '1', href: '/page/1', active: true },
+	 *     { name: '2', href: '/page/2', active: false },
+	 *     { name: '3', href: '/page/3', active: false }
+	 *   ];
+	 * </script>
+	 * <Pagination
+	 *   pages={pages}
+	 *   previous={goToPrevious}
+	 *   next={goToNext} />
+	 * ```
+	 *
+	 * @example Small size
+	 * ```svelte
+	 * <Pagination size="sm" pages={pages} previous={prev} next={next} />
+	 * ```
+	 *
+	 * @example Large size
+	 * ```svelte
+	 * <Pagination size="lg" pages={pages} previous={prev} next={next} />
+	 * ```
+	 *
+	 * @example Custom prev/next content
+	 * ```svelte
+	 * <Pagination
+	 *   pages={pages}
+	 *   previous={goBack}
+	 *   next={goForward}
+	 *   prevContent={() => <span>Previous</span>}
+	 *   nextContent={() => <span>Next</span>} />
+	 * ```
+	 *
+	 * @interface PageItem
+	 * @property {string} name - Page number/text to display
+	 * @property {string} href - Link URL for this page
+	 * @property {boolean} [active] - If true, this is the current page
+	 *
+	 * @param {PageItem[]} pages - Array of page items with name, href, and optional active state
+	 * @param {() => void} previous - Callback when previous button is clicked
+	 * @param {() => void} next - Callback when next button is clicked
+	 * @param {'sm' | 'md' | 'lg'} size - Button size affecting height and text. Default: 'md'
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {Snippet} prevContent - Custom content for previous button (alternative to chevron icon)
+	 * @param {Snippet} nextContent - Custom content for next button (alternative to chevron icon)
+	 *
+	 * @accessibility
+	 * - aria-label for navigation
+	 * - aria-current="page" for active page
+	 * - Keyboard navigable links
+	 * - Visible active state
+	 * - Semantic <nav> element
+	 */
 	interface PageItem {
 		name: string;
 		href: string;

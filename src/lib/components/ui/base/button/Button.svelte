@@ -9,6 +9,68 @@
 	} from '../enums';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Button component with multiple visual variants and sizes.
+	 * Wraps bits-ui.Button.Root with custom styling and theming.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Button variant={ButtonVariant.PRIMARY}>Click me</Button>
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <Button icon>
+	 *   {#snippet icon()}
+	 *     <Search class="h-4 w-4" />
+	 *   {/snippet}
+	 *   Search
+	 * </Button>
+	 * ```
+	 *
+	 * @example Loading state
+	 * ```svelte
+	 * <Button variant={ButtonVariant.PRIMARY} loading={isLoading}>
+	 *   {#snippet icon()}
+	 *     <Save class="h-4 w-4" />
+	 *   {/snippet}
+	 *   Save Changes
+	 * </Button>
+	 * ```
+	 *
+	 * @example Full width
+	 * ```svelte
+	 * <Button variant={ButtonVariant.PRIMARY} fullWidth>Full Width Button</Button>
+	 * ```
+	 *
+	 * @example As link
+	 * ```svelte
+	 * <Button href="/dashboard">Go to Dashboard</Button>
+	 * ```
+	 *
+	 * @param {ButtonVariant | ButtonVariantType} variant - Visual style variant. Default: ButtonVariant.PRIMARY
+	 *   Options: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success'
+	 * @param {ComponentSize | ComponentSizeType} size - Button size affecting padding and text size. Default: ComponentSize.MD
+	 *   Options: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	 * @param {boolean} fullWidth - If true, button takes full width of container. Default: false
+	 * @param {boolean} loading - If true, shows loading spinner and disables button. Default: false
+	 * @param {boolean} disabled - If true, button is disabled. Default: false
+	 * @param {Snippet} icon - Icon slot for leading icon
+	 * @param {Snippet} children - Main button content
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {string} href - If provided, renders as anchor tag with href attribute
+	 * @param {'button' | 'submit' | 'reset'} type - HTML button type. Default: 'button'
+	 * @param {(e: MouseEvent) => void} onclick - Click event handler
+	 *
+	 * @see {@link ButtonGroup} - Can be grouped with ButtonGroup
+	 * @see {@link CloseButton} - For modal close buttons
+	 *
+	 * @accessibility
+	 * - Keyboard: Enter and Space to activate
+	 * - ARIA: Supports all button ARIA attributes
+	 * - Focus: Visible focus ring indicator
+	 * - Screen reader: Proper button role announced
+	 */
 	interface Props {
 		variant?: ButtonVariant | ButtonVariantType;
 		size?: ComponentSize | ComponentSizeType;

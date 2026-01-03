@@ -5,6 +5,73 @@
 	import type { Snippet } from 'svelte';
 	import type { FlyParams } from 'svelte/transition';
 
+	/**
+	 * Slide-out drawer/sheet component from any edge of viewport.
+	 * Wraps bits-ui Dialog with placement-specific animations and backdrop.
+	 *
+	 * @example Left sidebar drawer
+	 * ```svelte
+	 * <Drawer bind:open={showDrawer} placement="left">
+	 *   <h2>Settings</h2>
+	 *   <p>Drawer content goes here</p>
+	 * </Drawer>
+	 * ```
+	 *
+	 * @example Right drawer with backdrop
+	 * ```svelte
+	 * <Drawer bind:open={showDrawer} placement="right" backdrop>
+	 *   <Button onclick={() => showDrawer = false}>Close</Button>
+	 *   <p>Right drawer content</p>
+	 * </Drawer>
+	 * ```
+	 *
+	 * @example Bottom sheet (mobile style)
+	 * ```svelte
+	 * <Drawer bind:open={showSheet} placement="bottom">
+	 *   <h3>Select Option</h3>
+	 *   <ul>
+	 *     <li>Option 1</li>
+	 *     <li>Option 2</li>
+	 *   </ul>
+	 * </Drawer>
+	 * ```
+	 *
+	 * @example Without backdrop
+	 * ```svelte
+	 * <Drawer bind:open={showDrawer} placement="right" backdrop={false}>
+	 *   <p>Drawer without backdrop</p>
+	 * </Drawer>
+	 * ```
+	 *
+	 * @example Custom transition
+	 * ```svelte
+	 * <Drawer
+	 *   bind:open={showDrawer}
+	 *   placement="left"
+	 *   transitionParams={{ duration: 400 }}
+	 * >
+	 *   <p>Slow fade drawer</p>
+	 * </Drawer>
+	 * ```
+	 *
+	 * @param {Snippet} children - Drawer content
+	 * @param {boolean} open - Controls drawer visibility. Default: false
+	 * @param {'left' | 'right' | 'top' | 'bottom'} placement - Which edge to slide from. Default: 'left'
+	 *   Options: 'left' | 'right' | 'top' | 'bottom'
+	 * @param {boolean} backdrop - If true, shows backdrop overlay. Default: true
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {Partial<FlyParams>} transitionParams - Custom fly transition parameters
+	 *
+	 * @see {@link Modal} - For centered modal dialogs
+	 * @see {@link Sidebar} - For persistent sidebar navigation
+	 *
+	 * @accessibility
+	 * - Keyboard: Escape to close, Tab/Shift+Tab for focus management
+	 * - Focus trap: Managed by bits-ui Dialog primitive
+	 * - ARIA: Proper role and attributes managed by bits-ui
+	 * - Backdrop click closes drawer
+	 * - Animation respects prefers-reduced-motion
+	 */
 	type Placement = 'left' | 'right' | 'top' | 'bottom';
 
 	interface Props {

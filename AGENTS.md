@@ -60,8 +60,7 @@ You are a senior UI component developer with expertise in building reusable, acc
 ### Package Publishing
 
 - `bun run build` - Build production bundle for npm publishing
-- `npm publish` - Publish package to npm registry (requires npm login)
-- `npm version <patch|minor|major>` - Bump version before publishing
+- `bun publish` - Publish package to npm registry (requires npm login)
 - `git tag -a v<version> -m "v<version>"` - Create git tag for version
 
 ## Project Knowledge

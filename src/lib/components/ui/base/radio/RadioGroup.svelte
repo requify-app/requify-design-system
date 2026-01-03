@@ -3,6 +3,72 @@
 	import { cn } from '$lib/utils/cn';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Radio button group with single-select functionality.
+	 * Wraps bits-ui.RadioGroup.Root for accessibility.
+	 *
+	 * @example Using options prop
+	 * ```svelte
+	 * <RadioGroup bind:value={selectedPlan} options={[
+	 *   { value: 'free', label: 'Free Plan' },
+	 *   { value: 'pro', label: 'Pro Plan' },
+	 *   { value: 'enterprise', label: 'Enterprise' }
+	 * ]} />
+	 * ```
+	 *
+	 * @example Horizontal orientation
+	 * ```svelte
+	 * <RadioGroup
+	 *   bind:value={selectedTheme}
+	 *   orientation="horizontal"
+	 *   options={[
+	 *     { value: 'light', label: 'Light' },
+	 *     { value: 'dark', label: 'Dark' }
+	 *   ]} />
+	 * ```
+	 *
+	 * @example With disabled options
+	 * ```svelte
+	 * <RadioGroup bind:value={plan} options={[
+	 *   { value: 'free', label: 'Free' },
+	 *   { value: 'pro', label: 'Pro (Upgrade)' },
+	 *   { value: 'enterprise', label: 'Enterprise', disabled: true }
+	 * ]} />
+	 * ```
+	 *
+	 * @example With custom children
+	 * ```svelte
+	 * <RadioGroup bind:value={selected}>
+	 *   <RadioItem value="option1">Option 1</RadioItem>
+	 *   <RadioItem value="option2">Option 2</RadioItem>
+	 *   <RadioItem value="option3">Option 3</RadioItem>
+	 * </RadioGroup>
+	 * ```
+	 *
+	 * @param {string} value - Currently selected value (bindable)
+	 * @param {RadioOption[]} options - Array of radio options (alternative to children). Each option has value, label, and optional disabled
+	 * @param {boolean} disabled - Disables entire radio group. Default: false
+	 * @param {boolean} required - Shows asterisk, form validation hint. Default: false
+	 * @param {string} name - HTML name attribute for form grouping
+	 * @param {Snippet} children - Custom RadioItem children (alternative to options prop)
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {'horizontal' | 'vertical'} orientation - Layout direction. Default: 'vertical'
+	 *
+	 * @interface RadioOption
+	 * @property {string} value - Unique value for this option
+	 * @property {string} label - Display label text
+	 * @property {boolean} [disabled] - If true, option is disabled
+	 *
+	 * @see {@link RadioItem} - Use RadioItem for custom children
+	 * @see {@link Checkbox} - Use Checkbox for multiple independent selections
+	 *
+	 * @accessibility
+	 * - Arrow keys to navigate between options
+	 * - Space or Enter to select
+	 * - Proper ARIA role for radio groups
+	 * - Visible focus indicator
+	 * - Screen reader announces selected state
+	 */
 	interface RadioOption {
 		value: string;
 		label: string;

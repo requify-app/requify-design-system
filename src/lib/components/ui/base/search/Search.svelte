@@ -3,6 +3,50 @@
 	import { Search as SearchIcon } from '@lucide/svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
+	/**
+	 * Search input with built-in search icon and proper styling.
+	 * Extends HTML input with search-specific defaults.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Search bind:value={searchQuery} />
+	 * ```
+	 *
+	 * @example Small size
+	 * ```svelte
+	 * <Search size="sm" bind:value={quickSearch} />
+	 * ```
+	 *
+	 * @example Large size
+	 * ```svelte
+	 * <Search size="lg" bind:value={advancedSearch} />
+	 * ```
+	 *
+	 * @example Custom placeholder
+	 * ```svelte
+	 * <Search placeholder="Search products..." bind:value={productSearch} />
+	 * ```
+	 *
+	 * @example With custom class
+	 * ```svelte
+	 * <Search class="max-w-md" bind:value={search} />
+	 * ```
+	 *
+	 * @param {string} value - Search input value (bindable)
+	 * @param {'sm' | 'md' | 'lg'} size - Input size affecting height and text size. Default: 'md'
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {string} placeholder - Placeholder text. Default: 'Search...'
+	 *
+	 * @see {@link Input} - Use Input for general text inputs without icon
+	 * @see {@link Button} - Often used with search for submit buttons
+	 *
+	 * @accessibility
+	 * - type="search" for proper search semantics
+	 * - Search icon provides visual context
+	 * - Keyboard focusable with proper focus ring
+	 * - Proper label association (add Label component)
+	 * - Placeholder text for screen readers
+	 */
 	interface Props extends Omit<HTMLInputAttributes, 'size'> {
 		value?: string;
 		size?: 'sm' | 'md' | 'lg';

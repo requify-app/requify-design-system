@@ -2,6 +2,47 @@
 	import { cn } from '$lib/utils/cn';
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
+	/**
+	 * Multi-line text input with error state support.
+	 * Extends HTML textarea attributes for full compatibility.
+	 *
+	 * @example Basic textarea
+	 * ```svelte
+	 * <Textarea placeholder="Enter your message..." bind:value={message} />
+	 * ```
+	 *
+	 * @example With error state
+	 * ```svelte
+	 * <Textarea error="Message must be at least 10 characters" bind:value={message} />
+	 * ```
+	 *
+	 * @example Custom rows
+	 * ```svelte
+	 * <Textarea rows={10} placeholder="Long form content" bind:value={description} />
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <Textarea disabled placeholder="Disabled textarea" value="Can't edit this" />
+	 * ```
+	 *
+	 * @param {string} error - Error message to display below textarea. Triggers error styling
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {boolean} disabled - Disables textarea. Default: false
+	 * @param {string} value - Textarea value (bindable)
+	 * @param {number} rows - Number of visible rows. Default: 4
+	 *
+	 * @see {@link Label} - Use with Label for proper form structure
+	 * @see {@link Input} - Use Input for single-line text
+	 * @see {@link Helper} - Add helper text below textarea
+	 *
+	 * @accessibility
+	 * - Requires Label with matching for/id for proper screen reader support
+	 * - Error state announced to screen readers via aria-describedby
+	 * - Resizable with drag handle (visual indicator)
+	 * - Keyboard navigation: Enter, Tab
+	 * - Visible focus ring
+	 */
 	interface Props extends HTMLTextareaAttributes {
 		error?: string;
 		class?: string;

@@ -5,6 +5,94 @@
 	import { CircleAlert, TriangleAlert, Info, CircleCheckBig } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Alert dialog for critical confirmations and important messages.
+	 * Wraps Modal with pre-configured confirm/cancel actions and variant icons.
+	 *
+	 * @example Basic confirmation
+	 * ```svelte
+	 * <AlertDialog
+	 *   bind:open={showDialog}
+	 *   title="Delete Account"
+	 *   description="This action cannot be undone"
+	 *   onConfirm={handleDelete}
+	 * />
+	 * ```
+	 *
+	 * @example Error variant
+	 * ```svelte
+	 * <AlertDialog
+	 *   bind:open={showError}
+	 *   variant="error"
+	 *   title="Error Occurred"
+	 *   description="Something went wrong. Please try again."
+	 *   confirmText="Retry"
+	 *   onConfirm={handleRetry}
+	 * />
+	 * ```
+	 *
+	 * @example Success variant with custom content
+	 * ```svelte
+	 * <AlertDialog
+	 *   bind:open={showSuccess}
+	 *   variant="success"
+	 *   title="Operation Complete"
+	 *   onConfirm={() => showSuccess = false}
+	 * >
+	 *   {#snippet children()}
+	 *     <p class="text-sm text-gray-600">
+	 *       Your changes have been saved successfully.
+	 *     </p>
+	 *   {/snippet}
+	 * </AlertDialog>
+	 * ```
+	 *
+	 * @example Warning with custom buttons
+	 * ```svelte
+	 * <AlertDialog
+	 *   bind:open={showWarning}
+	 *   variant="warning"
+	 *   title="Unsaved Changes"
+	 *   confirmText="Discard"
+	 *   cancelText="Keep Editing"
+	 *   onConfirm={handleDiscard}
+	 *   onCancel={handleKeep}
+	 * />
+	 * ```
+	 *
+	 * @example Info variant
+	 * ```svelte
+	 * <AlertDialog
+	 *   bind:open={showInfo}
+	 *   variant="info"
+	 *   title="New Feature"
+	 *   description="Check out our latest features"
+	 *   confirmText="Got it"
+	 *   onConfirm={() => showInfo = false}
+	 * />
+	 * ```
+	 *
+	 * @param {boolean} open - Controls dialog visibility. Default: false
+	 * @param {'info' | 'warning' | 'error' | 'success'} variant - Visual variant affecting icon and button colors. Default: 'info'
+	 * @param {string} title - Dialog title (required)
+	 * @param {string} description - Optional descriptive text below title
+	 * @param {string} confirmText - Text for confirm button. Default: 'Confirm'
+	 * @param {string} cancelText - Text for cancel button. Default: 'Cancel'
+	 * @param {() => void} onConfirm - Callback when confirm button is clicked
+	 * @param {() => void} onCancel - Callback when cancel button is clicked
+	 * @param {Snippet} children - Custom content below description
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Modal} - Base modal component
+	 * @see {@link Drawer} - For side-panel navigation
+	 *
+	 * @accessibility
+	 * - Keyboard: Escape to close, Tab/Shift+Tab to navigate buttons
+	 * - Focus trap: Focus managed by Modal component
+	 * - ARIA: Proper role, aria-labelledby, aria-describedby managed by bits-ui
+	 * - Screen reader: Icon, title, and description are properly announced
+	 * - High contrast colors for all variants
+	 */
 	interface Props {
 		open?: boolean;
 		variant?: 'info' | 'warning' | 'error' | 'success';

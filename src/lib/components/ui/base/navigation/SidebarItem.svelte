@@ -4,6 +4,61 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 
+	/**
+	 * Individual sidebar navigation item with active state detection.
+	 * Supports icons, nested items, and automatic active state via context.
+	 *
+	 * @example Basic item
+	 * ```svelte
+	 * <SidebarItem label="Dashboard" href="/dashboard" />
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <SidebarItem label="Home" href="/">
+	 *   {#snippet icon()}
+	 *     <Home class="h-5 w-5" />
+	 *   {/snippet}
+	 * </SidebarItem>
+	 * ```
+	 *
+	 * @example Nested item
+	 * ```svelte
+	 * <SidebarItem label="Sub Item" href="/nested" nested />
+	 * ```
+	 *
+	 * @example With custom content
+	 * ```svelte
+	 * <SidebarItem label="Settings" href="/settings">
+	 *   {#snippet children()}
+	 *     <span class="ml-auto text-xs">New</span>
+	 *   {/snippet}
+	 * </SidebarItem>
+	 * ```
+	 *
+	 * @example With custom styling
+	 * ```svelte
+	 * <SidebarItem label="Custom" href="/custom" class="font-bold" />
+	 * ```
+	 *
+	 * @param {string} label - Text label for the navigation item
+	 * @param {string} href - URL path for the navigation link
+	 * @param {Snippet} icon - Leading icon slot
+	 * @param {Snippet} children - Additional content to display after label
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {boolean} nested - If true, adds indentation for nested items. Default: false
+	 *
+	 * @see {@link SidebarWrapper} - Main sidebar container
+	 * @see {@link SidebarGroup} - Group sidebar items
+	 * @see {@link SidebarDropdown} - Collapsible sidebar section
+	 *
+	 * @accessibility
+	 * - Semantic link element with proper role and href
+	 * - Active state clearly indicated visually and semantically
+	 * - Keyboard navigable with Tab and Enter
+	 * - High contrast ratios for text
+	 * - Screen reader announces label and active state
+	 */
 	interface Props extends HTMLAnchorAttributes {
 		label: string;
 		href: string;

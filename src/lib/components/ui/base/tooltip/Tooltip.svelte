@@ -5,8 +5,77 @@
 	import type { Snippet } from 'svelte';
 
 	/**
-	 * Tooltip component props
-	 * @interface Props
+	 * Tooltip component for displaying contextual information on hover/focus.
+	 * Wraps bits-ui Tooltip with scale animation and arrow indicator.
+	 *
+	 * @example Basic tooltip
+	 * ```svelte
+	 * <Tooltip content="This is a tooltip">
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @example With custom placement
+	 * ```svelte
+	 * <Tooltip content="Tooltip on right" side="right">
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @example With custom alignment
+	 * ```svelte
+	 * <Tooltip content="Start aligned" side="bottom" align="start">
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @example With custom content
+	 * ```svelte
+	 * <Tooltip>
+	 *   {#snippet content()}
+	 *     <div>
+	 *       <p class="font-bold">Custom Tooltip</p>
+	 *       <p class="text-sm">Rich content</p>
+	 *     </div>
+	 *   {/snippet}
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @example With no delay
+	 * ```svelte
+	 * <Tooltip content="Instant tooltip" delayDuration={0}>
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @example With hoverable content
+	 * ```svelte
+	 * <Tooltip
+	 *   content="Click to dismiss"
+	 *   disableHoverableContent={false}
+	 * >
+	 *   <Button>Hover me</Button>
+	 * </Tooltip>
+	 * ```
+	 *
+	 * @param {string | Snippet} content - Tooltip text or custom content snippet
+	 * @param {Snippet} children - Trigger element that shows tooltip on hover/focus
+	 * @param {'top' | 'right' | 'bottom' | 'left'} side - Tooltip placement side relative to trigger. Default: 'top'
+	 * @param {'start' | 'center' | 'end'} align - Tooltip alignment along the side. Default: 'center'
+	 * @param {number} delayDuration - Delay in ms before tooltip appears. Default: 200
+	 * @param {boolean} disableHoverableContent - If true, tooltip closes when leaving trigger. Default: undefined
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Popover} - For interactive popovers
+	 * @see {@link Dropdown} - For dropdown menus
+	 *
+	 * @accessibility
+	 * - Keyboard: Focus/blur shows/hides tooltip
+	 * - ARIA: Proper role and aria-describedby managed by bits-ui
+	 * - Screen reader: Tooltip content announced on focus
+	 * - Scale animation respects prefers-reduced-motion
+	 * - High contrast for text readability
 	 */
 	interface Props {
 		/** Tooltip content (string or snippet) */

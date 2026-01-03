@@ -1,0 +1,880 @@
+# Requify Design System
+
+A professional, customizable design system built with Svelte 5, Tailwind CSS, and bits-ui primitives. Includes 60+ accessible, type-safe UI components.
+
+## Tech Stack
+
+- **Framework**: Svelte 5 with runes-based reactivity ($props, $state, $derived, $effect)
+- **Styling**: Tailwind CSS 4 with CSS custom properties for theming
+- **Primitives**: bits-ui v2 for accessibility-first headless components
+- **Icons**: @lucide/svelte for consistent iconography
+- **TypeScript**: Strict mode with comprehensive type definitions
+- **Date Handling**: @internationalized/date for date components
+
+## Installation
+
+```bash
+npm install @requify/requify-design-system
+# or
+yarn add @requify/requify-design-system
+# or
+bun add @requify/requify-design-system
+```
+
+## Quick Start
+
+```typescript
+// Import components and enums
+import { Button, Card, Input } from '@requify/requify-design-system';
+import { ButtonVariant, ComponentSize } from '@requify/requify-design-system';
+```
+
+```svelte
+<script lang="ts">
+  import { Button, Card, Input, Label } from '@requify/requify-design-system';
+  import { ButtonVariant } from '@requify/requify-design-system';
+
+  let inputValue = '';
+</script>
+
+<Card variant="default">
+  <h3>Example Card</h3>
+  <Label for="input">Enter text:</Label>
+  <Input id="input" bind:value={inputValue} placeholder="Type something..." />
+  <Button variant={ButtonVariant.PRIMARY}>Submit</Button>
+</Card>
+```
+
+## Available Components
+
+### Foundation Components
+
+#### Button
+Clickable button with multiple visual variants (primary, secondary, outline, ghost, danger, success) and sizes (xs, sm, md, lg, xl). Supports loading state, icons, and full-width. Wraps bits-ui.Button.Root.
+
+**Props:**
+- `variant`: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' (default: 'primary')
+- `size`: 'xs' | 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+- `loading`: boolean (default: false)
+- `disabled`: boolean (default: false)
+- `fullWidth`: boolean (default: false)
+- `icon`: Snippet (icon slot)
+- `children`: Snippet (button content)
+- `onclick`: (e: MouseEvent) => void
+- `href`: string (renders as link if provided)
+- `type`: 'button' | 'submit' | 'reset' (default: 'button')
+
+**Accessibility:** Keyboard navigation (Enter, Space), visible focus ring, ARIA button role.
+
+#### Card
+Container component with variants for different visual styles. Can render as link when href provided.
+
+**Props:**
+- `variant`: 'default' | 'bordered' | 'elevated' | 'flat' | 'glass' (default: 'default')
+- `size` | `padding`: 'none' | 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+- `hoverable`: boolean (default: false)
+- `href`: string (renders as <a> if provided)
+- `children`: Snippet
+
+#### Input
+Text input with error states, left/right icon slots, clearable option, and size variants.
+
+**Props:**
+- `size`: 'xs' | 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+- `error`: string (displays error message below input)
+- `clearable`: boolean (shows X button to clear value, default: false)
+- `left`: Snippet (left icon slot)
+- `right`: Snippet (right icon slot)
+- `children`: Snippet<[HTMLInputAttributes]> (custom input rendering)
+- `value`: string (bindable)
+- `disabled`: boolean (default: false)
+- `id`: string (for label association)
+
+**Accessibility:** Proper label association via for/id attributes, error state with ARIA, keyboard navigation.
+
+#### Label
+Form label component with proper for/id attribute handling for accessibility.
+
+**Props:**
+- `for`: string (id of associated input)
+- `required`: boolean (shows asterisk, default: false)
+- `children`: Snippet
+
+#### Badge
+Small status indicator with semantic colors and dismissible option. Can render as link.
+
+**Props:**
+- `variant`: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'orange' (default: 'default')
+- `size`: 'xs' | 'sm' | 'md' | 'lg' (default: 'md')
+- `dismissable`: boolean (shows X button, default: false)
+- `onclose`: () => void (callback when dismissed)
+- `href`: string (renders as link if provided)
+- `children`: Snippet
+
+#### Spinner
+Loading spinner for async operations. Simple, animated loading indicator.
+
+#### ButtonGroup
+Groups buttons together with proper spacing and visual connection.
+
+#### CloseButton
+Pre-styled close button (X icon) for modals and panels.
+
+### Form Components
+
+#### Checkbox
+Boolean input with checked/unchecked/indeterminate states. Wraps bits-ui.Checkbox.Root.
+
+**Props:**
+- `checked`: boolean (bindable)
+- `indeterminate`: boolean (tri-state, bindable, default: false)
+- `disabled`: boolean (default: false)
+- `required`: boolean (default: false)
+- `name`: string
+- `value`: string
+- `id`: string (for label association)
+- `onCheckedChange`: (checked: boolean | 'indeterminate') => void
+- `children`: Snippet (label content)
+
+**Accessibility:** Native checkbox keyboard support, label association, indeterminate state ARIA.
+
+#### Switch
+Toggle switch with variants (primary, secondary, success, error, warning) and sizes (sm, md, lg).
+
+**Props:**
+- `checked`: boolean (bindable)
+- `variant`: 'primary' | 'secondary' | 'success' | 'error' | 'warning' (default: 'primary')
+- `size`: 'sm' | 'md' | 'lg' (default: 'md')
+- `disabled`: boolean (default: false)
+- `id`: string
+- `label`: Snippet
+
+**Accessibility:** Keyboard toggle (Enter, Space), visible focus ring, ARIA switch role.
+
+#### Select
+Dropdown select with keyboard navigation and custom styling. Wraps bits-ui.Select.Root.
+
+**Props:**
+- `value`: string | number | null (bindable)
+- `options`: SelectOption[] (array of { value, label, disabled })
+- `placeholder`: string (default: 'Select an option')
+- `disabled`: boolean (default: false)
+- `required`: boolean (default: false)
+- `error`: string
+- `onChange`: (value: string | number | null | undefined) => void
+- `children`: Snippet (custom option rendering)
+- `id`: string
+
+**Interface:**
+```typescript
+interface SelectOption {
+  value: string | number | null;
+  label?: string;
+  disabled?: boolean;
+}
+```
+
+**Accessibility:** Full keyboard navigation, ARIA combobox, screen reader support.
+
+#### SelectItem
+Individual select option item for custom rendering in Select.
+
+#### RadioGroup
+Radio button group with keyboard navigation. Wraps bits-ui.RadioGroup.Root.
+
+**Props:**
+- `value`: string (bindable)
+- `orientation`: 'horizontal' | 'vertical' (default: 'horizontal')
+- `disabled`: boolean (default: false)
+- `name`: string
+- `required`: boolean (default: false)
+- `onChange`: (value: string) => void
+- `children`: Snippet (RadioItem components)
+
+#### RadioItem
+Individual radio button item for RadioGroup.
+
+**Props:**
+- `value`: string
+- `disabled`: boolean
+- `label`: Snippet
+
+#### Datepicker
+Date selection component with custom styling and keyboard support. Uses @internationalized/date.
+
+**Props:**
+- `value`: Date | undefined (bindable)
+- `placeholder`: string
+- `disabled`: boolean
+- `required`: boolean
+- `error`: string
+- `id`: string
+- `label`: Snippet
+
+**Accessibility:** Full keyboard date navigation, ARIA datepicker role, screen reader friendly.
+
+#### DateRangePicker
+Date range selection with validation. Uses @internationalized/date.
+
+**Props:**
+- `value`: { start?: Date; end?: Date } (bindable)
+- `placeholder`: string
+- `disabled`: boolean
+- `required`: boolean
+- `error`: string
+- `id`: string
+- `label`: Snippet
+
+#### Search
+Search input with icon and clearable functionality. Extends Input with search-specific styling.
+
+**Props:**
+- Same as Input, plus search-specific defaults and styling.
+
+### Navigation Components
+
+#### Sidebar
+Collapsible sidebar navigation with groups. Complex navigation component with nested structure.
+
+**Props:**
+- `open`: boolean (collapsed state)
+- `width`: string (default: '250px')
+- `collapsedWidth`: string (default: '64px')
+- `children`: Snippet
+
+#### SidebarWrapper
+Container for sidebar with proper layout and transitions.
+
+#### SidebarGroup
+Groups sidebar items together with optional label.
+
+#### SidebarItem
+Individual sidebar navigation item with active state and icon support.
+
+#### SidebarDropdown
+Dropdown menu within sidebar for nested navigation.
+
+#### Tabs
+Tabbed interface with keyboard navigation. Wraps bits-ui.Tabs.Root.
+
+**Props:**
+- `value`: string (active tab, bindable)
+- `onValueChange`: (value: string) => void
+- `children`: Snippet (TabsList, TabsContent components)
+
+**Accessibility:** Left/Right arrow navigation, Tab/Shift+Tab to focus list, Enter/Space to activate.
+
+#### TabsList
+Container for tab triggers with visual selection indicator.
+
+#### TabsTrigger
+Individual tab trigger button.
+
+**Props:**
+- `value`: string (tab identifier)
+- `disabled`: boolean
+- `children`: Snippet (tab label)
+
+#### TabsContent
+Content panel for each tab.
+
+**Props:**
+- `value`: string (must match trigger value)
+- `children`: Snippet (tab content)
+
+#### Breadcrumb
+Hierarchical navigation trail for showing page hierarchy.
+
+**Props:**
+- `children`: Snippet (BreadcrumbItem components)
+
+#### BreadcrumbItem
+Individual breadcrumb item with separator and link.
+
+**Props:**
+- `href`: string
+- `current`: boolean (if true, renders as text, not link)
+- `children`: Snippet
+
+#### Accordion
+Collapsible content panels with keyboard navigation. Wraps bits-ui.Accordion.Root.
+
+**Props:**
+- `type`: 'single' | 'multiple' (default: 'single')
+- `value`: string | string[] (open item(s), bindable)
+- `onValueChange`: (value: string | string[]) => void
+- `collapsible`: boolean (default: true)
+- `children`: Snippet (AccordionItem components)
+
+**Accessibility:** Space/Enter to toggle, arrow keys between items, ARIA expanded states.
+
+#### AccordionItem
+Individual accordion panel with header and content.
+
+**Props:**
+- `value`: string (item identifier)
+- `disabled`: boolean
+- `title`: Snippet (accordion header)
+- `children`: Snippet (accordion content)
+
+#### Dropdown
+Dropdown menu with keyboard navigation. Wraps bits-ui.DropdownMenu.Root.
+
+**Props:**
+- `open`: boolean (bindable)
+- `align`: 'start' | 'center' | 'end' (default: 'start')
+- `trigger`: Snippet (trigger element, required)
+- `children`: Snippet (DropdownItem, DropdownDivider, DropdownHeader, DropdownLink)
+
+**Accessibility:** Arrow key navigation, Space/Enter to select, Escape to close, focus trap.
+
+#### DropdownItem
+Individual dropdown menu item.
+
+**Props:**
+- `disabled`: boolean
+- `onSelect`: () => void
+- `children`: Snippet
+
+#### DropdownDivider
+Visual separator between dropdown sections.
+
+#### DropdownHeader
+Header text for dropdown sections.
+
+**Props:**
+- `children`: Snippet
+
+#### DropdownLink
+Dropdown item that renders as link.
+
+**Props:**
+- `href`: string
+- `disabled`: boolean
+- `children`: Snippet
+
+#### Pagination
+Pagination controls for data sets. Supports page numbers, next/prev, and page size selection.
+
+**Props:**
+- `currentPage`: number (bindable)
+- `totalPages`: number
+- `onPageChange`: (page: number) => void
+- `showSizeSelector`: boolean (default: false)
+- `pageSize`: number (default: 10)
+- `onPageSizeChange`: (size: number) => void
+
+### Feedback Components
+
+#### Alert
+Informational message with variants (info, success, warning, error) and dismissible option.
+
+**Props:**
+- `variant`: 'info' | 'success' | 'warning' | 'error' (default: 'info')
+- `dismissible`: boolean (shows X button, default: false)
+- `onDismiss`: () => void
+- `icon`: Snippet (custom icon, defaults to variant icon)
+- `children`: Snippet (alert message)
+
+**Accessibility:** role="alert", ARIA live region, dismiss button with aria-label.
+
+#### Toast
+Temporary notification with positioning and variant options.
+
+**Props:**
+- `open`: boolean (bindable)
+- `variant`: 'info' | 'success' | 'warning' | 'error'
+- `position`: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
+- `duration`: number (auto-dismiss in ms, 0 for manual)
+- `title`: string
+- `description`: string
+- `action`: Snippet
+- `onClose`: () => void
+
+**Accessibility:** role="status", ARIA live region, keyboard dismissible.
+
+#### ToastProvider
+Context provider for toast management and positioning.
+
+#### Modal
+Dialog modal with backdrop and keyboard dismissal. Wraps bits-ui.Dialog.Root.
+
+**Props:**
+- `open`: boolean (bindable)
+- `size`: 'sm' | 'md' | 'lg' | 'xl' | 'full' (default: 'md', max-widths: 384px, 448px, 768px, 1280px, 100%)
+- `dismissible`: boolean (default: true)
+- `outsideclose`: boolean (click outside to close, default: true)
+- `title`: string
+- `description`: string
+- `children`: Snippet (modal content)
+- `footer`: Snippet (modal footer)
+- `header`: Snippet (custom header)
+- `onClose`: () => void
+- `form`: boolean (renders as form element)
+- `onsubmit`: (e: SubmitEvent) => void
+
+**Accessibility:** Focus trap, Escape to close, ARIA dialog role, proper focus management.
+
+#### AlertDialog
+Alert dialog for critical confirmations (destructive actions, warnings). Wraps bits-ui.Dialog.
+
+**Props:**
+- Similar to Modal, but optimized for confirmations with destructive implications.
+- Has built-in action/cancel button slots.
+
+**Accessibility:** role="alertdialog", ARIA described-by for dangerous actions, focus on primary action.
+
+#### Drawer
+Slide-out panel from screen edge with backdrop and transitions.
+
+**Props:**
+- `open`: boolean (bindable)
+- `placement`: 'left' | 'right' | 'top' | 'bottom' (default: 'left')
+- `backdrop`: boolean (default: true)
+- `transitionParams`: Partial<FlyParams> (custom transition)
+- `children`: Snippet
+
+**Accessibility:** Focus trap, Escape to close, ARIA dialog role, smooth transitions.
+
+#### Tooltip
+Hover tooltip with positioning options. Wraps bits-ui.Tooltip.Root.
+
+**Props:**
+- `content`: string | Snippet (tooltip text or rich content)
+- `children`: Snippet (trigger element, required)
+- `side`: 'top' | 'right' | 'bottom' | 'left' (default: 'top')
+- `align`: 'start' | 'center' | 'end' (default: 'center')
+- `delayDuration`: number (ms before showing, default: 200)
+- `disableHoverableContent`: boolean
+
+**Accessibility:** role="tooltip", ARIA described-by, keyboard accessible, screen reader friendly.
+
+#### Popover
+Positioned popover with manual trigger control. Wraps bits-ui.Popover.Root.
+
+**Props:**
+- `open`: boolean (bindable)
+- `side`: 'top' | 'right' | 'bottom' | 'left'
+- `align`: 'start' | 'center' | 'end'
+- `trigger`: Snippet (trigger element)
+- `children`: Snippet (popover content)
+
+**Accessibility:** Focus trap when open, Escape to close, ARIA attributes.
+
+### Data Display Components
+
+#### Table
+Data table with sortable headers and responsive design.
+
+**Props:**
+- `children`: Snippet (TableHead, TableBody components)
+
+#### TableHead
+Table header container with sorting support.
+
+**Props:**
+- `children`: Snippet (TableHeadCell components)
+
+#### TableHeadCell
+Individual table header cell with sort indicators.
+
+**Props:**
+- `sortable`: boolean
+- `sorted`: 'asc' | 'desc' | null
+- `onSort`: () => void
+- `children`: Snippet
+
+#### TableBody
+Table body container for rows.
+
+**Props:**
+- `children`: Snippet (TableBodyRow components)
+
+#### TableBodyRow
+Individual table row with hover states.
+
+**Props:**
+- `children`: Snippet (TableBodyCell components)
+
+#### TableBodyCell
+Individual table data cell.
+
+**Props:**
+- `children`: Snippet
+
+#### Progressbar
+Linear progress indicator with variants.
+
+**Props:**
+- `value`: number (0-100)
+- `variant`: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' (default: 'primary')
+- `size`: 'sm' | 'md' | 'lg' (default: 'md')
+- `showLabel`: boolean (show percentage text, default: false)
+- `animate`: boolean (striped animation, default: false)
+
+**Accessibility:** role="progressbar", ARIA value attributes, screen reader friendly.
+
+#### Listgroup
+Styled list for content groups and navigation.
+
+**Props:**
+- `children`: Snippet (ListgroupItem components)
+
+#### ListgroupItem
+Individual list item with active state and link support.
+
+**Props:**
+- `active`: boolean
+- `href`: string
+- `disabled`: boolean
+- `onclick`: (e: MouseEvent) => void
+- `children`: Snippet
+
+#### StepIndicator
+Visual step progress indicator for multi-step workflows.
+
+**Props:**
+- `currentStep`: number
+- `totalSteps`: number
+- `steps`: string[] (step labels)
+- `onStepClick`: (step: number) => void
+- `clickable`: boolean (default: false)
+
+#### Indicator
+Badge indicator with flexible positioning (9 positions).
+
+**Props:**
+- `show`: boolean
+- `placement`: 'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
+- `offset`: { x: number; y: number } (pixel offset, default: { x: 0, y: 0 })
+- `content`: Snippet
+- `children`: Snippet (parent element)
+
+#### Spinner
+Circular loading spinner with size variants.
+
+**Props:**
+- `size`: 'xs' | 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+- `color`: string (CSS color value)
+
+#### ListPlaceholder
+Skeleton placeholder for list items with shimmer effect.
+
+**Props:**
+- `count`: number (number of items, default: 3)
+- `height`: string (item height, default: '48px')
+
+#### WidgetPlaceholder
+Skeleton placeholder for cards/widgets with shimmer effect.
+
+**Props:**
+- `height`: string (default: '200px')
+- `showHeader`: boolean (default: true)
+- `showFooter`: boolean (default: false)
+
+### Typography Components
+
+#### Heading
+Semantic heading component with size variants.
+
+**Props:**
+- `level`: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' (HTML tag)
+- `size`: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' (text size, default: 'lg')
+- `weight`: 'normal' | 'medium' | 'semibold' | 'bold' (default: 'semibold')
+- `color`: 'default' | 'muted' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' (default: 'default')
+- `children`: Snippet
+- `id`: string (for anchor links)
+
+#### P
+Paragraph text component with size and color variants.
+
+**Props:**
+- `size`: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' (default: 'base')
+- `weight`: 'normal' | 'medium' | 'semibold' | 'bold' (default: 'normal')
+- `color`: 'default' | 'muted' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' (default: 'default')
+- `leading`: 'tight' | 'normal' | 'relaxed' (line-height)
+- `children`: Snippet
+
+#### A
+Styled link component with hover states.
+
+**Props:**
+- `href`: string
+- `external`: boolean (shows external icon, default: false)
+- `variant`: 'default' | 'primary' | 'muted' (default: 'primary')
+- `children`: Snippet
+
+#### Blockquote
+Styled blockquote for quotes and testimonials.
+
+**Props:**
+- `variant`: 'default' | 'bordered' | 'elevated' (default: 'bordered')
+- `cite`: string (attribution)
+- `children`: Snippet
+
+### Other Components
+
+#### Img
+Responsive image component with lazy loading and fallback.
+
+**Props:**
+- `src`: string
+- `alt`: string (required for accessibility)
+- `loading`: 'lazy' | 'eager' (default: 'lazy')
+- `width`: number
+- `height`: number
+- `class`: string
+
+**Accessibility:** Always requires alt text, lazy loading for performance.
+
+#### Hr
+Horizontal rule/separator with variants.
+
+**Props:**
+- `variant`: 'default' | 'dashed' | 'dotted' (default: 'default')
+- `class`: string
+
+#### Helper
+Form helper text for additional context below inputs.
+
+**Props:**
+- `text`: string
+- `error`: boolean (error color variant, default: false)
+
+#### Toolbar
+Toolbar container with grouping support.
+
+**Props:**
+- `align`: 'start' | 'center' | 'end' | 'space-between' (default: 'start')
+- `orientation`: 'horizontal' | 'vertical' (default: 'horizontal')
+- `children`: Snippet
+
+#### ToolbarButton
+Pre-styled button for toolbar use.
+
+**Props:**
+- Same as Button, with toolbar-specific defaults.
+
+#### ToolbarGroup
+Groups toolbar buttons with proper spacing.
+
+**Props:**
+- `children`: Snippet
+
+## Enums Reference
+
+### ButtonVariant
+- PRIMARY, SECONDARY, OUTLINE, GHOST, DANGER, SUCCESS
+
+### BadgeVariant
+- DEFAULT, PRIMARY, SECONDARY, SUCCESS, WARNING, ERROR, INFO, ORANGE
+
+### AlertVariant
+- INFO, SUCCESS, WARNING, ERROR
+
+### ToastVariant
+- INFO, SUCCESS, WARNING, ERROR
+
+### ProgressbarVariant
+- PRIMARY, SECONDARY, SUCCESS, ERROR, WARNING, INFO
+
+### CardVariant
+- DEFAULT, BORDERED, ELEVATED, FLAT, GLASS
+
+### ComponentSize
+- XS, SM, MD, LG, XL
+
+### ModalSize
+- SM (384px), MD (448px), LG (768px), XL (1280px), FULL
+
+### CardPadding
+- NONE, SM, MD, LG, XL
+
+### SwitchSize
+- SM, MD, LG
+
+### SwitchVariant
+- PRIMARY, SECONDARY, SUCCESS, ERROR, WARNING
+
+### HeadingTag
+- H1, H2, H3, H4, H5, H6
+
+### TextSize
+- XS, SM, BASE, LG, XL, XXL, XXXL
+
+### FontWeight
+- NORMAL, MEDIUM, SEMIBOLD, BOLD
+
+### TextColor
+- DEFAULT, MUTED, PRIMARY, SECONDARY, SUCCESS, WARNING, ERROR
+
+### Side
+- TOP, RIGHT, BOTTOM, LEFT
+
+### Align
+- START, CENTER, END
+
+### DrawerPlacement
+- LEFT, RIGHT, TOP, BOTTOM
+
+### IndicatorPlacement
+- TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER_LEFT, CENTER, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
+
+### ToastPosition
+- TOP_LEFT, TOP_CENTER, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
+
+### Orientation
+- HORIZONTAL, VERTICAL
+
+## Theming
+
+All components use CSS custom properties for colors, allowing easy theming.
+
+```css
+:root {
+  /* Override primary brand color */
+  --color-primary-500: #your-brand-color;
+  --color-primary-600: #your-darker-brand-color;
+
+  /* Override secondary/accent colors */
+  --color-secondary-500: #your-accent-color;
+
+  /* Override semantic colors */
+  --color-success-500: #your-green;
+  --color-error-500: #your-red;
+  --color-warning-500: #your-yellow;
+  --color-info-500: #your-blue;
+}
+```
+
+## Accessibility
+
+All components follow WCAG AA/AAA guidelines:
+- Keyboard navigation support
+- Proper ARIA attributes
+- Screen reader compatibility
+- Focus management
+- Color contrast (4.5:1 minimum)
+
+## Composition Patterns
+
+### Snippet API
+Svelte 5 snippets allow flexible content composition:
+
+```svelte
+<Button icon>
+  {#snippet icon()}
+    <Search class="h-4 w-4" />
+  {/snippet}
+  Search
+</Button>
+```
+
+### Component Grouping
+```svelte
+<ButtonGroup>
+  <Button variant="outline">Cancel</Button>
+  <Button variant="primary">Confirm</Button>
+</ButtonGroup>
+```
+
+### Form Composition
+```svelte
+<Card>
+  <Label for="email">Email</Label>
+ <Input id="email" error="Invalid email format" />
+  <Helper text="We'll never share your email" />
+</Card>
+```
+
+## Best Practices
+
+1. **Always use TypeScript**: All props are strongly typed with interfaces
+2. **Use enums for variants**: `ButtonVariant.PRIMARY` instead of strings
+3. **Leverage snippets**: For icons, headers, footers, and custom content
+4. **Accessibility first**: Always provide labels, alt text, and ARIA attributes
+5. **Responsive design**: Use size variants for different screen sizes
+6. **Dark mode**: All components support dark mode automatically
+7. **Theming**: Override CSS variables instead of hardcoded colors
+
+## Code Examples
+
+### Button with Loading State
+```svelte
+<Button variant={ButtonVariant.PRIMARY} loading={isSubmitting}>
+  {#snippet icon()}
+    <Save class="h-4 w-4" />
+  {/snippet}
+  Save Changes
+</Button>
+```
+
+### Form with Validation
+```svelte
+<Card variant="bordered">
+  <Label for="name" required>Name</Label>
+  <Input
+    id="name"
+    bind:value={name}
+    error={errors.name}
+    placeholder="Enter your name" />
+</Card>
+```
+
+### Modal with Form
+```svelte
+<Modal
+  bind:open={showModal}
+  title="Create User"
+  size={ModalSize.MD}>
+  <Input label="Name" bind:value={userName} />
+  <Input label="Email" bind:value={userEmail} />
+
+  {#snippet footer()}
+    <Button variant="outline" onclick={() => showModal = false}>
+      Cancel
+    </Button>
+    <Button variant="primary" onclick={handleSave}>
+      Create User
+    </Button>
+  {/snippet}
+</Modal>
+```
+
+### Tabs with Content
+```svelte
+<Tabs value="overview">
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="overview">
+    <Heading level="h3">Overview</Heading>
+    <P>Content goes here</P>
+  </TabsContent>
+
+  <TabsContent value="settings">
+    <Heading level="h3">Settings</Heading>
+    <P>Configuration options</P>
+  </TabsContent>
+</Tabs>
+```
+
+## Related Packages
+
+- **bits-ui**: Headless primitives for accessibility
+- **@lucide/svelte**: Icon components
+- **@internationalized/date**: Date handling utilities
+- **clsx**: Conditional class utility
+- **tailwind-merge**: Tailwind class deduplication
+
+## Support
+
+- GitHub: https://github.com/requify/requify-design-system
+- Issues: https://github.com/requify/requify-design-system/issues
+- Docs: https://github.com/requify/requify-design-system#readme
+
+## License
+
+MIT License - see LICENSE file for details

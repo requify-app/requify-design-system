@@ -6,8 +6,49 @@
 	import { dateToCalendarDate, calendarDateToDate } from '$lib/utils/bits-ui-utils';
 
 	/**
-	 * Date range interface
+	 * Date range selection component for choosing start and end dates.
+	 * Wraps bits-ui.DateRangePicker with internationalized date handling.
+	 *
+	 * @example Basic date range
+	 * ```svelte
+	 * <DateRangePicker bind:value={dateRange} />
+	 * ```
+	 *
+	 * @example With initial range
+	 * ```svelte
+	 * <script lang="ts">
+	 *   let range = {
+	 *     start: new Date('2024-01-01'),
+	 *     end: new Date('2024-01-07')
+	 *   };
+	 * </script>
+	 * <DateRangePicker bind:value={range} />
+	 * ```
+	 *
+	 * @example With onChange handler
+	 * ```svelte
+	 * <DateRangePicker
+	 *   bind:value={stayDates}
+	 *   onChange={() => checkAvailability()} />
+	 * ```
+	 *
 	 * @interface DateRange
+	 * @property {Date} [start] - Start date of the range (optional)
+	 * @property {Date} [end] - End date of the range (optional)
+	 *
+	 * @param {DateRange | Date} value - Selected date range or single date (bindable).
+	 *   Can be { start: Date, end: Date } or single Date
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {() => void} onChange - Callback when date range selection changes
+	 *
+	 * @see {@link Datepicker} - Use Datepicker for single date selection
+	 *
+	 * @accessibility
+	 * - Full keyboard date navigation for both calendars
+	 * - ARIA datepicker roles with proper labels
+	 * - Visual selection indicators for range
+	 * - Focus management across calendar views
+	 * - Screen reader announces selected range
 	 */
 	interface DateRange {
 		/** Start date of the range */

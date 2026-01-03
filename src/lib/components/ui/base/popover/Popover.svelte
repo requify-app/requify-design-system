@@ -4,6 +4,83 @@
 	import { scale } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Popover component for displaying rich, interactive content on demand.
+	 * Wraps bits-ui Popover with scale animation and flexible positioning.
+	 *
+	 * @example Basic popover
+	 * ```svelte
+	 * <Popover bind:open={showPopover}>
+	 *   {#snippet trigger()}
+	 *     <Button>Click to open</Button>
+	 *   {/snippet}
+	 *   <div>
+	 *     <h3>Popover Title</h3>
+	 *     <p>Popover content</p>
+	 *   </div>
+	 * </Popover>
+	 * ```
+	 *
+	 * @example With custom alignment
+	 * ```svelte
+	 * <Popover bind:open={showPopover} align="center" side="top">
+	 *   {#snippet trigger()}
+	 *     <Button>Open Popover</Button>
+	 *   {/snippet}
+	 *   <p>Centered content</p>
+	 * </Popover>
+	 * ```
+	 *
+	 * @example With form content
+	 * ```svelte
+	 * <Popover bind:open={showPopover}>
+	 *   {#snippet trigger()}
+	 *     <Button>Filter</Button>
+	 *   {/snippet}
+	 *   <form onsubmit={handleFilter}>
+	 *     <Input placeholder="Filter by..." />
+	 *     <Button type="submit">Apply</Button>
+	 *   </form>
+	 * </Popover>
+	 * ```
+	 *
+	 * @example Right placement
+	 * ```svelte
+	 * <Popover bind:open={showPopover} side="right">
+	 *   {#snippet trigger()}
+	 *     <Button>Open Right</Button>
+	 *   {/snippet}
+	 *   <p>Content on right side</p>
+	 * </Popover>
+	 * ```
+	 *
+	 * @example Without trigger (manual open)
+	 * ```svelte
+	 * <Button onclick={() => showPopover = !showPopover}>Toggle</Button>
+	 * <Popover bind:open={showPopover}>
+	 *   <p>Manually controlled popover</p>
+	 * </Popover>
+	 * ```
+	 *
+	 * @param {boolean} open - Controls popover visibility. Default: false
+	 * @param {Snippet} trigger - Element that triggers popover on click
+	 * @param {Snippet} children - Popover content
+	 * @param {'start' | 'center' | 'end'} align - Popover alignment along the side. Default: 'start'
+	 * @param {'top' | 'right' | 'bottom' | 'left'} side - Popover placement side relative to trigger. Default: 'bottom'
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Tooltip} - For simple informational tooltips
+	 * @see {@link Dropdown} - For dropdown menus with items
+	 * @see {@link Modal} - For modal dialogs
+	 *
+	 * @accessibility
+	 * - Keyboard: Enter/Space to open, Escape to close, Tab/Shift+Tab for navigation
+	 * - ARIA: Proper role and aria-expanded managed by bits-ui
+	 * - Focus management: Focus trap within popover content
+	 * - Screen reader: Popover content announced when opened
+	 * - Click outside closes popover
+	 * - Scale animation respects prefers-reduced-motion
+	 */
 	interface Props {
 		open?: boolean;
 		trigger?: Snippet;

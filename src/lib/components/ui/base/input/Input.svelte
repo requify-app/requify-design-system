@@ -8,6 +8,61 @@
 	import type { ComponentSizeType } from '$lib/components/ui/base/enums';
 
 	// @ts-expect-error - Extending Omit<HTMLInputAttributes, 'size'> to override size prop
+	/**
+	 * Text input with error states, icon slots, and clearable functionality.
+	 * Extends HTML input attributes for full compatibility.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <Input placeholder="Enter text..." bind:value={text} />
+	 * ```
+	 *
+	 * @example With left icon
+	 * ```svelte
+	 * <Input placeholder="Search...">
+	 *   {#snippet left()}
+	 *     <Search class="h-4 w-4" />
+	 *   {/snippet}
+	 * </Input>
+	 * ```
+	 *
+	 * @example With error state
+	 * ```svelte
+	 * <Input error="This field is required" bind:value={email} />
+	 * ```
+	 *
+	 * @example Clearable input
+	 * ```svelte
+	 * <Input clearable placeholder="Type something..." bind:value={search} />
+	 * ```
+	 *
+	 * @example Small size
+	 * ```svelte
+	 * <Input size={ComponentSize.SM} placeholder="Small input" />
+	 * ```
+	 *
+	 * @param {ComponentSize | ComponentSizeType} size - Input size affecting height and padding. Default: ComponentSize.MD
+	 *   Options: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	 * @param {string} error - Error message to display below input. Triggers error styling
+	 * @param {boolean} clearable - If true, shows X button to clear value when not empty. Default: false
+	 * @param {Snippet} left - Left icon slot (displayed before input text)
+	 * @param {Snippet} right - Right icon slot (displayed after input text)
+	 * @param {Snippet<[HTMLInputAttributes]>} children - Custom input rendering snippet
+	 * @param {string} class - Additional CSS classes to apply
+	 * @param {string} value - Input value (bindable)
+	 * @param {boolean} disabled - Disables input. Default: false
+	 * @param {string} id - HTML id for label association
+	 *
+	 * @see {@link Label} - Use with Label for proper form structure
+	 * @see {@link Helper} - Add helper text below input
+	 *
+	 * @accessibility
+	 * - Requires Label with matching for/id for proper screen reader support
+	 * - Error state announced to screen readers via aria-describedby
+	 * - Keyboard navigation: Enter, Escape
+	 * - Clearable button has proper aria-label
+	 * - Visible focus ring for keyboard navigation
+	 */
 	interface Props extends Omit<HTMLInputAttributes, 'size'> {
 		size?: ComponentSize | ComponentSizeType;
 		error?: string;

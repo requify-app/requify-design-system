@@ -5,6 +5,62 @@
 	import { ChevronDown } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Collapsible sidebar section with animated expand/collapse.
+	 * Wraps bits-ui Collapsible with smooth slide transition.
+	 *
+	 * @example Basic dropdown
+	 * ```svelte
+	 * <SidebarDropdown label="Products">
+	 *   <SidebarItem label="All Products" href="/products" />
+	 *   <SidebarItem label="Featured" href="/products/featured" />
+	 * </SidebarDropdown>
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <SidebarDropdown label="Settings">
+	 *   {#snippet icon()}
+	 *     <Settings class="h-5 w-5" />
+	 *   {/snippet}
+	 *   <SidebarItem label="Profile" href="/settings/profile" />
+	 *   <SidebarItem label="Security" href="/settings/security" />
+	 * </SidebarDropdown>
+	 * ```
+	 *
+	 * @example Default collapsed
+	 * ```svelte
+	 * <SidebarDropdown label="Advanced" defaultOpen={false}>
+	 *   <SidebarItem label="Analytics" href="/advanced/analytics" />
+	 *   <SidebarItem label="Reports" href="/advanced/reports" />
+	 * </SidebarDropdown>
+	 * ```
+	 *
+	 * @example With nested dropdowns
+	 * ```svelte
+	 * <SidebarDropdown label="Main Section">
+	 *   <SidebarDropdown label="Sub Section">
+	 *     <SidebarItem label="Deep Link" href="/deep" />
+	 *   </SidebarDropdown>
+	 * </SidebarDropdown>
+	 * ```
+	 *
+	 * @param {string} label - Text label for the dropdown trigger
+	 * @param {Snippet} icon - Leading icon slot for trigger
+	 * @param {Snippet} children - Nested sidebar items (SidebarItem, SidebarDropdown)
+	 * @param {boolean} defaultOpen - Initial open state. Default: true
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link SidebarWrapper} - Main sidebar container
+	 * @see {@link SidebarGroup} - Group sidebar items
+	 * @see {@link SidebarItem} - Individual sidebar navigation item
+	 *
+	 * @accessibility
+	 * - Keyboard: Enter or Space to toggle, Escape to close
+	 * - ARIA: Proper aria-expanded state managed by bits-ui
+	 * - Smooth transition respects prefers-reduced-motion
+	 * - Screen reader announces expanded/collapsed state
+	 */
 	interface Props {
 		label: string;
 		icon?: Snippet;

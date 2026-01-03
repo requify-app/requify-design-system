@@ -4,6 +4,47 @@
 	import { fade, fly } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Content panel for each tab with smooth transitions.
+	 * Wraps bits-ui.Tabs.Content.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <TabsContent value="overview">
+	 *   <h3>Overview</h3>
+	 *   <p>This is the overview tab content.</p>
+	 * </TabsContent>
+	 * ```
+	 *
+	 * @example With custom onclick
+	 * ```svelte
+	 * <TabsContent value="details" onclick={trackView}>
+	 *   <DetailsPanel />
+	 * </TabsContent>
+	 * ```
+	 *
+	 * @example Auto-generated value
+	 * ```svelte
+	 * <TabsContent>
+	 *   <!-- Value auto-generated if not provided -->
+	 *   <p>Content here</p>
+	 * </TabsContent>
+	 * ```
+	 *
+	 * @param {string} value - Tab identifier (must match TabsTrigger value, auto-generated if not provided)
+	 * @param {Snippet} children - Tab content to display
+	 * @param {(event: MouseEvent) => void} onclick - Click handler for content
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Tabs} - Parent component
+	 * @see {@link TabsTrigger} - Trigger button for this content
+	 *
+	 * @accessibility
+	 * - Only active tab content is visible to screen readers
+	 * - Smooth fade/slide transition
+	 * - Focus management when switching tabs
+	 * - ARIA role="tabpanel"
+	 */
 	interface Props {
 		value?: string; // Optional - will auto-generate if not provided
 		children?: Snippet;

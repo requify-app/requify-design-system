@@ -3,6 +3,47 @@
 	import { cn } from '$lib/utils/cn';
 	import type { Snippet } from 'svelte';
 
+	/**
+	 * Individual tab trigger button with active state indicator.
+	 * Wraps bits-ui.Tabs.Trigger.
+	 *
+	 * @example Basic usage
+	 * ```svelte
+	 * <TabsTrigger value="overview">Overview</TabsTrigger>
+	 * <TabsTrigger value="settings">Settings</TabsTrigger>
+	 * <TabsTrigger value="reports">Reports</TabsTrigger>
+	 * ```
+	 *
+	 * @example With icon
+	 * ```svelte
+	 * <TabsTrigger value="home">
+	 *   {#snippet children()}
+	 *     <Home class="h-4 w-4 mr-2" />
+	 *     Home
+	 *   {/snippet}
+	 * </TabsTrigger>
+	 * ```
+	 *
+	 * @example Disabled
+	 * ```svelte
+	 * <TabsTrigger value="disabled" disabled>Disabled Tab</TabsTrigger>
+	 * ```
+	 *
+	 * @param {string} value - Tab identifier (must match TabsContent value)
+	 * @param {boolean} disabled - Disables tab interaction. Default: false
+	 * @param {Snippet} children - Tab label text and/or icons
+	 * @param {string} class - Additional CSS classes to apply
+	 *
+	 * @see {@link Tabs} - Parent component
+	 * @see {@link TabsContent} - Content panel for this tab
+	 *
+	 * @accessibility
+	 * - Keyboard navigable with arrow keys
+	 * - Space or Enter to activate
+	 * - Active state visually indicated (underline)
+	 * - ARIA tab role
+	 * - Focus indicator when keyboard focused
+	 */
 	interface Props {
 		value: string;
 		disabled?: boolean;
