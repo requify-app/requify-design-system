@@ -215,26 +215,26 @@ All components should use TypeScript enums for type-safe variants and sizes:
 ```typescript
 // In enums.ts
 export enum ButtonVariant {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  OUTLINE = 'outline',
-  GHOST = 'ghost',
-  DANGER = 'danger',
-  SUCCESS = 'success'
+	PRIMARY = 'primary',
+	SECONDARY = 'secondary',
+	OUTLINE = 'outline',
+	GHOST = 'ghost',
+	DANGER = 'danger',
+	SUCCESS = 'success'
 }
 
 export enum ComponentSize {
-  XS = 'xs',
-  SM = 'sm',
-  MD = 'md',
-  LG = 'lg',
-  XL = 'xl'
+	XS = 'xs',
+	SM = 'sm',
+	MD = 'md',
+	LG = 'lg',
+	XL = 'xl'
 }
 
 // In component
 interface Props {
-  variant?: ButtonVariant | ButtonVariantType
-  size?: ComponentSize | ComponentSizeType
+	variant?: ButtonVariant | ButtonVariantType;
+	size?: ComponentSize | ComponentSizeType;
 }
 ```
 
@@ -324,8 +324,8 @@ Follow these rules for all code you write:
 
 ```typescript
 // Good - Type-safe with proper documentation
-import { clsx, type ClassValue } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Merges Tailwind CSS classes with proper precedence.
@@ -334,7 +334,7 @@ import { twMerge } from 'tailwind-merge'
  * @returns Merged class string
  */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+	return twMerge(clsx(inputs));
 }
 ```
 
@@ -400,15 +400,15 @@ Example prop validation:
 
 ```typescript
 interface Props {
-  value?: string
-  error?: string
-  onChange?: (value: string) => void
+	value?: string;
+	error?: string;
+	onChange?: (value: string) => void;
 }
 
-let { value, error, onChange }: Props = $props()
+let { value, error, onChange }: Props = $props();
 
 if (value !== undefined && onChange) {
-  onChange(value)
+	onChange(value);
 }
 ```
 
@@ -442,13 +442,13 @@ if (value !== undefined && onChange) {
    ```typescript
    // Wrong
    interface Props {
-     children: Snippet
+   	children: Snippet;
    }
 
    // Correct
    interface Props {
-     children?: Snippet
-     icon?: Snippet<[{ size: number }]>
+   	children?: Snippet;
+   	icon?: Snippet<[{ size: number }]>;
    }
    ```
 
@@ -458,10 +458,10 @@ if (value !== undefined && onChange) {
 
    ```typescript
    // Wrong
-   const computedClass = $derived(cn(baseStyles, variants[variant]))
+   const computedClass = $derived(cn(baseStyles, variants[variant]));
 
    // Correct
-   const computedClass = $derived(cn(baseStyles, variants[variant] as string))
+   const computedClass = $derived(cn(baseStyles, variants[variant] as string));
    ```
 
 3. **Enum Type Assertions**
@@ -470,10 +470,10 @@ if (value !== undefined && onChange) {
 
    ```typescript
    // Wrong
-   const state: ButtonVariant = ButtonVariant.PRIMARY
+   const state: ButtonVariant = ButtonVariant.PRIMARY;
 
    // Correct
-   const state = ButtonVariant.PRIMARY as ButtonVariant
+   const state = ButtonVariant.PRIMARY as ButtonVariant;
    ```
 
 4. **Props Destructuring**
@@ -482,15 +482,15 @@ if (value !== undefined && onChange) {
 
    ```typescript
    // Wrong
-   let { variant, size, disabled } = $props()
+   let { variant, size, disabled } = $props();
 
    // Correct
    interface Props {
-     variant?: ButtonVariant
-     size?: ComponentSize
-     disabled?: boolean
+   	variant?: ButtonVariant;
+   	size?: ComponentSize;
+   	disabled?: boolean;
    }
-   let { variant, size, disabled }: Props = $props()
+   let { variant, size, disabled }: Props = $props();
    ```
 
 ## Pre-Commit Checklist
@@ -519,31 +519,31 @@ Before considering any code changes complete:
 Example component test:
 
 ```typescript
-import { render, screen } from '@testing-library/svelte'
-import { describe, it, expect } from 'vitest'
-import Button from '$lib/components/ui/base/button/Button.svelte'
-import { ButtonVariant } from '$lib/components/ui/base/enums'
+import { render, screen } from '@testing-library/svelte';
+import { describe, it, expect } from 'vitest';
+import Button from '$lib/components/ui/base/button/Button.svelte';
+import { ButtonVariant } from '$lib/components/ui/base/enums';
 
 describe('Button', () => {
-  it('renders children correctly', () => {
-    render(Button, { children: 'Click me' })
-    expect(screen.getByRole('button')).toHaveTextContent('Click me')
-  })
+	it('renders children correctly', () => {
+		render(Button, { children: 'Click me' });
+		expect(screen.getByRole('button')).toHaveTextContent('Click me');
+	});
 
-  it('applies variant classes correctly', () => {
-    render(Button, {
-      children: 'Primary Button',
-      variant: ButtonVariant.PRIMARY
-    })
-    const button = screen.getByRole('button')
-    expect(button).toHaveClass('bg-primary-600')
-  })
+	it('applies variant classes correctly', () => {
+		render(Button, {
+			children: 'Primary Button',
+			variant: ButtonVariant.PRIMARY
+		});
+		const button = screen.getByRole('button');
+		expect(button).toHaveClass('bg-primary-600');
+	});
 
-  it('is disabled when disabled prop is true', () => {
-    render(Button, { children: 'Disabled', disabled: true })
-    expect(screen.getByRole('button')).toBeDisabled()
-  })
-})
+	it('is disabled when disabled prop is true', () => {
+		render(Button, { children: 'Disabled', disabled: true });
+		expect(screen.getByRole('button')).toBeDisabled();
+	});
+});
 ```
 
 ## Release & Publishing Process
