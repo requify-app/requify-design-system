@@ -19,6 +19,7 @@ export { default as Spinner } from './spinner/Spinner.svelte';
 
 // Phase 2: Form Components
 export { default as Select } from './select/Select.svelte';
+export type { SelectOption } from './select/Select.svelte';
 export { default as SelectItem } from './select/SelectItem.svelte';
 export { default as Checkbox } from './checkbox/Checkbox.svelte';
 export { default as Switch } from './switch/Switch.svelte';
