@@ -130,7 +130,7 @@
 			{#if open}
 				<div
 					{...props}
-					class={cn(placementStyles[placement], 'z-40 overflow-y-auto', className)}
+					class={cn(placementStyles[placement] as string, 'z-40 overflow-y-auto', className)}
 					transition:fly={getTransition(placement)}>
 					{#if children}
 						{@render children()}

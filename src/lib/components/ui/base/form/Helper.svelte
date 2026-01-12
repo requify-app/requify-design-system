@@ -85,7 +85,7 @@
 	const baseStyles = 'mt-1 text-sm';
 </script>
 
-<p class={cn(baseStyles, colors[color], className)} {...restProps}>
+<p class={cn(baseStyles, colors[color] as string, className)} {...restProps}>
 	{#if children}
 		{@render children()}
 	{/if}

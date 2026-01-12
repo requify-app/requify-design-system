@@ -110,7 +110,7 @@
 	const computedClass = $derived(
 		cn(
 			baseStyles,
-			sizes[finalSize],
+			sizes[finalSize] as string,
 			errorStyles,
 			left && 'pl-10',
 			(right || clearable) && 'pr-10',

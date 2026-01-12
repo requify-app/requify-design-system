@@ -127,7 +127,7 @@
 		{value}
 		{id}
 		{onCheckedChange}
-		class={cn(baseStyles, colors[color], classValue)}>
+		class={cn(baseStyles, colors[color] as string, classValue)}>
 		<BitsSwitch.Thumb class={thumbStyles} />
 	</BitsSwitch.Root>
 

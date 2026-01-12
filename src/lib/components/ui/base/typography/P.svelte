@@ -107,7 +107,13 @@
 </script>
 
 <p
-	class={cn(baseStyles, sizeStyles[size], weightStyles[weight], colorStyles[color], className)}
+	class={cn(
+		baseStyles,
+		sizeStyles[size] as string,
+		weightStyles[weight] as string,
+		colorStyles[color] as string,
+		className
+	)}
 	{...restProps}>
 	{#if children}{@render children()}{/if}
 </p>

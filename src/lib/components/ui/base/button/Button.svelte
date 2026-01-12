@@ -128,7 +128,13 @@
 	};
 
 	const computedClass = $derived(
-		cn(baseStyles, variants[variant], sizes[size], fullWidth && 'w-full', className)
+		cn(
+			baseStyles,
+			variants[variant] as string,
+			sizes[size] as string,
+			fullWidth && 'w-full',
+			className
+		)
 	);
 </script>
 

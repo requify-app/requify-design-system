@@ -95,6 +95,11 @@
 		'font-medium hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded';
 </script>
 
-<a {href} {target} {rel} class={cn(baseStyles, colorStyles[color], className)} {...restProps}>
+<a
+	{href}
+	{target}
+	{rel}
+	class={cn(baseStyles, colorStyles[color] as string, className)}
+	{...restProps}>
 	{#if children}{@render children()}{/if}
 </a>

@@ -103,8 +103,8 @@
 	const computedClass = $derived(
 		cn(
 			baseStyles,
-			variants[variant],
-			paddings[computedPadding],
+			variants[variant] as string,
+			paddings[computedPadding] as string,
 			(hoverable || href) &&
 				'hover:-translate-y-0.5 hover:shadow-[0_4px_8px_0_rgb(0_0_0/0.08),0_12px_24px_-4px_rgb(0_0_0/0.12)] hover:border-gray-300 dark:hover:border-gray-600 cursor-pointer active:translate-y-0 active:shadow-[0_1px_2px_0_rgb(0_0_0/0.06),0_4px_8px_-2px_rgb(0_0_0/0.08)]',
 			href && 'block no-underline',

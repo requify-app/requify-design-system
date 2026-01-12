@@ -109,7 +109,7 @@
 			}}
 			class={cn(
 				'fixed top-1/2 left-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800',
-				sizes[size],
+				sizes[size] as string,
 				classValue
 			)}
 			{...restProps}>

@@ -90,7 +90,7 @@
 		lg: 'h-11 w-11 p-2.5'
 	};
 
-	const computedClass = $derived(cn(baseStyles, sizes[size], className));
+	const computedClass = $derived(cn(baseStyles, sizes[size] as string, className));
 </script>
 
 <button type="button" class={computedClass} {...restProps}>

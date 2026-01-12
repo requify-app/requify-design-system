@@ -79,12 +79,12 @@
 
 <div class="relative">
 	<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-		<SearchIcon class={cn('text-gray-500 dark:text-gray-400', iconSizes[size])} />
+		<SearchIcon class={cn('text-gray-500 dark:text-gray-400', iconSizes[size] as string)} />
 	</div>
 	<input
 		type="search"
 		bind:value
 		{placeholder}
-		class={cn(baseStyles, sizes[size], className)}
+		class={cn(baseStyles, sizes[size] as string, className)}
 		{...restProps} />
 </div>

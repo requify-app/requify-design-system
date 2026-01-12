@@ -105,7 +105,7 @@
 		class={cn('w-full overflow-hidden rounded-full', barBg, sizeClass, className)}
 		{...restProps}>
 		<div
-			class={cn('h-full transition-all duration-300', colorStyles[color])}
+			class={cn('h-full transition-all duration-300', colorStyles[color] as string)}
 			style="width: {progressValue}%">
 			{#if labelInside && size === 'lg'}
 				<span class="flex h-full items-center justify-center text-xs font-medium text-white">

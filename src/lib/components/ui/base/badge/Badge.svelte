@@ -110,7 +110,9 @@
 		[ComponentSize.LG]: 'px-3 py-1 text-base'
 	};
 
-	const computedClass = $derived(cn(baseStyles, variants[variant], sizes[size], className));
+	const computedClass = $derived(
+		cn(baseStyles, variants[variant] as string, sizes[size] as string, className)
+	);
 </script>
 
 {#if href}

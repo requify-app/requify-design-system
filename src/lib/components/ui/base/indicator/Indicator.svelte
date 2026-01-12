@@ -136,9 +136,9 @@
 <span
 	class={cn(
 		baseStyles,
-		sizes[size],
-		placements[placement],
-		variantColors[variant],
+		sizes[size] as string,
+		placements[placement] as string,
+		variantColors[variant] as string,
 		borderStyles,
 		className
 	)}

@@ -63,7 +63,7 @@
 	}
 
 	const baseStyles = 'flex items-start gap-3 rounded-lg border p-4';
-	const computedClass = $derived(cn(baseStyles, variants[variant], className));
+	const computedClass = $derived(cn(baseStyles, variants[variant] as string, className));
 </script>
 
 {#if !dismissed}
