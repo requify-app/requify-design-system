@@ -3,7 +3,9 @@
 	import { CircleAlert, CircleCheckBig, Info, TriangleAlert, X } from '@lucide/svelte';
 	import { fly } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
-	import { ToastVariant } from '$lib/components/ui/base/enums';
+	import { StatusVariant } from '$lib/components/ui/base/enums';
+	import type { StatusVariantType } from '$lib/components/ui/base/enums';
+	import { ButtonVariant } from '$lib/components/ui/base/enums';
 
 	/**
 	 * Toast notification component with multiple variants and dismissible option.
@@ -11,13 +13,13 @@
 	 *
 	 * @example Basic success toast
 	 * ```svelte
-	 * <Toast variant={ToastVariant.SUCCESS} message="Changes saved successfully!" />
+	 * <Toast variant={StatusVariant.SUCCESS} message="Changes saved successfully!" />
 	 * ```
 	 *
 	 * @example Dismissible error toast
 	 * ```svelte
 	 * <Toast
-	 *   variant={ToastVariant.ERROR}
+	 *   variant={StatusVariant.ERROR}
 	 *   message="Failed to save changes"
 	 *   dismissable
 	 *   onDismiss={() => console.log('dismissed')}
@@ -46,14 +48,14 @@
 	 *
 	 * @example Warning variant
 	 * ```svelte
-	 * <Toast variant={ToastVariant.WARNING} message="This is a warning" />
+	 * <Toast variant={StatusVariant.WARNING} message="This is a warning" />
 	 * ```
 	 *
 	 * @param {ToastData} toast - Toast data object containing id, variant, and message
 	 * @param {(id: string) => void} onDismiss - Callback when toast is dismissed via close button
 	 * @param {boolean} dismissable - If true, shows dismiss button. Auto-detected from toast/onDismiss. Default: false
 	 * @param {() => void} onclose - Callback when toast is closed or dismissed
-	 * @param {ToastVariant} color - Color variant (alternative to toast.variant). Default: ToastVariant.INFO
+	 * @param {StatusVariant | StatusVariantType} color - Color variant (alternative to toast.variant). Default: StatusVariant.INFO
 	 * @param {Snippet} children - Custom toast content (overrides toast.message)
 	 * @param {string} class - Additional CSS classes to apply
 	 *
@@ -69,7 +71,7 @@
 	 */
 	interface ToastData {
 		id: string;
-		variant?: ToastVariant;
+		variant?: StatusVariant;
 		message?: string;
 	}
 
@@ -78,7 +80,7 @@
 		onDismiss?: (id: string) => void;
 		dismissable?: boolean;
 		onclose?: () => void;
-		color?: ToastVariant;
+		color?: StatusVariant | StatusVariantType;
 		children?: Snippet;
 		class?: string;
 	}
@@ -93,32 +95,32 @@
 		class: className
 	}: Props = $props();
 
-	const variant = $derived(toast?.variant ?? colorProp ?? ToastVariant.INFO);
+	const variant = $derived(toast?.variant ?? colorProp ?? StatusVariant.INFO);
 
-	const icons = {
-		[ToastVariant.INFO]: Info,
-		[ToastVariant.SUCCESS]: CircleCheckBig,
-		[ToastVariant.ERROR]: CircleAlert,
-		[ToastVariant.WARNING]: TriangleAlert
-	} as const;
+	const icons: Record<StatusVariant, any> = {
+		[StatusVariant.INFO]: Info,
+		[StatusVariant.SUCCESS]: CircleCheckBig,
+		[StatusVariant.ERROR]: CircleAlert,
+		[StatusVariant.WARNING]: TriangleAlert
+	};
 
-	const variants = {
-		[ToastVariant.INFO]:
+	const variants: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]:
 			'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/90 dark:border-blue-700 dark:text-blue-100',
-		[ToastVariant.SUCCESS]:
+		[StatusVariant.SUCCESS]:
 			'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/90 dark:border-green-700 dark:text-green-100',
-		[ToastVariant.ERROR]:
+		[StatusVariant.ERROR]:
 			'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/90 dark:border-red-700 dark:text-red-100',
-		[ToastVariant.WARNING]:
+		[StatusVariant.WARNING]:
 			'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/90 dark:border-yellow-700 dark:text-yellow-100'
-	} as const;
+	};
 
-	const iconColors = {
-		[ToastVariant.INFO]: 'text-blue-600 dark:text-blue-400',
-		[ToastVariant.SUCCESS]: 'text-green-600 dark:text-green-400',
-		[ToastVariant.ERROR]: 'text-red-600 dark:text-red-400',
-		[ToastVariant.WARNING]: 'text-yellow-600 dark:text-yellow-400'
-	} as const;
+	const iconColors: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]: 'text-blue-600 dark:text-blue-400',
+		[StatusVariant.SUCCESS]: 'text-green-600 dark:text-green-400',
+		[StatusVariant.ERROR]: 'text-red-600 dark:text-red-400',
+		[StatusVariant.WARNING]: 'text-yellow-600 dark:text-yellow-400'
+	};
 
 	const Icon = $derived(icons[variant]);
 

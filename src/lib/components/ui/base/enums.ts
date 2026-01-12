@@ -43,9 +43,10 @@ export enum BadgeVariant {
 }
 
 /**
- * Alert component variants
+ * Status variant for feedback components (Alert, Toast, AlertDialog, Helper)
+ * Used for displaying status messages with semantic colors
  */
-export enum AlertVariant {
+export enum StatusVariant {
 	INFO = 'info',
 	SUCCESS = 'success',
 	WARNING = 'warning',
@@ -53,19 +54,10 @@ export enum AlertVariant {
 }
 
 /**
- * Toast notification variants
+ * Accent variant for control components (Progressbar, Switch)
+ * Used for control elements with semantic color accents
  */
-export enum ToastVariant {
-	INFO = 'info',
-	SUCCESS = 'success',
-	WARNING = 'warning',
-	ERROR = 'error'
-}
-
-/**
- * Progressbar component variants
- */
-export enum ProgressbarVariant {
+export enum AccentVariant {
 	PRIMARY = 'primary',
 	SECONDARY = 'secondary',
 	SUCCESS = 'success',
@@ -133,16 +125,6 @@ export enum SwitchSize {
 	LG = 'lg'
 }
 
-/**
- * Switch/Toggle component variants
- */
-export enum SwitchVariant {
-	PRIMARY = 'primary',
-	SECONDARY = 'secondary',
-	SUCCESS = 'success',
-	ERROR = 'error',
-	WARNING = 'warning'
-}
 // ============================================================================
 // Typography
 // ============================================================================
@@ -192,7 +174,13 @@ export enum TextColor {
 	SECONDARY = 'secondary',
 	SUCCESS = 'success',
 	WARNING = 'warning',
-	ERROR = 'error'
+	ERROR = 'error',
+	INFO = 'info',
+	BLUE = 'blue',
+	GREEN = 'green',
+	RED = 'red',
+	YELLOW = 'yellow',
+	PURPLE = 'purple'
 }
 
 // ============================================================================
@@ -269,11 +257,19 @@ export enum Orientation {
 
 export type ButtonVariantType = `${ButtonVariant}`;
 export type BadgeVariantType = `${BadgeVariant}`;
-export type AlertVariantType = `${AlertVariant}`;
+export type CardVariantType = `${CardVariant}`;
+export type CardPaddingType = `${CardPadding}`;
 export type ComponentSizeType = `${ComponentSize}`;
 export type ModalSizeType = `${ModalSize}`;
+export type SwitchSizeType = `${SwitchSize}`;
 export type HeadingTagType = `${HeadingTag}`;
 export type TextSizeType = `${TextSize}`;
 export type FontWeightType = `${FontWeight}`;
 export type SideType = `${Side}`;
 export type AlignType = `${Align}`;
+export type DrawerPlacementType = `${DrawerPlacement}`;
+export type IndicatorPlacementType = `${IndicatorPlacement}`;
+export type OrientationType = `${Orientation}`;
+export type TextColorType = `${TextColor}`;
+export type StatusVariantType = `${StatusVariant}`;
+export type AccentVariantType = `${AccentVariant}`;

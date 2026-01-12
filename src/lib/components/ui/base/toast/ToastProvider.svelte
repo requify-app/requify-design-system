@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Toast from './Toast.svelte';
 	import type { Snippet } from 'svelte';
-	import { ToastVariant } from '$lib/components/ui/base/enums';
+	import { StatusVariant } from '$lib/components/ui/base/enums';
 
 	interface ToastData {
 		id: string;
-		variant?: ToastVariant;
+		variant?: StatusVariant;
 		message?: string;
 	}
 

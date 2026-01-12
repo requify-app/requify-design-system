@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ModalSize } from '$lib/components/ui/base/enums';
+	import { ModalSize, StatusVariant, ButtonVariant } from '$lib/components/ui/base/enums';
+	import type { StatusVariantType } from '$lib/components/ui/base/enums';
 	import Modal from './Modal.svelte';
 	import Button from '../button/Button.svelte';
 	import { CircleAlert, TriangleAlert, Info, CircleCheckBig } from '@lucide/svelte';
@@ -73,7 +74,8 @@
 	 * ```
 	 *
 	 * @param {boolean} open - Controls dialog visibility. Default: false
-	 * @param {'info' | 'warning' | 'error' | 'success'} variant - Visual variant affecting icon and button colors. Default: 'info'
+	 * @param {StatusVariant | StatusVariantType} variant - Visual variant affecting icon and button colors. Default: StatusVariant.INFO
+	 *   Options: 'info' | 'warning' | 'error' | 'success'
 	 * @param {string} title - Dialog title (required)
 	 * @param {string} description - Optional descriptive text below title
 	 * @param {string} confirmText - Text for confirm button. Default: 'Confirm'
@@ -95,7 +97,7 @@
 	 */
 	interface Props {
 		open?: boolean;
-		variant?: 'info' | 'warning' | 'error' | 'success';
+		variant?: StatusVariant | StatusVariantType;
 		title: string;
 		description?: string;
 		confirmText?: string;
@@ -108,7 +110,7 @@
 
 	let {
 		open = $bindable(),
-		variant = 'info',
+		variant = StatusVariant.INFO,
 		title,
 		description,
 		confirmText = 'Confirm',
@@ -120,26 +122,26 @@
 		...restProps
 	}: Props = $props();
 
-	const icons = {
-		info: Info,
-		warning: TriangleAlert,
-		error: CircleAlert,
-		success: CircleCheckBig
+	const icons: Record<StatusVariant, any> = {
+		[StatusVariant.INFO]: Info,
+		[StatusVariant.WARNING]: TriangleAlert,
+		[StatusVariant.ERROR]: CircleAlert,
+		[StatusVariant.SUCCESS]: CircleCheckBig
 	};
 
-	const iconColors = {
-		info: 'text-info-600',
-		warning: 'text-warning-600',
-		error: 'text-error-600',
-		success: 'text-success-600'
+	const iconColors: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]: 'text-info-600',
+		[StatusVariant.WARNING]: 'text-warning-600',
+		[StatusVariant.ERROR]: 'text-error-600',
+		[StatusVariant.SUCCESS]: 'text-success-600'
 	};
 
-	const buttonVariants = {
-		info: 'primary',
-		warning: 'secondary',
-		error: 'danger',
-		success: 'success'
-	} as const;
+	const buttonVariants: Record<StatusVariant, ButtonVariant> = {
+		[StatusVariant.INFO]: ButtonVariant.PRIMARY,
+		[StatusVariant.WARNING]: ButtonVariant.SECONDARY,
+		[StatusVariant.ERROR]: ButtonVariant.DANGER,
+		[StatusVariant.SUCCESS]: ButtonVariant.SUCCESS
+	};
 
 	const Icon = $derived(icons[variant]);
 

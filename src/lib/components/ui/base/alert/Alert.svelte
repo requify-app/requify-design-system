@@ -3,12 +3,11 @@
 	import { CircleAlert, TriangleAlert, Info, CircleCheckBig, X } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { AlertVariant } from '../enums';
-
-	type AlertVariantType = 'info' | 'success' | 'warning' | 'error';
+	import { StatusVariant } from '../enums';
+	import type { StatusVariantType } from '../enums';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
-		variant?: AlertVariant | AlertVariantType;
+		variant?: StatusVariant | StatusVariantType;
 		dismissible?: boolean;
 		onDismiss?: () => void;
 		icon?: Snippet;
@@ -17,7 +16,7 @@
 	}
 
 	let {
-		variant = 'info',
+		variant = StatusVariant.INFO,
 		dismissible = false,
 		onDismiss,
 		icon,
@@ -28,29 +27,29 @@
 
 	let dismissed = $state(false);
 
-	const defaultIcons: Record<string, any> = {
-		[AlertVariant.INFO]: Info,
-		[AlertVariant.SUCCESS]: CircleCheckBig,
-		[AlertVariant.WARNING]: TriangleAlert,
-		[AlertVariant.ERROR]: CircleAlert
+	const defaultIcons: Record<StatusVariant, any> = {
+		[StatusVariant.INFO]: Info,
+		[StatusVariant.SUCCESS]: CircleCheckBig,
+		[StatusVariant.WARNING]: TriangleAlert,
+		[StatusVariant.ERROR]: CircleAlert
 	};
 
-	const variants: Record<string, string> = {
-		[AlertVariant.INFO]:
+	const variants: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]:
 			'bg-info-50 border-info-200 text-info-800 dark:bg-info-900/20 dark:border-info-700 dark:text-info-300',
-		[AlertVariant.SUCCESS]:
+		[StatusVariant.SUCCESS]:
 			'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300',
-		[AlertVariant.WARNING]:
+		[StatusVariant.WARNING]:
 			'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-700 dark:text-yellow-300',
-		[AlertVariant.ERROR]:
+		[StatusVariant.ERROR]:
 			'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-700 dark:text-red-300'
 	};
 
-	const iconColors: Record<string, string> = {
-		[AlertVariant.INFO]: 'text-info-600 dark:text-info-400',
-		[AlertVariant.SUCCESS]: 'text-green-600 dark:text-green-400',
-		[AlertVariant.WARNING]: 'text-yellow-600 dark:text-yellow-400',
-		[AlertVariant.ERROR]: 'text-red-600 dark:text-red-400'
+	const iconColors: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]: 'text-info-600 dark:text-info-400',
+		[StatusVariant.SUCCESS]: 'text-green-600 dark:text-green-400',
+		[StatusVariant.WARNING]: 'text-yellow-600 dark:text-yellow-400',
+		[StatusVariant.ERROR]: 'text-red-600 dark:text-red-400'
 	};
 
 	const DefaultIcon = $derived(defaultIcons[variant]);

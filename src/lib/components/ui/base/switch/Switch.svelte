@@ -2,7 +2,8 @@
 	import { Switch as BitsSwitch } from 'bits-ui';
 	import { cn } from '$lib/utils/cn';
 	import type { Snippet } from 'svelte';
-	import { SwitchVariant } from '../enums';
+	import { AccentVariant } from '../enums';
+	import type { AccentVariantType } from '../enums';
 
 	/**
 	 * Toggle switch with variants (primary, secondary, success, error, warning) and sizes.
@@ -16,19 +17,19 @@
 	 *
 	 * @example With variant
 	 * ```svelte
-	 * <Switch bind:checked={darkMode} variant={SwitchVariant.SECONDARY} />
+	 * <Switch bind:checked={darkMode} variant={AccentVariant.SECONDARY} />
 	 * <Label for="theme">Dark mode</Label>
 	 * ```
 	 *
 	 * @example Success variant
 	 * ```svelte
-	 * <Switch bind:checked={autoSave} variant={SwitchVariant.SUCCESS} />
+	 * <Switch bind:checked={autoSave} variant={AccentVariant.SUCCESS} />
 	 * <Label for="autosave">Auto-save</Label>
 	 * ```
 	 *
 	 * @example Error variant
 	 * ```svelte
-	 * <Switch bind:checked={strictMode} variant={SwitchVariant.ERROR} />
+	 * <Switch bind:checked={strictMode} variant={AccentVariant.ERROR} />
 	 * <Label for="strict">Strict mode</Label>
 	 * ```
 	 *
@@ -39,8 +40,9 @@
 	 * ```
 	 *
 	 * @param {boolean} checked - Current checked state (bindable)
-	 * @param {SwitchVariant} variant - Color variant for semantic meaning. Default: SwitchVariant.PRIMARY
+	 * @param {AccentVariant | AccentVariantType} variant - Color variant for semantic meaning. Default: AccentVariant.PRIMARY
 	 *   Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning'
+	 *   Note: 'info' defaults to 'primary'
 	 * @param {boolean} disabled - Disables switch interaction. Default: false
 	 * @param {boolean} required - Shows asterisk, form validation hint. Default: false
 	 * @param {string} name - HTML name attribute for form submission
@@ -78,7 +80,7 @@
 		/** HTML id attribute */
 		id?: string;
 		/** Visual variant (color scheme) */
-		variant?: SwitchVariant;
+		variant?: AccentVariant | AccentVariantType;
 		/** Callback when checked state changes */
 		onCheckedChange?: (checked: boolean) => void;
 	}
@@ -92,14 +94,14 @@
 		children,
 		class: classValue,
 		id,
-		variant = SwitchVariant.PRIMARY,
+		variant = AccentVariant.PRIMARY,
 		onCheckedChange,
 		...restProps
 	}: Props = $props();
 
 	const color = $derived(variant);
 
-	const colors = {
+	const colors: Record<string, string> = {
 		primary:
 			'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(61_82_153/0.2)]',
 		secondary:
@@ -109,7 +111,8 @@
 		error:
 			'data-[state=checked]:bg-error-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(220_38_38/0.2)]',
 		warning:
-			'data-[state=checked]:bg-warning-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(202_138_4/0.2)]'
+			'data-[state=checked]:bg-warning-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(202_138_4/0.2)]',
+		info: 'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(61_82_153/0.2)]'
 	};
 
 	const baseStyles =

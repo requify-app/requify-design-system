@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { TextSize, FontWeight, TextColor } from '../enums';
+	import type { TextSizeType, FontWeightType, TextColorType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -50,10 +52,12 @@
 	 *
 	 * @param {Snippet} children - Paragraph content
 	 * @param {string} class - Additional CSS classes to apply
-	 * @param {'xs' | 'sm' | 'base' | 'lg' | 'xl'} size - Text size. Default: 'base'
+	 * @param {TextSize | TextSizeType} size - Text size. Default: TextSize.BASE
 	 *   Options: 'xs' (12px), 'sm' (14px), 'base' (16px), 'lg' (18px), 'xl' (20px)
-	 * @param {'normal' | 'medium' | 'semibold' | 'bold'} weight - Font weight. Default: 'normal'
-	 * @param {'default' | 'muted' | 'primary' | 'secondary'} color - Text color variant. Default: 'default'
+	 * @param {FontWeight | FontWeightType} weight - Font weight. Default: FontWeight.NORMAL
+	 *   Options: 'normal' | 'medium' | 'semibold' | 'bold'
+	 * @param {TextColor | TextColorType} color - Text color variant. Default: TextColor.DEFAULT
+	 *   Options: 'default' | 'muted' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'blue' | 'green' | 'red' | 'yellow' | 'purple'
 	 *
 	 * @see {@link Heading} - For heading elements
 	 * @see {@link A} - For links within text
@@ -67,40 +71,51 @@
 	interface Props {
 		children?: Snippet;
 		class?: string;
-		size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl';
-		weight?: 'normal' | 'medium' | 'semibold' | 'bold';
-		color?: 'default' | 'muted' | 'primary' | 'secondary';
+		size?: TextSize | TextSizeType;
+		weight?: FontWeight | FontWeightType;
+		color?: TextColor | TextColorType;
 	}
 
 	let {
 		children,
 		class: className,
-		size = 'base',
-		weight = 'normal',
-		color = 'default',
+		size = TextSize.BASE,
+		weight = FontWeight.NORMAL,
+		color = TextColor.DEFAULT,
 		...restProps
 	}: Props = $props();
 
-	const sizeStyles = {
+	const sizeStyles: Record<string, string> = {
 		xs: 'text-xs',
 		sm: 'text-sm',
 		base: 'text-base',
 		lg: 'text-lg',
-		xl: 'text-xl'
+		xl: 'text-xl',
+		'2xl': 'text-2xl',
+		'3xl': 'text-3xl'
 	};
 
-	const weightStyles = {
+	const weightStyles: Record<string, string> = {
 		normal: 'font-normal',
 		medium: 'font-medium',
 		semibold: 'font-semibold',
 		bold: 'font-bold'
 	};
 
-	const colorStyles = {
+	const colorStyles: Record<string, string> = {
 		default: 'text-gray-700 dark:text-gray-300',
 		muted: 'text-gray-600 dark:text-gray-400',
 		primary: 'text-primary-600 dark:text-primary-400',
-		secondary: 'text-secondary-600 dark:text-secondary-400'
+		secondary: 'text-secondary-600 dark:text-secondary-400',
+		success: 'text-green-600 dark:text-green-400',
+		warning: 'text-yellow-600 dark:text-yellow-400',
+		error: 'text-red-600 dark:text-red-400',
+		info: 'text-blue-600 dark:text-blue-400',
+		blue: 'text-blue-600 dark:text-blue-400',
+		green: 'text-green-600 dark:text-green-400',
+		red: 'text-red-600 dark:text-red-400',
+		yellow: 'text-yellow-600 dark:text-yellow-400',
+		purple: 'text-purple-600 dark:text-purple-400'
 	};
 
 	const baseStyles = 'leading-relaxed';

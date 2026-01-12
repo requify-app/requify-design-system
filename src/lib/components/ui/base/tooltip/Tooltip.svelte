@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Tooltip as BitsTooltip } from 'bits-ui';
 	import { cn } from '$lib/utils/cn';
+	import { Side, Align } from '../enums';
+	import type { SideType, AlignType } from '../enums';
 	import { scale } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
@@ -61,8 +63,10 @@
 	 *
 	 * @param {string | Snippet} content - Tooltip text or custom content snippet
 	 * @param {Snippet} children - Trigger element that shows tooltip on hover/focus
-	 * @param {'top' | 'right' | 'bottom' | 'left'} side - Tooltip placement side relative to trigger. Default: 'top'
-	 * @param {'start' | 'center' | 'end'} align - Tooltip alignment along the side. Default: 'center'
+	 * @param {Side | SideType} side - Tooltip placement side relative to trigger. Default: Side.TOP
+	 *   Options: 'top' | 'right' | 'bottom' | 'left'
+	 * @param {Align | AlignType} align - Tooltip alignment along the side. Default: Align.CENTER
+	 *   Options: 'start' | 'center' | 'end'
 	 * @param {number} delayDuration - Delay in ms before tooltip appears. Default: 200
 	 * @param {boolean} disableHoverableContent - If true, tooltip closes when leaving trigger. Default: undefined
 	 * @param {string} class - Additional CSS classes to apply
@@ -83,9 +87,9 @@
 		/** Trigger element content */
 		children: Snippet;
 		/** Tooltip placement side */
-		side?: 'top' | 'right' | 'bottom' | 'left';
+		side?: Side | SideType;
 		/** Tooltip alignment */
-		align?: 'start' | 'center' | 'end';
+		align?: Align | AlignType;
 		/** Delay before showing tooltip (ms) */
 		delayDuration?: number;
 		/** Whether tooltip content is hoverable */
@@ -99,8 +103,8 @@
 	let {
 		content,
 		children,
-		side = 'top',
-		align = 'center',
+		side = Side.TOP,
+		align = Align.CENTER,
 		delayDuration = 200,
 		disableHoverableContent,
 		class: classValue,

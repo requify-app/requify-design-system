@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Dialog } from 'bits-ui';
 	import { cn } from '$lib/utils/cn';
+	import { DrawerPlacement } from '../enums';
+	import type { DrawerPlacementType } from '../enums';
 	import { fade, fly } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 	import type { FlyParams } from 'svelte/transition';
@@ -56,7 +58,7 @@
 	 *
 	 * @param {Snippet} children - Drawer content
 	 * @param {boolean} open - Controls drawer visibility. Default: false
-	 * @param {'left' | 'right' | 'top' | 'bottom'} placement - Which edge to slide from. Default: 'left'
+	 * @param {DrawerPlacement | DrawerPlacementType} placement - Which edge to slide from. Default: DrawerPlacement.LEFT
 	 *   Options: 'left' | 'right' | 'top' | 'bottom'
 	 * @param {boolean} backdrop - If true, shows backdrop overlay. Default: true
 	 * @param {string} class - Additional CSS classes to apply
@@ -72,12 +74,10 @@
 	 * - Backdrop click closes drawer
 	 * - Animation respects prefers-reduced-motion
 	 */
-	type Placement = 'left' | 'right' | 'top' | 'bottom';
-
 	interface Props {
 		children?: Snippet;
 		open?: boolean;
-		placement?: Placement;
+		placement?: DrawerPlacement | DrawerPlacementType;
 		backdrop?: boolean;
 		class?: string;
 		transitionParams?: Partial<FlyParams>; // Custom transition parameters
@@ -87,24 +87,25 @@
 	let {
 		children,
 		open = $bindable(),
-		placement = 'left',
+		placement = DrawerPlacement.LEFT,
 		backdrop = true,
 		class: className,
 		transitionParams = {},
 		...restProps
 	}: Props = $props();
 
-	const placementStyles: Record<Placement, string> = {
+	const placementStyles: Record<DrawerPlacement, string> = {
 		left: 'fixed left-0 top-0 h-full w-80 m-0 rounded-none bg-white dark:bg-gray-800 p-4',
 		right: 'fixed right-0 top-0 h-full w-80 m-0 rounded-none bg-white dark:bg-gray-800 p-4',
 		top: 'fixed left-0 top-0 w-full h-auto m-0 rounded-none bg-white dark:bg-gray-800 p-4',
 		bottom: 'fixed bottom-0 left-0 w-full h-auto m-0 rounded-none bg-white dark:bg-gray-800 p-4'
 	};
 
-	const getTransition = (placement: Placement) => {
+	const getTransition = (placement: DrawerPlacement | DrawerPlacementType) => {
+		const placementStr = placement as string;
 		return {
-			x: placement === 'left' ? -500 : placement === 'right' ? 500 : 0,
-			y: placement === 'top' ? -500 : placement === 'bottom' ? 500 : 0,
+			x: placementStr === 'left' ? -500 : placementStr === 'right' ? 500 : 0,
+			y: placementStr === 'top' ? -500 : placementStr === 'bottom' ? 500 : 0,
 			duration: 300,
 			...transitionParams
 		};

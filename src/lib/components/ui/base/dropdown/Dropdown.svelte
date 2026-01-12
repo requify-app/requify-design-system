@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { DropdownMenu } from 'bits-ui';
 	import { cn } from '$lib/utils/cn';
+	import { Side, Align } from '../enums';
+	import type { SideType, AlignType } from '../enums';
 	import { scale } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
@@ -47,8 +49,10 @@
 	 * @param {boolean} open - Dropdown open state (bindable). Default: false
 	 * @param {Snippet} trigger - Trigger element that opens dropdown (required)
 	 * @param {Snippet} children - Dropdown menu items (DropdownItem, DropdownDivider, DropdownHeader, DropdownLink)
-	 * @param {'start' | 'center' | 'end'} align - Horizontal alignment of dropdown. Default: 'start'
-	 * @param {'top' | 'right' | 'bottom' | 'left'} side - Which side of trigger to show on. Default: 'bottom'
+	 * @param {Align | AlignType} align - Horizontal alignment of dropdown. Default: Align.START
+	 *   Options: 'start' | 'center' | 'end'
+	 * @param {Side | SideType} side - Which side of trigger to show on. Default: Side.BOTTOM
+	 *   Options: 'top' | 'right' | 'bottom' | 'left'
 	 * @param {string} class - Additional CSS classes to apply
 	 * @param {'optimized' | 'always'} updatePositionStrategy - How to update position. Default: 'always'
 	 * @param {boolean} hideWhenDetached - Hide when dropdown detaches from DOM. Default: false
@@ -66,16 +70,16 @@
 	 * - ARIA menu role
 	 */
 	interface Props {
-		/** Whether the dropdown is open */
+		/** Whether dropdown is open */
 		open?: boolean;
 		/** Trigger element content */
 		trigger?: Snippet;
 		/** Dropdown content */
 		children?: Snippet;
 		/** Dropdown alignment */
-		align?: 'start' | 'center' | 'end';
+		align?: Align | AlignType;
 		/** Dropdown placement side */
-		side?: 'top' | 'right' | 'bottom' | 'left';
+		side?: Side | SideType;
 		/** Additional CSS classes */
 		class?: string;
 		/** Position update strategy */
@@ -88,8 +92,8 @@
 		open = $bindable(false),
 		trigger,
 		children,
-		align = 'start',
-		side = 'bottom',
+		align = Align.START,
+		side = Side.BOTTOM,
 		class: classValue,
 		updatePositionStrategy = 'always',
 		hideWhenDetached = false,

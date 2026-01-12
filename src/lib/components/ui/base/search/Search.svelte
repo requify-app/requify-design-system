@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { ComponentSize } from '../enums';
+	import type { ComponentSizeType } from '../enums';
 	import { Search as SearchIcon } from '@lucide/svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
@@ -33,7 +35,8 @@
 	 * ```
 	 *
 	 * @param {string} value - Search input value (bindable)
-	 * @param {'sm' | 'md' | 'lg'} size - Input size affecting height and text size. Default: 'md'
+	 * @param {ComponentSize | ComponentSizeType} size - Input size affecting height and text size. Default: ComponentSize.MD
+	 *   Options: 'sm' | 'md' | 'lg'
 	 * @param {string} class - Additional CSS classes to apply
 	 * @param {string} placeholder - Placeholder text. Default: 'Search...'
 	 *
@@ -49,28 +52,32 @@
 	 */
 	interface Props extends Omit<HTMLInputAttributes, 'size'> {
 		value?: string;
-		size?: 'sm' | 'md' | 'lg';
+		size?: ComponentSize | ComponentSizeType;
 		class?: string;
 	}
 
 	let {
 		value = $bindable(),
-		size = 'md',
+		size = ComponentSize.MD,
 		class: className,
 		placeholder = 'Search...',
 		...restProps
 	}: Props = $props();
 
-	const sizes = {
-		sm: 'h-8 text-sm',
-		md: 'h-10 text-sm',
-		lg: 'h-12 text-base'
+	const sizes: Record<ComponentSize, string> = {
+		[ComponentSize.XS]: 'h-6 text-xs',
+		[ComponentSize.SM]: 'h-8 text-sm',
+		[ComponentSize.MD]: 'h-10 text-sm',
+		[ComponentSize.LG]: 'h-12 text-base',
+		[ComponentSize.XL]: 'h-14 text-lg'
 	};
 
-	const iconSizes = {
-		sm: 'h-4 w-4',
-		md: 'h-5 w-5',
-		lg: 'h-6 w-6'
+	const iconSizes: Record<ComponentSize, string> = {
+		[ComponentSize.XS]: 'h-3 w-3',
+		[ComponentSize.SM]: 'h-4 w-4',
+		[ComponentSize.MD]: 'h-5 w-5',
+		[ComponentSize.LG]: 'h-6 w-6',
+		[ComponentSize.XL]: 'h-7 w-7'
 	};
 
 	const baseStyles =

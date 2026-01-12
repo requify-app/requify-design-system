@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { HeadingTag } from '../enums';
+	import type { HeadingTagType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -46,7 +48,8 @@
 	 * <Heading tag="h1" class="text-center mt-8">Centered Title</Heading>
 	 * ```
 	 *
-	 * @param {'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'} tag - HTML heading element to render. Default: 'h1'
+	 * @param {HeadingTag | HeadingTagType} tag - HTML heading element to render. Default: HeadingTag.H1
+	 *   Options: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 	 * @param {Snippet} children - Heading content
 	 * @param {string} class - Additional CSS classes to apply
 	 * @param {string} customSize - Custom Tailwind size class (overrides default tag size)
@@ -61,13 +64,19 @@
 	 * - Appropriate font weights and tracking
 	 */
 	interface Props {
-		tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+		tag?: HeadingTag | HeadingTagType;
 		children?: Snippet;
 		class?: string;
 		customSize?: string;
 	}
 
-	let { tag = 'h1', children, class: className, customSize, ...restProps }: Props = $props();
+	let {
+		tag = HeadingTag.H1,
+		children,
+		class: className,
+		customSize,
+		...restProps
+	}: Props = $props();
 
 	const sizeStyles = {
 		h1: 'text-3xl font-bold tracking-tight lg:text-4xl',

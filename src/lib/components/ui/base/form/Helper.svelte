@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { StatusVariant } from '../enums';
+	import type { StatusVariantType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -56,7 +58,8 @@
 	 *
 	 * @param {Snippet} children - Helper text content
 	 * @param {string} class - Additional CSS classes to apply
-	 * @param {'default' | 'success' | 'error' | 'warning'} color - Text color variant. Default: 'default'
+	 * @param {StatusVariant | StatusVariantType} color - Text color variant. Default: StatusVariant.INFO
+	 *   Options: 'default' | 'success' | 'error' | 'warning'
 	 *
 	 * @see {@link Input} - Form input component
 	 * @see {@link Label} - Form label component
@@ -70,16 +73,16 @@
 	interface Props {
 		children?: Snippet;
 		class?: string;
-		color?: 'default' | 'success' | 'error' | 'warning';
+		color?: StatusVariant | StatusVariantType;
 	}
 
-	let { children, class: className, color = 'default', ...restProps }: Props = $props();
+	let { children, class: className, color = StatusVariant.INFO, ...restProps }: Props = $props();
 
-	const colors = {
-		default: 'text-gray-500 dark:text-gray-400',
-		success: 'text-green-600 dark:text-green-400',
-		error: 'text-red-600 dark:text-red-400',
-		warning: 'text-yellow-600 dark:text-yellow-400'
+	const colors: Record<StatusVariant, string> = {
+		[StatusVariant.INFO]: 'text-gray-500 dark:text-gray-400',
+		[StatusVariant.SUCCESS]: 'text-green-600 dark:text-green-400',
+		[StatusVariant.ERROR]: 'text-red-600 dark:text-red-400',
+		[StatusVariant.WARNING]: 'text-yellow-600 dark:text-yellow-400'
 	};
 
 	const baseStyles = 'mt-1 text-sm';

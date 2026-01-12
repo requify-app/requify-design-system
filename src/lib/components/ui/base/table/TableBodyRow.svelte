@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { TextColor } from '../enums';
+	import type { TextColorType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -45,7 +47,9 @@
 	 *
 	 * @param {Snippet} children - TableBodyCell components
 	 * @param {string} class - Additional CSS classes to apply
-	 * @param {'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple'} color - Row color theme. Default: 'default'
+	 * @param {TextColor | TextColorType} color - Row color theme. Default: TextColor.DEFAULT
+	 *   Options: 'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple'
+	 *   Note: Currently reserved for future use, not applied in styling
 	 * @param {(event: MouseEvent) => void} onclick - Click handler for row interaction
 	 *
 	 * @see {@link Table} - Main table container
@@ -61,7 +65,7 @@
 	interface Props {
 		children?: Snippet;
 		class?: string;
-		color?: 'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple';
+		color?: TextColor | TextColorType;
 		onclick?: (event: MouseEvent) => void;
 	}
 

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { TextColor } from '../enums';
+	import type { TextColorType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -51,7 +53,8 @@
 	 * @param {string} href - Link URL or destination (required)
 	 * @param {Snippet} children - Link content
 	 * @param {string} class - Additional CSS classes to apply
-	 * @param {'default' | 'primary' | 'secondary'} color - Link color variant. Default: 'primary'
+	 * @param {TextColor | TextColorType} color - Link color variant. Default: TextColor.PRIMARY
+	 *   Options: 'default' | 'primary' | 'secondary'
 	 * @param {string} target - Link target (e.g., '_blank' for new tab)
 	 * @param {string} rel - Link relationship (e.g., 'noopener noreferrer' for external links)
 	 *
@@ -70,7 +73,7 @@
 		href: string;
 		children?: Snippet;
 		class?: string;
-		color?: 'default' | 'primary' | 'secondary';
+		color?: TextColor | TextColorType;
 		target?: string;
 		rel?: string;
 	}
@@ -79,16 +82,26 @@
 		href,
 		children,
 		class: className,
-		color = 'primary',
+		color = TextColor.PRIMARY,
 		target,
 		rel,
 		...restProps
 	}: Props = $props();
 
-	const colorStyles = {
-		default: 'text-blue-600 dark:text-blue-400',
-		primary: 'text-primary-600 dark:text-primary-400',
-		secondary: 'text-secondary-600 dark:text-secondary-400'
+	const colorStyles: Record<TextColor, string> = {
+		[TextColor.DEFAULT]: 'text-blue-600 dark:text-blue-400',
+		[TextColor.PRIMARY]: 'text-primary-600 dark:text-primary-400',
+		[TextColor.SECONDARY]: 'text-secondary-600 dark:text-secondary-400',
+		[TextColor.MUTED]: 'text-gray-600 dark:text-gray-400',
+		[TextColor.SUCCESS]: 'text-green-600 dark:text-green-400',
+		[TextColor.WARNING]: 'text-yellow-600 dark:text-yellow-400',
+		[TextColor.ERROR]: 'text-red-600 dark:text-red-400',
+		[TextColor.INFO]: 'text-blue-600 dark:text-blue-400',
+		[TextColor.BLUE]: 'text-blue-600 dark:text-blue-400',
+		[TextColor.GREEN]: 'text-green-600 dark:text-green-400',
+		[TextColor.RED]: 'text-red-600 dark:text-red-400',
+		[TextColor.YELLOW]: 'text-yellow-600 dark:text-yellow-400',
+		[TextColor.PURPLE]: 'text-purple-600 dark:text-purple-400'
 	};
 
 	const baseStyles =

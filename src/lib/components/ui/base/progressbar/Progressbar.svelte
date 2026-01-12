@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
-	import { ComponentSize, ProgressbarVariant } from '../enums';
+	import { ComponentSize, AccentVariant } from '../enums';
+	import type { AccentVariantType } from '../enums';
 
 	/**
 	 * Progress bar component for displaying completion percentage.
@@ -13,7 +14,7 @@
 	 *
 	 * @example With success color
 	 * ```svelte
-	 * <Progressbar progress={75} color={ProgressbarVariant.SUCCESS} />
+	 * <Progressbar progress={75} color={AccentVariant.SUCCESS} />
 	 * ```
 	 *
 	 * @example Small size with label outside
@@ -28,7 +29,7 @@
 	 *
 	 * @example Error progress
 	 * ```svelte
-	 * <Progressbar progress={90} color={ProgressbarVariant.ERROR} labelOutside />
+	 * <Progressbar progress={90} color={AccentVariant.ERROR} labelOutside />
 	 * ```
 	 *
 	 * @example Custom size
@@ -40,7 +41,7 @@
 	 * @param {ComponentSize | string} size - Progress bar height. Default: ComponentSize.MD
 	 *   Named: 'xs' (4px), 'sm' (6px), 'md' (10px), 'lg' (16px), 'xl' (24px)
 	 *   Custom: pass Tailwind height class (e.g., 'h-1')
-	 * @param {ProgressbarVariant} color - Color variant. Default: ProgressbarVariant.PRIMARY
+	 * @param {AccentVariant | AccentVariantType} color - Color variant. Default: AccentVariant.PRIMARY
 	 *   Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
 	 * @param {boolean} labelInside - If true, shows percentage inside bar. Default: false
 	 * @param {boolean} labelOutside - If true, shows percentage above bar. Default: false
@@ -57,7 +58,7 @@
 	interface Props {
 		progress?: number;
 		size?: ComponentSize | string;
-		color?: ProgressbarVariant;
+		color?: AccentVariant | AccentVariantType;
 		labelInside?: boolean;
 		labelOutside?: boolean;
 		class?: string;
@@ -66,20 +67,20 @@
 	let {
 		progress = 0,
 		size = ComponentSize.MD,
-		color = ProgressbarVariant.PRIMARY,
+		color = AccentVariant.PRIMARY,
 		labelInside = false,
 		labelOutside = false,
 		class: className,
 		...restProps
 	}: Props = $props();
 
-	const colorStyles: Record<ProgressbarVariant, string> = {
-		[ProgressbarVariant.PRIMARY]: 'bg-primary-600 dark:bg-primary-500',
-		[ProgressbarVariant.SECONDARY]: 'bg-secondary-500 dark:bg-secondary-400',
-		[ProgressbarVariant.SUCCESS]: 'bg-green-600 dark:bg-green-500',
-		[ProgressbarVariant.ERROR]: 'bg-red-600 dark:bg-red-500',
-		[ProgressbarVariant.WARNING]: 'bg-yellow-400 dark:bg-yellow-300',
-		[ProgressbarVariant.INFO]: 'bg-blue-600 dark:bg-blue-500'
+	const colorStyles: Record<AccentVariant, string> = {
+		[AccentVariant.PRIMARY]: 'bg-primary-600 dark:bg-primary-500',
+		[AccentVariant.SECONDARY]: 'bg-secondary-500 dark:bg-secondary-400',
+		[AccentVariant.SUCCESS]: 'bg-green-600 dark:bg-green-500',
+		[AccentVariant.ERROR]: 'bg-red-600 dark:bg-red-500',
+		[AccentVariant.WARNING]: 'bg-yellow-400 dark:bg-yellow-300',
+		[AccentVariant.INFO]: 'bg-blue-600 dark:bg-blue-500'
 	};
 
 	const sizeStyles: Record<string, string> = {

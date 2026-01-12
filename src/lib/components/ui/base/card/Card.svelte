@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { CardVariant, CardPadding, ComponentSize } from '../enums';
+	import type { CardVariantType, CardPaddingType, ComponentSizeType } from '../enums';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
@@ -39,9 +41,12 @@
 	 * </Card>
 	 * ```
 	 *
-	 * @param {'default' | 'bordered' | 'elevated' | 'flat' | 'glass'} variant - Visual style variant. Default: 'default'
-	 * @param {'none' | 'sm' | 'md' | 'lg' | 'xl'} size - Padding size (alias for padding). Default: 'md'
-	 * @param {'none' | 'sm' | 'md' | 'lg' | 'xl'} padding - Padding size. Default: 'md'
+	 * @param {CardVariant | CardVariantType} variant - Visual style variant. Default: CardVariant.DEFAULT
+	 *   Options: 'default' | 'bordered' | 'elevated' | 'flat' | 'glass'
+	 * @param {ComponentSize | ComponentSizeType} size - Padding size (alias for padding). Default: ComponentSize.MD
+	 *   Options: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	 * @param {CardPadding | CardPaddingType} padding - Padding size. Default: CardPadding.MD
+	 *   Options: 'none' | 'sm' | 'md' | 'lg' | 'xl'
 	 * @param {boolean} hoverable - If true or href provided, adds hover lift effect. Default: false
 	 * @param {string} href - If provided, renders as anchor tag with href and link behavior
 	 * @param {Snippet} children - Card content
@@ -56,9 +61,9 @@
 	 * - Visible focus indicator
 	 */
 	interface Props extends HTMLAttributes<HTMLDivElement> {
-		variant?: 'default' | 'bordered' | 'elevated' | 'flat';
-		padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'; // Alias for size
-		size?: 'sm' | 'md' | 'lg' | 'xl';
+		variant?: CardVariant | CardVariantType;
+		padding?: CardPadding | CardPaddingType;
+		size?: ComponentSize | ComponentSizeType;
 		hoverable?: boolean;
 		href?: string; // If provided, renders as a link
 		children?: Snippet;
@@ -66,8 +71,8 @@
 	}
 
 	let {
-		variant = 'default',
-		size = 'md',
+		variant = CardVariant.DEFAULT,
+		size = ComponentSize.MD,
 		padding,
 		hoverable = false,
 		href,
@@ -92,12 +97,13 @@
 			'bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl backdrop-saturate-150 border border-white/80 dark:border-gray-700/80 shadow-[0_4px_6px_-1px_rgb(0_0_0/0.08),0_10px_24px_-6px_rgb(0_0_0/0.1),inset_0_1px_0_0_rgba(255_255_255/0.9)]'
 	};
 
-	const paddings = {
+	const paddings: Record<string, string> = {
 		none: '',
 		sm: 'p-4',
 		md: 'p-6',
 		lg: 'p-8',
-		xl: 'p-10'
+		xl: 'p-10',
+		xs: ''
 	};
 
 	const computedClass = $derived(

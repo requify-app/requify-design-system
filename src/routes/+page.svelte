@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		ModalSize,
-		ComponentSize,
-		ToastVariant,
-		ProgressbarVariant
-	} from '$lib/components/ui/base/enums';
+	import { ModalSize, ComponentSize } from '$lib/components/ui/base/enums';
 	import {
 		Button,
 		Card,

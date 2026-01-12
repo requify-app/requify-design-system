@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { BadgeVariant, ComponentSize, IndicatorPlacement } from '../enums';
+	import type { BadgeVariantType, ComponentSizeType, IndicatorPlacementType } from '../enums';
 
 	/**
 	 * Status indicator badge for notifications, alerts, and status markers.
@@ -55,10 +57,12 @@
 	 * </div>
 	 * ```
 	 *
-	 * @param {'success' | 'error' | 'warning' | 'info' | 'default'} variant - Color variant. Default: 'default'
-	 * @param {'xs' | 'sm' | 'md' | 'lg' | 'xl'} size - Indicator size. Default: 'md'
+	 * @param {BadgeVariant | BadgeVariantType} variant - Color variant. Default: BadgeVariant.DEFAULT
+	 *   Options: 'success' | 'error' | 'warning' | 'info' | 'default' | 'primary' | 'secondary' | 'orange'
+	 * @param {ComponentSize | ComponentSizeType} size - Indicator size. Default: ComponentSize.MD
 	 *   Sizes: 'xs' (8px), 'sm' (10px), 'md' (12px), 'lg' (14px), 'xl' (24px)
-	 * @param {'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'} placement - Position relative to parent. Default: 'top-right'
+	 * @param {IndicatorPlacement | IndicatorPlacementType} placement - Position relative to parent. Default: IndicatorPlacement.TOP_RIGHT
+	 *   Options: 'top-left' | 'top-center' | 'top-right' | 'center-left' | 'center' | 'center-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
 	 * @param {boolean} border - If true, adds white ring border around indicator. Default: false
 	 * @param {string} class - Additional CSS classes to apply
 	 *
@@ -71,62 +75,52 @@
 	 * - Optional border for better visibility on colored backgrounds
 	 * - Small footprint for subtle notifications
 	 */
-	type Variant = 'success' | 'error' | 'warning' | 'info' | 'default';
-	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-	type Placement =
-		| 'top-left'
-		| 'top-center'
-		| 'top-right'
-		| 'center-left'
-		| 'center'
-		| 'center-right'
-		| 'bottom-left'
-		| 'bottom-center'
-		| 'bottom-right';
-
 	interface Props {
-		variant?: Variant;
-		size?: Size;
-		placement?: Placement;
+		variant?: BadgeVariant | BadgeVariantType;
+		size?: ComponentSize | ComponentSizeType;
+		placement?: IndicatorPlacement | IndicatorPlacementType;
 		border?: boolean;
 		class?: string;
 	}
 
 	let {
-		variant = 'default',
-		size = 'md',
-		placement = 'top-right',
+		variant = BadgeVariant.DEFAULT,
+		size = ComponentSize.MD,
+		placement = IndicatorPlacement.TOP_RIGHT,
 		border = false,
 		class: className
 	}: Props = $props();
 
 	// Map variants to colors
-	const variantColors = {
-		success: 'bg-green-500',
-		error: 'bg-red-500',
-		warning: 'bg-yellow-500',
-		info: 'bg-blue-500',
-		default: 'bg-gray-500'
+	const variantColors: Record<BadgeVariant, string> = {
+		[BadgeVariant.SUCCESS]: 'bg-green-500',
+		[BadgeVariant.ERROR]: 'bg-red-500',
+		[BadgeVariant.WARNING]: 'bg-yellow-500',
+		[BadgeVariant.INFO]: 'bg-blue-500',
+		[BadgeVariant.DEFAULT]: 'bg-gray-500',
+		[BadgeVariant.PRIMARY]: 'bg-primary-500',
+		[BadgeVariant.SECONDARY]: 'bg-secondary-500',
+		[BadgeVariant.ORANGE]: 'bg-orange-500'
 	};
 
-	const sizes = {
-		xs: 'h-2 w-2',
-		sm: 'h-2.5 w-2.5',
-		md: 'h-3 w-3',
-		lg: 'h-3.5 w-3.5',
-		xl: 'h-6 w-6'
+	const sizes: Record<ComponentSize, string> = {
+		[ComponentSize.XS]: 'h-2 w-2',
+		[ComponentSize.SM]: 'h-2.5 w-2.5',
+		[ComponentSize.MD]: 'h-3 w-3',
+		[ComponentSize.LG]: 'h-3.5 w-3.5',
+		[ComponentSize.XL]: 'h-6 w-6'
 	};
 
-	const placements = {
-		'top-left': '-top-1 -left-1',
-		'top-center': '-top-1 left-1/2 -translate-x-1/2',
-		'top-right': '-top-1 -right-1',
-		'center-left': 'top-1/2 -left-1 -translate-y-1/2',
-		center: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-		'center-right': 'top-1/2 -right-1 -translate-y-1/2',
-		'bottom-left': '-bottom-1 -left-1',
-		'bottom-center': '-bottom-1 left-1/2 -translate-x-1/2',
-		'bottom-right': '-bottom-1 -right-1'
+	const placements: Record<IndicatorPlacement, string> = {
+		[IndicatorPlacement.TOP_LEFT]: '-top-1 -left-1',
+		[IndicatorPlacement.TOP_CENTER]: '-top-1 left-1/2 -translate-x-1/2',
+		[IndicatorPlacement.TOP_RIGHT]: '-top-1 -right-1',
+		[IndicatorPlacement.CENTER_LEFT]: 'top-1/2 -left-1 -translate-y-1/2',
+		[IndicatorPlacement.CENTER]: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+		[IndicatorPlacement.CENTER_RIGHT]: 'top-1/2 -right-1 -translate-y-1/2',
+		[IndicatorPlacement.BOTTOM_LEFT]: '-bottom-1 -left-1',
+		[IndicatorPlacement.BOTTOM_CENTER]: '-bottom-1 left-1/2 -translate-x-1/2',
+		[IndicatorPlacement.BOTTOM_RIGHT]: '-bottom-1 -right-1'
 	};
 
 	const baseStyles = 'absolute rounded-full';

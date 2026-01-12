@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Popover as PopoverPrimitive } from 'bits-ui';
 	import { cn } from '$lib/utils/cn';
+	import { Side, Align } from '../enums';
+	import type { SideType, AlignType } from '../enums';
 	import { scale } from 'svelte/transition';
 	import type { Snippet } from 'svelte';
 
@@ -65,8 +67,10 @@
 	 * @param {boolean} open - Controls popover visibility. Default: false
 	 * @param {Snippet} trigger - Element that triggers popover on click
 	 * @param {Snippet} children - Popover content
-	 * @param {'start' | 'center' | 'end'} align - Popover alignment along the side. Default: 'start'
-	 * @param {'top' | 'right' | 'bottom' | 'left'} side - Popover placement side relative to trigger. Default: 'bottom'
+	 * @param {Align | AlignType} align - Popover alignment along the side. Default: Align.START
+	 *   Options: 'start' | 'center' | 'end'
+	 * @param {Side | SideType} side - Popover placement side relative to trigger. Default: Side.BOTTOM
+	 *   Options: 'top' | 'right' | 'bottom' | 'left'
 	 * @param {string} class - Additional CSS classes to apply
 	 *
 	 * @see {@link Tooltip} - For simple informational tooltips
@@ -85,8 +89,8 @@
 		open?: boolean;
 		trigger?: Snippet;
 		children?: Snippet;
-		align?: 'start' | 'center' | 'end';
-		side?: 'top' | 'right' | 'bottom' | 'left';
+		align?: Align | AlignType;
+		side?: Side | SideType;
 		class?: string;
 	}
 
@@ -94,8 +98,8 @@
 		open = $bindable(false),
 		trigger,
 		children,
-		align = 'start',
-		side = 'bottom',
+		align = Align.START,
+		side = Side.BOTTOM,
 		class: className,
 		...restProps
 	}: Props = $props();

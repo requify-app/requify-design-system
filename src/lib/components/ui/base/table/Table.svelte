@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { TextColor } from '../enums';
+	import type { TextColorType } from '../enums';
 	import type { Snippet } from 'svelte';
 
 	/**
@@ -85,7 +87,9 @@
 	 * @param {boolean} hoverable - If true, adds hover effect to rows. Default: false
 	 * @param {boolean} noborder - If true, removes border collapse. Default: false
 	 * @param {boolean} shadow - If true, adds shadow to table container. Default: false
-	 * @param {'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple'} color - Color theme. Default: 'default'
+	 * @param {TextColor | TextColorType} color - Color theme. Default: TextColor.DEFAULT
+	 *   Options: 'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple'
+	 *   Note: Currently reserved for future use, not applied in styling
 	 *
 	 * @see {@link TableHead} - Table header component
 	 * @see {@link TableBody} - Table body component
@@ -110,7 +114,7 @@
 		hoverable?: boolean;
 		noborder?: boolean;
 		shadow?: boolean;
-		color?: 'default' | 'blue' | 'green' | 'red' | 'yellow' | 'purple';
+		color?: TextColor | TextColorType;
 	}
 
 	let {

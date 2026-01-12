@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { cn } from '$lib/utils/cn';
+	import { ComponentSize } from '../enums';
+	import type { ComponentSizeType } from '../enums';
 	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 
@@ -23,7 +25,8 @@
 	 * @param {PageItem[]} pages - Array of page items with name, href, and optional active state
 	 * @param {() => void} previous - Callback when previous button is clicked
 	 * @param {() => void} next - Callback when next button is clicked
-	 * @param {'sm' | 'md' | 'lg'} size - Button size affecting height and text. Default: 'md'
+	 * @param {ComponentSize | ComponentSizeType} size - Button size affecting height and text. Default: ComponentSize.MD
+	 *   Options: 'sm' | 'md' | 'lg'
 	 * @param {string} class - Additional CSS classes to apply
 	 * @param {Snippet} prevContent - Custom content for previous button (alternative to chevron icon)
 	 * @param {Snippet} nextContent - Custom content for next button (alternative to chevron icon)
@@ -45,7 +48,7 @@
 		pages: PageItem[];
 		previous?: () => void;
 		next?: () => void;
-		size?: 'sm' | 'md' | 'lg';
+		size?: ComponentSize | ComponentSizeType;
 		class?: string;
 		prevContent?: Snippet;
 		nextContent?: Snippet;
@@ -55,16 +58,18 @@
 		pages,
 		previous,
 		next,
-		size = 'md',
+		size = ComponentSize.MD,
 		class: className,
 		prevContent,
 		nextContent
 	}: Props = $props();
 
-	const sizes = {
-		sm: 'h-8 min-w-8 text-xs',
-		md: 'h-10 min-w-10 text-sm',
-		lg: 'h-12 min-w-12 text-base'
+	const sizes: Record<ComponentSize, string> = {
+		[ComponentSize.XS]: 'h-6 min-w-6 text-xs',
+		[ComponentSize.SM]: 'h-8 min-w-8 text-xs',
+		[ComponentSize.MD]: 'h-10 min-w-10 text-sm',
+		[ComponentSize.LG]: 'h-12 min-w-12 text-base',
+		[ComponentSize.XL]: 'h-14 min-w-14 text-lg'
 	};
 
 	const sizeClass = $derived(sizes[size]);
