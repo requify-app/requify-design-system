@@ -212,6 +212,20 @@
 						<Button variant="primary" fullWidth>Full Width</Button>
 					</div>
 				</Card>
+
+				<Card variant="default">
+					<h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">As Links</h3>
+					<div class="flex flex-wrap gap-3">
+						<Button variant="primary" href="#buttons">Primary Link</Button>
+						<Button variant="secondary" href="#forms">Secondary Link</Button>
+						<Button variant="outline" href="https://github.com" target="_blank" rel="noopener">
+							External Link
+						</Button>
+					</div>
+					<p class="mt-3 text-sm text-gray-500 dark:text-gray-400">
+						Buttons with `href` render as anchor tags - Test by clicking above
+					</p>
+				</Card>
 			</div>
 		</section>
 
