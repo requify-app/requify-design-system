@@ -24,6 +24,11 @@ The Requify Design System uses CSS custom properties (variables) for colors, all
 All components reference these color variables:
 
 ```css
+@import 'tailwindcss';
+
+/* Import design system styles - REQUIRED for components to work properly */
+@source '../node_modules/@requify/requify-design-system/**/*.{svelte,js}';
+
 :root {
 	/* Primary brand color - main action buttons, links, key elements */
 	--color-primary-50: #f0f4ff;
@@ -73,6 +78,11 @@ All components reference these color variables:
 Add this to your global CSS file (e.g., `app.css` or `global.css`):
 
 ```css
+@import 'tailwindcss';
+
+/* Import design system styles - REQUIRED for components to work properly */
+@source '../node_modules/@requify/requify-design-system/**/*.{svelte,js}';
+
 /* Override primary brand color to match your brand */
 :root {
 	--color-primary-500: #3b82f6;
@@ -779,8 +789,9 @@ Use proper state management:
 ### Styles Not Applying
 
 1. Ensure Tailwind CSS is configured
-2. Check CSS custom properties are defined
-3. Verify component class names match Tailwind config
+2. **Add `@source '../node_modules/@requify/requify-design-system/**/\*.{svelte,js}'` to your CSS file\*\* - this is required for components to work
+3. Check CSS custom properties are defined
+4. Verify component class names match Tailwind config
 
 ### TypeScript Errors
 

@@ -36,10 +36,13 @@ bun add @requify/requify-design-system
    npm install -D tailwindcss @tailwindcss/typography
    ```
 
-2. Add CSS variables to your global CSS (e.g., `app.css`):
+   2. Add CSS variables to your global CSS (e.g., `app.css`):
 
    ```css
    @import 'tailwindcss';
+
+   /* Import design system styles - REQUIRED for components to work properly */
+   @source '../node_modules/@requify/requify-design-system/**/*.{svelte,js}';
 
    @layer base {
    	:root {
@@ -59,7 +62,7 @@ bun add @requify/requify-design-system
    }
    ```
 
-3. Configure Tailwind with your project needs (see Tailwind CSS docs for setup)
+2. Configure Tailwind with your project needs (see Tailwind CSS docs for setup)
 
 ## Usage
 
