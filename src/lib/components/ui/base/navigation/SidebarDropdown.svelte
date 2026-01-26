@@ -88,7 +88,7 @@
 		'shrink-0 w-7 h-7 text-gray-500 transition-colors duration-200 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white';
 </script>
 
-<Collapsible.Root bind:open={isOpen} class={cn('', className)} {...restProps}>
+<Collapsible.Root bind:open={isOpen} class={cn('space-y-2', className)} {...restProps}>
 	<Collapsible.Trigger class={triggerStyles}>
 		{#if icon}
 			<span class="transition-colors duration-200">
