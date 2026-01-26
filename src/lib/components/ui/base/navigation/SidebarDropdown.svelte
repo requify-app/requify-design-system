@@ -106,7 +106,10 @@
 	<Collapsible.Content forceMount>
 		{#snippet child({ props, open })}
 			{#if open}
-				<div {...props} transition:slide={{ duration: 250 }} class="sidebar-dropdown-content">
+				<div
+					{...props}
+					transition:slide={{ duration: 250 }}
+					class="sidebar-dropdown-content space-y-2">
 					{#if children}
 						{@render children()}
 					{/if}
