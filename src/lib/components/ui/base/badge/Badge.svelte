@@ -82,7 +82,8 @@
 		...restProps
 	}: Props = $props();
 
-	const baseStyles = 'inline-flex items-center justify-center font-medium rounded-full border';
+	const baseStyles =
+		'inline-flex items-center text-center justify-center font-medium rounded-full border';
 
 	const variants: Record<string, string> = {
 		[BadgeVariant.DEFAULT]:
