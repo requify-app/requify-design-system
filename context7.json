@@ -1,4 +1,47 @@
 {
-	"url": "https://context7.com/requify-app/requify-design-system",
-	"public_key": "pk_CkKtsguKd97kZMOAt6vDO"
+	"$schema": "https://context7.com/schema/context7.json",
+	"projectTitle": "Requify Design System",
+	"description": "Professional Svelte 5 UI components with Tailwind CSS and bits-ui primitives - 60+ accessible, type-safe components",
+	"folders": ["src/docs", "src/lib/components/ui/base", "src/lib/utils"],
+	"excludeFolders": [
+		"node_modules",
+		".svelte-kit",
+		"dist",
+		"build",
+		"test",
+		"tests",
+		".git",
+		"*.test.*",
+		"*.spec.*"
+	],
+	"excludeFiles": [
+		"CHANGELOG.md",
+		"LICENSE",
+		"package-lock.json",
+		"yarn.lock",
+		"pnpm-lock.yaml",
+		"bun.lock",
+		".gitignore",
+		".prettierrc",
+		".prettierignore",
+		"svelte.config.js",
+		"vite.config.ts",
+		"tsconfig.json",
+		"tailwind.config.js"
+	],
+	"rules": [
+		"Use Svelte 5 runes ($props, $state, $derived, $effect) for reactivity",
+		"Import enums from '@requify/requify-design-system' for type-safe variants and sizes",
+		"Always use TypeScript strict mode with comprehensive type definitions",
+		"Follow existing component patterns for consistency",
+		"Use CSS custom properties for theming, never hardcode colors",
+		"Ensure all interactive elements are keyboard accessible",
+		"Provide proper ARIA attributes for screen readers",
+		"Use snippets for flexible content composition",
+		"Test components in both light and dark modes",
+		"Wrap bits-ui primitives with custom styling and theming",
+		"Follow WCAG AA/AAA accessibility guidelines",
+		"Use cn() utility for merging Tailwind classes",
+		"Bind values with $bindable() for two-way data flow"
+	]
 }
