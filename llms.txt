@@ -150,17 +150,22 @@ Boolean input with checked/unchecked/indeterminate states. Wraps bits-ui.Checkbo
 **Accessibility:** Native checkbox keyboard support, label association, indeterminate state ARIA.
 
 #### Switch
-Toggle switch with variants (primary, secondary, success, error, warning) and sizes (sm, md, lg).
+Toggle switch with variants (primary, secondary, success, error, warning, info). Wraps bits-ui.Switch.Root for accessibility.
 
 **Props:**
 - `checked`: boolean (bindable)
-- `variant`: 'primary' | 'secondary' | 'success' | 'error' | 'warning' (default: 'primary')
-- `size`: 'sm' | 'md' | 'lg' (default: 'md')
+- `variant`: AccentVariant | AccentVariantType (default: 'primary')
+  - Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
 - `disabled`: boolean (default: false)
-- `id`: string
-- `label`: Snippet
+- `required`: boolean (default: false)
+- `name`: string
+- `value`: string
+- `id`: string (for label association)
+- `children`: Snippet (label content displayed next to switch)
+- `class`: string (additional CSS classes)
+- `onCheckedChange`: (checked: boolean) => void
 
-**Accessibility:** Keyboard toggle (Enter, Space), visible focus ring, ARIA switch role.
+**Accessibility:** Keyboard toggle (Enter, Space), visible focus ring, ARIA switch role, proper label association.
 
 #### Select
 Dropdown select with keyboard navigation and custom styling. Wraps bits-ui.Select.Root.
@@ -190,17 +195,33 @@ interface SelectOption {
 #### SelectItem
 Individual select option item for custom rendering in Select.
 
+**Props:**
+- `value`: string | number | null (option value)
+- `label`: string (display label text)
+- `disabled`: boolean (default: false)
+- `onSelect`: () => void (callback when selected)
+
 #### RadioGroup
 Radio button group with keyboard navigation. Wraps bits-ui.RadioGroup.Root.
 
 **Props:**
 - `value`: string (bindable)
-- `orientation`: 'horizontal' | 'vertical' (default: 'horizontal')
+- `orientation`: 'horizontal' | 'vertical' (default: 'vertical')
 - `disabled`: boolean (default: false)
 - `name`: string
 - `required`: boolean (default: false)
 - `onChange`: (value: string) => void
 - `children`: Snippet (RadioItem components)
+- `class`: string (additional CSS classes)
+
+**Interface:**
+```typescript
+interface RadioOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+```
 
 #### RadioItem
 Individual radio button item for RadioGroup.
@@ -211,30 +232,34 @@ Individual radio button item for RadioGroup.
 - `label`: Snippet
 
 #### Datepicker
-Date selection component with custom styling and keyboard support. Uses @internationalized/date.
+Date selection component with custom styling and keyboard support. Wraps bits-ui.DatePicker with @internationalized/date.
 
 **Props:**
-- `value`: Date | undefined (bindable)
-- `placeholder`: string
-- `disabled`: boolean
-- `required`: boolean
-- `error`: string
-- `id`: string
-- `label`: Snippet
+- `value`: Date | undefined (bindable, undefined if no date selected)
+- `minValue`: Date (minimum selectable date)
+- `maxValue`: Date (maximum selectable date)
+- `class`: string (additional CSS classes)
+- `onChange`: () => void (callback when date selection changes)
 
 **Accessibility:** Full keyboard date navigation, ARIA datepicker role, screen reader friendly.
 
 #### DateRangePicker
-Date range selection with validation. Uses @internationalized/date.
+Date range selection with validation. Wraps bits-ui.DateRangePicker with @internationalized/date.
 
 **Props:**
-- `value`: { start?: Date; end?: Date } (bindable)
-- `placeholder`: string
-- `disabled`: boolean
-- `required`: boolean
-- `error`: string
-- `id`: string
-- `label`: Snippet
+- `value`: DateRange | Date (bindable)
+  - Can be { start?: Date; end?: Date } for range
+  - Or single Date for start-only selection
+- `class`: string (additional CSS classes)
+- `onChange`: () => void (callback when date range changes)
+
+**Interface:**
+```typescript
+interface DateRange {
+  start?: Date;
+  end?: Date;
+}
+```
 
 #### Search
 Search input with icon and clearable functionality. Extends Input with search-specific styling.
@@ -514,14 +539,18 @@ Individual table data cell.
 - `children`: Snippet
 
 #### Progressbar
-Linear progress indicator with variants.
+Linear progress indicator with variants and sizes.
 
 **Props:**
-- `value`: number (0-100)
-- `variant`: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' (default: 'primary')
-- `size`: 'sm' | 'md' | 'lg' (default: 'md')
-- `showLabel`: boolean (show percentage text, default: false)
-- `animate`: boolean (striped animation, default: false)
+- `progress`: number (0-100, percentage value, default: 0)
+- `size`: ComponentSize | string (progress bar height, default: 'md')
+  - Named sizes: 'xs' (4px), 'sm' (6px), 'md' (10px), 'lg' (16px), 'xl' (24px)
+  - Custom: pass Tailwind height class (e.g., 'h-1')
+- `color`: AccentVariant | AccentVariantType (color variant, default: 'primary')
+  - Options: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info'
+- `labelInside`: boolean (show percentage inside bar, default: false)
+- `labelOutside`: boolean (show percentage above bar, default: false)
+- `class`: string (additional CSS classes)
 
 **Accessibility:** role="progressbar", ARIA value attributes, screen reader friendly.
 
@@ -704,8 +733,8 @@ Groups toolbar buttons with proper spacing.
 ### SwitchSize
 - SM, MD, LG
 
-### SwitchVariant
-- PRIMARY, SECONDARY, SUCCESS, ERROR, WARNING
+### AccentVariant
+- PRIMARY, SECONDARY, SUCCESS, ERROR, WARNING, INFO
 
 ### HeadingTag
 - H1, H2, H3, H4, H5, H6

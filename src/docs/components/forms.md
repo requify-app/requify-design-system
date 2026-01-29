@@ -285,7 +285,7 @@ Boolean input with checked/unchecked/indeterminate states. Wraps bits-ui.Checkbo
 
 ## Switch
 
-Toggle switch with variants (primary, secondary, success, error, warning) and sizes. Wraps bits-ui.Switch.Root for accessibility.
+Toggle switch with variants (primary, secondary, success, error, warning, info). Wraps bits-ui.Switch.Root for accessibility.
 
 ### When to Use
 
@@ -298,24 +298,24 @@ Toggle switch with variants (primary, secondary, success, error, warning) and si
 
 ```svelte
 <script>
-	import { Switch, SwitchVariant } from 'requify-design-system';
+	import { Switch, AccentVariant } from 'requify-design-system';
 </script>
 ```
 
 ### Props API
 
-| Prop              | Type                                                                             | Default     | Description                             |
-| ----------------- | -------------------------------------------------------------------------------- | ----------- | --------------------------------------- |
-| `checked`         | `boolean`                                                                        | -           | Current checked state (bindable)        |
-| `variant`         | `SwitchVariant \| 'primary' \| 'secondary' \| 'success' \| 'error' \| 'warning'` | `'primary'` | Color variant for semantic meaning      |
-| `disabled`        | `boolean`                                                                        | `false`     | Disables switch interaction             |
-| `required`        | `boolean`                                                                        | `false`     | Shows asterisk, form validation hint    |
-| `name`            | `string`                                                                         | -           | HTML name attribute for form submission |
-| `value`           | `string`                                                                         | -           | HTML value attribute                    |
-| `id`              | `string`                                                                         | -           | HTML id for label association           |
-| `children`        | `Snippet`                                                                        | -           | Label content displayed next to switch  |
-| `class`           | `string`                                                                         | -           | Additional CSS classes to apply         |
-| `onCheckedChange` | `(checked: boolean) => void`                                                     | -           | Callback when checked state changes     |
+| Prop              | Type                                 | Default     | Description                             |
+| ----------------- | ------------------------------------ | ----------- | --------------------------------------- |
+| `checked`         | `boolean`                            | -           | Current checked state (bindable)        |
+| `variant`         | `AccentVariant \| AccentVariantType` | `'primary'` | Color variant for semantic meaning      |
+| `disabled`        | `boolean`                            | `false`     | Disables switch interaction             |
+| `required`        | `boolean`                            | `false`     | Shows asterisk, form validation hint    |
+| `name`            | `string`                             | -           | HTML name attribute for form submission |
+| `value`           | `string`                             | -           | HTML value attribute                    |
+| `id`              | `string`                             | -           | HTML id for label association           |
+| `children`        | `Snippet`                            | -           | Label content displayed next to switch  |
+| `class`           | `string`                             | -           | Additional CSS classes to apply         |
+| `onCheckedChange` | `(checked: boolean) => void`         | -           | Callback when checked state changes     |
 
 ### Examples
 
@@ -329,20 +329,23 @@ Toggle switch with variants (primary, secondary, success, error, warning) and si
 #### All Variants
 
 ```svelte
-<Switch bind:checked={v1} variant={SwitchVariant.PRIMARY} />
+<Switch bind:checked={v1} variant={AccentVariant.PRIMARY} />
 <Label>Primary</Label>
 
-<Switch bind:checked={v2} variant={SwitchVariant.SECONDARY} />
+<Switch bind:checked={v2} variant={AccentVariant.SECONDARY} />
 <Label>Secondary</Label>
 
-<Switch bind:checked={v3} variant={SwitchVariant.SUCCESS} />
+<Switch bind:checked={v3} variant={AccentVariant.SUCCESS} />
 <Label>Success</Label>
 
-<Switch bind:checked={v4} variant={SwitchVariant.ERROR} />
+<Switch bind:checked={v4} variant={AccentVariant.ERROR} />
 <Label>Error</Label>
 
-<Switch bind:checked={v5} variant={SwitchVariant.WARNING} />
+<Switch bind:checked={v5} variant={AccentVariant.WARNING} />
 <Label>Warning</Label>
+
+<Switch bind:checked={v6} variant={AccentVariant.INFO} />
+<Label>Info</Label>
 ```
 
 #### Disabled
@@ -355,7 +358,7 @@ Toggle switch with variants (primary, secondary, success, error, warning) and si
 #### With Label
 
 ```svelte
-<Switch bind:checked={darkMode} variant={SwitchVariant.SECONDARY}>Dark mode</Switch>
+<Switch bind:checked={darkMode} variant={AccentVariant.SECONDARY}>Dark mode</Switch>
 ```
 
 #### Multiple Switches
@@ -390,10 +393,10 @@ Toggle switch with variants (primary, secondary, success, error, warning) and si
 	<h3>Settings</h3>
 	<div class="mt-4 space-y-4">
 		<Switch bind:checked={setting1}>Email notifications</Switch>
-		<Switch bind:checked={setting2} variant={SwitchVariant.SUCCESS}>
+		<Switch bind:checked={setting2} variant={AccentVariant.SUCCESS}>
 			Two-factor authentication
 		</Switch>
-		<Switch bind:checked={setting3} variant={SwitchVariant.ERROR}>Account deletion</Switch>
+		<Switch bind:checked={setting3} variant={AccentVariant.ERROR}>Account deletion</Switch>
 	</div>
 </Card>
 ```
