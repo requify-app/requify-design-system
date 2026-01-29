@@ -43,5 +43,7 @@
 		"Follow WCAG AA/AAA accessibility guidelines",
 		"Use cn() utility for merging Tailwind classes",
 		"Bind values with $bindable() for two-way data flow"
-	]
+	],
+	"url": "https://context7.com/requify-app/requify-design-system",
+	"public_key": "pk_CkKtsguKd97kZMOAt6vDO"
 }
