@@ -46,7 +46,7 @@
 	 * ```
 	 *
 	 * @param {BadgeVariant | BadgeVariantType} variant - Color variant for semantic meaning. Default: BadgeVariant.DEFAULT
-	 *   Options: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'orange'
+	 *   Options: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info'
 	 * @param {ComponentSize | ComponentSizeType} size - Badge size affecting padding and text. Default: ComponentSize.MD
 	 *   Options: 'xs' | 'sm' | 'md' | 'lg'
 	 * @param {boolean} dismissable - If true, shows X button to dismiss. Requires onclose. Default: false
@@ -96,8 +96,6 @@
 			'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700',
 		[BadgeVariant.WARNING]:
 			'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-700',
-		[BadgeVariant.ORANGE]:
-			'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700',
 		[BadgeVariant.ERROR]:
 			'bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700',
 		[BadgeVariant.INFO]:

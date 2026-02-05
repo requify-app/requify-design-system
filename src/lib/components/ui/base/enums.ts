@@ -38,8 +38,7 @@ export enum BadgeVariant {
 	SUCCESS = 'success',
 	WARNING = 'warning',
 	ERROR = 'error',
-	INFO = 'info',
-	ORANGE = 'orange'
+	INFO = 'info'
 }
 
 /**

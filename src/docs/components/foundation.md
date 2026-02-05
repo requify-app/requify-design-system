@@ -574,15 +574,15 @@ Small status indicator with semantic colors and dismissible option. Can render a
 
 ### Props API
 
-| Prop          | Type                                                                                                               | Default     | Description                                          |
-| ------------- | ------------------------------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------- |
-| `variant`     | `BadgeVariant \| 'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'info' \| 'orange'` | `'default'` | Color variant for semantic meaning                   |
-| `size`        | `ComponentSize \| 'xs' \| 'sm' \| 'md' \| 'lg'`                                                                    | `'md'`      | Badge size affecting padding and text                |
-| `dismissable` | `boolean`                                                                                                          | `false`     | If true, shows X button to dismiss. Requires onclose |
-| `onclose`     | `() => void`                                                                                                       | -           | Callback when dismiss button is clicked              |
-| `children`    | `Snippet`                                                                                                          | -           | Badge text and content                               |
-| `class`       | `string`                                                                                                           | -           | Additional CSS classes to apply                      |
-| `href`        | `string`                                                                                                           | -           | If provided, renders as anchor tag with hover effect |
+| Prop          | Type                                                                                                   | Default     | Description                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------- |
+| `variant`     | `BadgeVariant \| 'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'info'` | `'default'` | Color variant for semantic meaning                   |
+| `size`        | `ComponentSize \| 'xs' \| 'sm' \| 'md' \| 'lg'`                                                        | `'md'`      | Badge size affecting padding and text                |
+| `dismissable` | `boolean`                                                                                              | `false`     | If true, shows X button to dismiss. Requires onclose |
+| `onclose`     | `() => void`                                                                                           | -           | Callback when dismiss button is clicked              |
+| `children`    | `Snippet`                                                                                              | -           | Badge text and content                               |
+| `class`       | `string`                                                                                               | -           | Additional CSS classes to apply                      |
+| `href`        | `string`                                                                                               | -           | If provided, renders as anchor tag with hover effect |
 
 ### Examples
 
@@ -602,7 +602,6 @@ Small status indicator with semantic colors and dismissible option. Can render a
 <Badge variant={BadgeVariant.SECONDARY}>Secondary</Badge>
 <Badge variant={BadgeVariant.SUCCESS}>Success</Badge>
 <Badge variant={BadgeVariant.WARNING}>Warning</Badge>
-<Badge variant={BadgeVariant.ORANGE}>Orange</Badge>
 <Badge variant={BadgeVariant.ERROR}>Error</Badge>
 <Badge variant={BadgeVariant.INFO}>Info</Badge>
 ```

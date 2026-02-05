@@ -115,7 +115,7 @@ Form label component with proper for/id attribute handling for accessibility.
 Small status indicator with semantic colors and dismissible option. Can render as link.
 
 **Props:**
-- `variant`: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'orange' (default: 'default')
+- `variant`: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' (default: 'default')
 - `size`: 'xs' | 'sm' | 'md' | 'lg' (default: 'md')
 - `dismissable`: boolean (shows X button, default: false)
 - `onclose`: () => void (callback when dismissed)
@@ -707,7 +707,7 @@ Groups toolbar buttons with proper spacing.
 - PRIMARY, SECONDARY, OUTLINE, GHOST, DANGER, SUCCESS
 
 ### BadgeVariant
-- DEFAULT, PRIMARY, SECONDARY, SUCCESS, WARNING, ERROR, INFO, ORANGE
+- DEFAULT, PRIMARY, SECONDARY, SUCCESS, WARNING, ERROR, INFO
 
 ### AlertVariant
 - INFO, SUCCESS, WARNING, ERROR

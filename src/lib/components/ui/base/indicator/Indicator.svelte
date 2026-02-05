@@ -58,7 +58,7 @@
 	 * ```
 	 *
 	 * @param {BadgeVariant | BadgeVariantType} variant - Color variant. Default: BadgeVariant.DEFAULT
-	 *   Options: 'success' | 'error' | 'warning' | 'info' | 'default' | 'primary' | 'secondary' | 'orange'
+	 *   Options: 'success' | 'error' | 'warning' | 'info' | 'default' | 'primary' | 'secondary'
 	 * @param {ComponentSize | ComponentSizeType} size - Indicator size. Default: ComponentSize.MD
 	 *   Sizes: 'xs' (8px), 'sm' (10px), 'md' (12px), 'lg' (14px), 'xl' (24px)
 	 * @param {IndicatorPlacement | IndicatorPlacementType} placement - Position relative to parent. Default: IndicatorPlacement.TOP_RIGHT
@@ -99,8 +99,7 @@
 		[BadgeVariant.INFO]: 'bg-blue-500',
 		[BadgeVariant.DEFAULT]: 'bg-gray-500',
 		[BadgeVariant.PRIMARY]: 'bg-primary-500',
-		[BadgeVariant.SECONDARY]: 'bg-secondary-500',
-		[BadgeVariant.ORANGE]: 'bg-orange-500'
+		[BadgeVariant.SECONDARY]: 'bg-secondary-500'
 	};
 
 	const sizes: Record<ComponentSize, string> = {
