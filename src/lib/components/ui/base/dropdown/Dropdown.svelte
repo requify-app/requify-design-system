@@ -104,7 +104,11 @@
 <DropdownMenu.Root bind:open>
 	{#if trigger}
 		<DropdownMenu.Trigger>
-			{@render trigger()}
+			{#snippet child({ props })}
+				<span {...props}>
+					{@render trigger()}
+				</span>
+			{/snippet}
 		</DropdownMenu.Trigger>
 	{/if}
 
