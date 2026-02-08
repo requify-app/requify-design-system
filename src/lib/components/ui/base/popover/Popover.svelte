@@ -108,7 +108,11 @@
 <PopoverPrimitive.Root bind:open>
 	{#if trigger}
 		<PopoverPrimitive.Trigger>
-			{@render trigger()}
+			{#snippet child({ props })}
+				<span {...props}>
+					{@render trigger()}
+				</span>
+			{/snippet}
 		</PopoverPrimitive.Trigger>
 	{/if}
 
