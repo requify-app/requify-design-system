@@ -46,7 +46,9 @@ export function findOptionByValue(
 	options: Array<{ value: unknown }>,
 	value: unknown
 ): unknown | undefined {
-	if (!value) return undefined;
+	// This used to be `if (!value) return undefined;` but that caused problems when an index started at 0 for an enum
+	// This is a more explicit check for non-0 and non-valid inputs
+	if (value === null || value === undefined) return undefined;
 
 	const valueString = safeValueToString(value);
 	return options.find((opt) => safeValueToString(opt.value) === valueString);
