@@ -75,6 +75,8 @@
 		value?: string;
 		/** Label content snippet */
 		children?: Snippet;
+		/** Label content displayed to the left of the switch */
+		leftLabel?: Snippet;
 		/** Additional CSS classes */
 		class?: string;
 		/** HTML id attribute */
@@ -92,6 +94,7 @@
 		name,
 		value,
 		children,
+		leftLabel,
 		class: classValue,
 		id,
 		variant = AccentVariant.PRIMARY,
@@ -122,6 +125,14 @@
 </script>
 
 <div class="flex items-center gap-2">
+	{#if leftLabel}
+		<label
+			for={id}
+			class="text-sm leading-none font-medium text-gray-900 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50">
+			{@render leftLabel()}
+		</label>
+	{/if}
+
 	<BitsSwitch.Root
 		bind:checked
 		{disabled}
