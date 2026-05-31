@@ -31,9 +31,15 @@
 	 * </RadioGroup>
 	 * ```
 	 *
+	 * @example Clickable label
+	 * ```svelte
+	 * <RadioItem id="option-a" value="a" labelClickable>Option A</RadioItem>
+	 * ```
+	 *
 	 * @param {string} value - Unique value for this radio option (required)
 	 * @param {boolean} disabled - If true, this option cannot be selected. Default: false
-	 * @param {string} id - HTML id for label association
+	 * @param {string} id - HTML id for label association. Auto-generated per instance if omitted.
+	 * @param {boolean} labelClickable - If true, clicking the label also selects the radio. Default: false
 	 * @param {Snippet} children - Radio label text
 	 *
 	 * @see {@link RadioGroup} - Use RadioGroup to group multiple RadioItems
@@ -49,16 +55,22 @@
 		disabled?: boolean;
 		children?: Snippet;
 		id?: string;
+		labelClickable?: boolean;
 	}
 
-	let { value, disabled = false, children, id }: Props = $props();
+	let { value, disabled = false, children, id, labelClickable = true }: Props = $props();
+
+	// Fall back to a component-scoped unique id so `labelClickable` works even
+	// when the caller doesn't pass an explicit `id`.
+	const uid = $props.id();
+	const resolvedId = $derived(id ?? uid);
 </script>
 
 <div class="flex items-center gap-2">
 	<BitsRadioGroup.Item
 		{value}
 		{disabled}
-		{id}
+		id={resolvedId}
 		class="peer focus-visible:ring-primary-500 data-[state=checked]:border-primary-600 data-[state=checked]:bg-primary-600 h-5 w-5 shrink-0 rounded-full border-2 border-gray-300 bg-white transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800">
 		{#snippet children(props)}
 			{#if props.checked}
@@ -71,8 +83,10 @@
 
 	{#if children}
 		<label
-			for={id}
-			class="text-sm leading-none font-medium text-gray-900 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50">
+			for={labelClickable ? resolvedId : undefined}
+			class="text-sm leading-none font-medium text-gray-900 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-gray-50 {labelClickable
+				? 'cursor-pointer'
+				: ''}">
 			{@render children()}
 		</label>
 	{/if}
