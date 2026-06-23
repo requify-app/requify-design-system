@@ -10,38 +10,38 @@ html:not([data-theme-loaded]) {
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--color-primary-50: #f4f6fb;
-	--color-primary-100: #e8ecf6;
-	--color-primary-200: #cbd5eb;
-	--color-primary-300: #a1b4db;
-	--color-primary-400: #7088c6;
-	--color-primary-500: #4e68b4;
-	--color-primary-600: #3d5299;
-	--color-primary-700: #34427d;
-	--color-primary-800: #2f3968;
-	--color-primary-900: #2b3157;
+	--color-primary-50: #f3f7fe;
+	--color-primary-100: #e2ebfd;
+	--color-primary-200: #c3d6fb;
+	--color-primary-300: #93b5f7;
+	--color-primary-400: #6394f4;
+	--color-primary-500: #3374f1;
+	--color-primary-600: #0f5bee;
+	--color-primary-700: #0e44b3;
+	--color-primary-800: #0c2d79;
+	--color-primary-900: #0b1640;
 
-	--color-secondary-50: #fef9f3;
-	--color-secondary-100: #fdf2e6;
-	--color-secondary-200: #fae0c1;
-	--color-secondary-300: #f6c897;
-	--color-secondary-400: #f0a564;
-	--color-secondary-500: #eb8533;
-	--color-secondary-600: #d16a1f;
-	--color-secondary-700: #ad531a;
-	--color-secondary-800: #8b431b;
-	--color-secondary-900: #713819;
+	--color-secondary-50: #fff7ed;
+	--color-secondary-100: #ffedd5;
+	--color-secondary-200: #fed7aa;
+	--color-secondary-300: #fdba74;
+	--color-secondary-400: #fb923c;
+	--color-secondary-500: #f97316;
+	--color-secondary-600: #ea580c;
+	--color-secondary-700: #c2410c;
+	--color-secondary-800: #9a3412;
+	--color-secondary-900: #7c2d12;
 
-	--color-accent-50: #f0fbf9;
-	--color-accent-100: #d6f4f0;
-	--color-accent-200: #ace8e0;
-	--color-accent-300: #78d4ca;
-	--color-accent-400: #45b8af;
-	--color-accent-500: #2c9d95;
-	--color-accent-600: #207d78;
-	--color-accent-700: #1e6562;
-	--color-accent-800: #1d504f;
-	--color-accent-900: #1c4342;
+	--color-accent-50: #f0fdfa;
+	--color-accent-100: #ccfbf1;
+	--color-accent-200: #99f6e4;
+	--color-accent-300: #5eead4;
+	--color-accent-400: #2dd4bf;
+	--color-accent-500: #14b8a6;
+	--color-accent-600: #0d9488;
+	--color-accent-700: #0f766e;
+	--color-accent-800: #115e59;
+	--color-accent-900: #134e4a;
 
 	--color-success-50: #f0fdf4;
 	--color-success-100: #dcfce7;
@@ -93,13 +93,13 @@ html:not([data-theme-loaded]) {
 	--radius-xl: 1rem;
 
 	--shadow-primary-sm:
-		0 1px 2px 0 rgb(0 0 0 / 0.06), 0 4px 12px -2px rgb(61 82 153 / 0.15),
+		0 1px 2px 0 rgb(0 0 0 / 0.06), 0 4px 12px -2px rgb(15 91 238 / 0.15),
 		inset 0 1px 0 0 rgb(255 255 255 / 0.15);
 	--shadow-primary-md:
-		0 2px 4px 0 rgb(0 0 0 / 0.08), 0 8px 24px -4px rgb(61 82 153 / 0.25),
+		0 2px 4px 0 rgb(0 0 0 / 0.08), 0 8px 24px -4px rgb(15 91 238 / 0.25),
 		inset 0 1px 0 0 rgb(255 255 255 / 0.2);
 	--shadow-primary-lg:
-		0 4px 8px 0 rgb(0 0 0 / 0.1), 0 16px 32px -6px rgb(61 82 153 / 0.3),
+		0 4px 8px 0 rgb(0 0 0 / 0.1), 0 16px 32px -6px rgb(15 91 238 / 0.3),
 		inset 0 1px 0 0 rgb(255 255 255 / 0.25);
 }
 

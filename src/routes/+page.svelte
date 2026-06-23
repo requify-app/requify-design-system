@@ -33,7 +33,13 @@
 		Datepicker,
 		Toast,
 		Progressbar,
-		Spinner
+		Spinner,
+		DetomeLogo,
+		DetomeLogoLight,
+		DetomeLogoDark,
+		DetomeIcon,
+		DetomeIconLight,
+		DetomeIconDark
 	} from '$lib/components/ui/base';
 	import {
 		CircleCheckBig,
@@ -117,6 +123,11 @@
 				href="#tabs"
 				class="bg-primary-100 text-primary-700 hover:bg-primary-200 dark:bg-primary-900 dark:text-primary-300 dark:hover:bg-primary-800 rounded-full px-3 py-1 text-sm font-medium">
 				Tabs
+			</a>
+			<a
+				href="#brand"
+				class="bg-primary-100 text-primary-700 hover:bg-primary-200 dark:bg-primary-900 dark:text-primary-300 dark:hover:bg-primary-800 rounded-full px-3 py-1 text-sm font-medium">
+				Brand
 			</a>
 		</nav>
 	</header>
@@ -403,6 +414,78 @@
 					</TabsContent>
 				</Tabs>
 			</Card>
+		</section>
+
+		<section id="brand">
+			<h2 class="mb-6 text-2xl font-semibold text-gray-900 dark:text-gray-50">Brand Assets</h2>
+
+			<div class="space-y-6">
+				<Card variant="default">
+					<h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+						Auto-switching (follows theme)
+					</h3>
+					<p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+						<code>&lt;DetomeLogo /&gt;</code>
+						and
+						<code>&lt;DetomeIcon /&gt;</code>
+						render the light variant by default and swap to dark when a
+						<code>.dark</code>
+						class is present.
+					</p>
+					<div class="flex flex-wrap items-center gap-8">
+						<DetomeLogo size="xl" />
+						<DetomeIcon size="xl" />
+					</div>
+				</Card>
+
+				<Card variant="default">
+					<h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+						Explicit variants
+					</h3>
+					<div class="grid gap-4 sm:grid-cols-2">
+						<div class="rounded-lg border border-gray-200 bg-gray-50 p-6">
+							<p class="mb-3 text-xs font-medium tracking-wide text-gray-500 uppercase">
+								Light backgrounds
+							</p>
+							<div class="flex flex-wrap items-center gap-6">
+								<DetomeLogoLight size="lg" />
+								<DetomeIconLight size="lg" />
+							</div>
+						</div>
+						<div class="bg-primary-900 rounded-lg p-6">
+							<p class="text-primary-300 mb-3 text-xs font-medium tracking-wide uppercase">
+								Dark backgrounds
+							</p>
+							<div class="flex flex-wrap items-center gap-6">
+								<DetomeLogoDark size="lg" />
+								<DetomeIconDark size="lg" />
+							</div>
+						</div>
+					</div>
+				</Card>
+
+				<Card variant="default">
+					<h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Sizes</h3>
+					<div class="flex flex-wrap items-end gap-6">
+						<div class="flex flex-col items-center gap-2">
+							<DetomeIcon size="sm" />
+							<span class="text-xs text-gray-500">sm</span>
+						</div>
+						<div class="flex flex-col items-center gap-2">
+							<DetomeIcon size="md" />
+							<span class="text-xs text-gray-500">md</span>
+						</div>
+						<div class="flex flex-col items-center gap-2">
+							<DetomeIcon size="lg" />
+							<span class="text-xs text-gray-500">lg</span>
+						</div>
+						<div class="flex flex-col items-center gap-2">
+							<DetomeIcon size="xl" />
+							<span class="text-xs text-gray-500">xl</span>
+						</div>
+					</div>
+				</Card>
+			</div>
 		</section>
 	</div>
 </div>

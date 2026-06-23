@@ -106,7 +106,7 @@
 
 	const colors: Record<string, string> = {
 		primary:
-			'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(61_82_153/0.2)]',
+			'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(15_91_238/0.2)]',
 		secondary:
 			'data-[state=checked]:bg-secondary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(209_106_31/0.2)]',
 		success:
@@ -115,7 +115,7 @@
 			'data-[state=checked]:bg-error-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(220_38_38/0.2)]',
 		warning:
 			'data-[state=checked]:bg-warning-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(202_138_4/0.2)]',
-		info: 'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(61_82_153/0.2)]'
+		info: 'data-[state=checked]:bg-primary-500 data-[state=checked]:shadow-[0_2px_4px_0_rgb(15_91_238/0.2)]'
 	};
 
 	const baseStyles =

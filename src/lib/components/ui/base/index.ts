@@ -100,5 +100,13 @@ export { default as ToolbarGroup } from './toolbar/ToolbarGroup.svelte';
 // Form helper
 export { default as Helper } from './form/Helper.svelte';
 
+// Brand assets
+export { default as DetomeLogoLight } from './brand/DetomeLogoLight.svelte';
+export { default as DetomeLogoDark } from './brand/DetomeLogoDark.svelte';
+export { default as DetomeLogo } from './brand/DetomeLogo.svelte';
+export { default as DetomeIconLight } from './brand/DetomeIconLight.svelte';
+export { default as DetomeIconDark } from './brand/DetomeIconDark.svelte';
+export { default as DetomeIcon } from './brand/DetomeIcon.svelte';
+
 // Legacy aliases for compatibility
 export { default as TabItem } from './tabs/TabsContent.svelte';

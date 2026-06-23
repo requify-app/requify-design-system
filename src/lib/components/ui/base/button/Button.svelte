@@ -106,7 +106,7 @@
 
 	const variants: Record<string, string> = {
 		[ButtonVariant.PRIMARY]:
-			'bg-gradient-to-b from-primary-600 to-primary-700 text-white shadow-[0_1px_2px_0_rgb(0_0_0/0.06),0_4px_12px_-2px_rgb(61_82_153/0.15),inset_0_1px_0_0_rgb(255_255_255/0.15)] hover:shadow-[0_2px_4px_0_rgb(0_0_0/0.08),0_8px_24px_-4px_rgb(61_82_153/0.25),inset_0_1px_0_0_rgb(255_255_255/0.2)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_1px_2px_0_rgb(0_0_0/0.1),0_2px_8px_-2px_rgb(61_82_153/0.2),inset_0_1px_0_0_rgb(255_255_255/0.1)]',
+			'bg-gradient-to-b from-primary-600 to-primary-700 text-white shadow-[0_1px_2px_0_rgb(0_0_0/0.06),0_4px_12px_-2px_rgb(15_91_238/0.15),inset_0_1px_0_0_rgb(255_255_255/0.15)] hover:shadow-[0_2px_4px_0_rgb(0_0_0/0.08),0_8px_24px_-4px_rgb(15_91_238/0.25),inset_0_1px_0_0_rgb(255_255_255/0.2)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_1px_2px_0_rgb(0_0_0/0.1),0_2px_8px_-2px_rgb(15_91_238/0.2),inset_0_1px_0_0_rgb(255_255_255/0.1)]',
 		[ButtonVariant.SECONDARY]:
 			'bg-gradient-to-b from-secondary-500 to-secondary-600 text-white shadow-[0_1px_2px_0_rgb(0_0_0/0.06),0_4px_12px_-2px_rgb(209_106_31/0.15),inset_0_1px_0_0_rgb(255_255_255/0.15)] hover:shadow-[0_2px_4px_0_rgb(0_0_0/0.08),0_8px_24px_-4px_rgb(209_106_31/0.25),inset_0_1px_0_0_rgb(255_255_255/0.2)] hover:-translate-y-0.5 active:translate-y-0 active:shadow-[0_1px_2px_0_rgb(0_0_0/0.1),0_2px_8px_-2px_rgb(209_106_31/0.2),inset_0_1px_0_0_rgb(255_255_255/0.1)]',
 		[ButtonVariant.OUTLINE]:
